@@ -28,6 +28,13 @@
 		EF0D72C828E3A076004D04F5 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = EF0D72C728E3A076004D04F5 /* FirebaseStorage */; };
 		EF0D72CA28E3A076004D04F5 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = EF0D72C928E3A076004D04F5 /* FirebaseStorageCombine-Community */; };
 		EF0D72CD28E642D2004D04F5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF0D72CC28E642D2004D04F5 /* GoogleService-Info.plist */; };
+		EF3F357E28E65D3300F668B4 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3F357D28E65D3300F668B4 /* AuthService.swift */; };
+		EF3F358028E65D4500F668B4 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3F357F28E65D4500F668B4 /* DatabaseService.swift */; };
+		EF3F358228E65D8A00F668B4 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3F358128E65D8A00F668B4 /* StorageService.swift */; };
+		EF3F358428E65DAA00F668B4 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3F358328E65DAA00F668B4 /* AnalyticsService.swift */; };
+		EF3F358628E65DBA00F668B4 /* HapticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3F358528E65DBA00F668B4 /* HapticsService.swift */; };
+		EF3F358928E65F2500F668B4 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EF3F358828E65F2500F668B4 /* FirebaseFirestore */; };
+		EF3F358B28E65F2500F668B4 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = EF3F358A28E65F2500F668B4 /* FirebaseFirestoreCombine-Community */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +69,11 @@
 		5E4ECD6A28E385DA0080DE1D /* InstagramUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramUITests.swift; sourceTree = "<group>"; };
 		5E4ECD6C28E385DA0080DE1D /* InstagramUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		EF0D72CC28E642D2004D04F5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EF3F357D28E65D3300F668B4 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		EF3F357F28E65D4500F668B4 /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
+		EF3F358128E65D8A00F668B4 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		EF3F358328E65DAA00F668B4 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
+		EF3F358528E65DBA00F668B4 /* HapticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,11 +81,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF3F358B28E65F2500F668B4 /* FirebaseFirestoreCombine-Community in Frameworks */,
 				EF0D72CA28E3A076004D04F5 /* FirebaseStorageCombine-Community in Frameworks */,
 				EF0D72C228E3A076004D04F5 /* FirebaseDatabaseSwift in Frameworks */,
 				EF0D72C028E3A076004D04F5 /* FirebaseDatabase in Frameworks */,
 				EF0D72B828E3A076004D04F5 /* FirebaseAnalyticsSwift in Frameworks */,
 				EF0D72C828E3A076004D04F5 /* FirebaseStorage in Frameworks */,
+				EF3F358928E65F2500F668B4 /* FirebaseFirestore in Frameworks */,
 				EF0D72C628E3A076004D04F5 /* FirebaseRemoteConfigSwift in Frameworks */,
 				EF0D72BA28E3A076004D04F5 /* FirebaseAuth in Frameworks */,
 				EF0D72BE28E3A076004D04F5 /* FirebaseCrashlytics in Frameworks */,
@@ -107,6 +121,7 @@
 				5E4ECD5F28E385DA0080DE1D /* InstagramTests */,
 				5E4ECD6928E385DA0080DE1D /* InstagramUITests */,
 				5E4ECD4428E385D80080DE1D /* Products */,
+				EF3F358728E65F2500F668B4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -191,6 +206,11 @@
 		EF0D72D128E644A2004D04F5 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				EF3F357D28E65D3300F668B4 /* AuthService.swift */,
+				EF3F357F28E65D4500F668B4 /* DatabaseService.swift */,
+				EF3F358128E65D8A00F668B4 /* StorageService.swift */,
+				EF3F358328E65DAA00F668B4 /* AnalyticsService.swift */,
+				EF3F358528E65DBA00F668B4 /* HapticsService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -214,6 +234,13 @@
 			children = (
 			);
 			path = Flows;
+			sourceTree = "<group>";
+		};
+		EF3F358728E65F2500F668B4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,6 +271,8 @@
 				EF0D72C528E3A076004D04F5 /* FirebaseRemoteConfigSwift */,
 				EF0D72C728E3A076004D04F5 /* FirebaseStorage */,
 				EF0D72C928E3A076004D04F5 /* FirebaseStorageCombine-Community */,
+				EF3F358828E65F2500F668B4 /* FirebaseFirestore */,
+				EF3F358A28E65F2500F668B4 /* FirebaseFirestoreCombine-Community */,
 			);
 			productName = Instagram;
 			productReference = 5E4ECD4328E385D80080DE1D /* Instagram.app */;
@@ -365,6 +394,11 @@
 			files = (
 				5E4ECD5128E385D80080DE1D /* Instagram.xcdatamodeld in Sources */,
 				5E4ECD4B28E385D80080DE1D /* ViewController.swift in Sources */,
+				EF3F358028E65D4500F668B4 /* DatabaseService.swift in Sources */,
+				EF3F358228E65D8A00F668B4 /* StorageService.swift in Sources */,
+				EF3F358628E65DBA00F668B4 /* HapticsService.swift in Sources */,
+				EF3F358428E65DAA00F668B4 /* AnalyticsService.swift in Sources */,
+				EF3F357E28E65D3300F668B4 /* AuthService.swift in Sources */,
 				5E4ECD4728E385D80080DE1D /* AppDelegate.swift in Sources */,
 				5E4ECD4928E385D80080DE1D /* SceneDelegate.swift in Sources */,
 			);
@@ -537,7 +571,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9396A9KSNU;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = /Users/kirilltitov/my_projects/Instagram_pet_project/Instagram/Resources/Resources/Info.plist;
+				INFOPLIST_FILE = Instagram/Resources/Resources/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -565,7 +599,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9396A9KSNU;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = /Users/kirilltitov/my_projects/Instagram_pet_project/Instagram/Resources/Resources/Info.plist;
+				INFOPLIST_FILE = Instagram/Resources/Resources/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -767,6 +801,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EF0D72B428E3A076004D04F5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageCombine-Community";
+		};
+		EF3F358828E65F2500F668B4 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EF0D72B428E3A076004D04F5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		EF3F358A28E65F2500F668B4 /* FirebaseFirestoreCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EF0D72B428E3A076004D04F5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseFirestoreCombine-Community";
 		};
 /* End XCSwiftPackageProductDependency section */
 
