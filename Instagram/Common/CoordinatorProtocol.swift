@@ -1,0 +1,10 @@
+//
+//  CoordinatorProtocol.swift
+//  Instagram
+//
+//  Created by Титов Кирилл Иванович on 10.10.2022.
+//
+
+protocol CoordinatorProtocol {
+	func start(onFinish: @escaping (() -> Void))
+}
