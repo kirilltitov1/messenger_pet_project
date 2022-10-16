@@ -10,40 +10,39 @@ import Combine
 
 extension SignIn {
 	final class ViewModel {
-		let signInService = AuthService.shared
-
-		var cancelBag = Set<AnyCancellable>()
+		private let signInService = AuthService.shared
 	}
 }
 
 // MARK: ViewModelProtocol
 extension SignIn.ViewModel: ViewModelProtocol {
 
-	struct Input {
+	struct Input: SignInInputProtocol {
 		let email: AnyPublisher<String, Never>
 		let password: AnyPublisher<String, Never>
 		let signIn: AnyPublisher<Void, Never>
 	}
-
-	typealias Output = AnyPublisher<SignInState, Never>
-
-	enum SignInState {
-		case idle
-		case success
-		case error(Error)
+	
+	final class Output: ObservableObject, SignInOutputProtocol {
+		@Published var isSignIn: Bool = false
 	}
 
-	func transform(input: Input) -> Output {
-
-		input.$signIn
-			.de
-			.sink(receiveValue: { _ in
-				signInService.signIn(email: input.&email, password: input.password)
-			})
-			.store(in: &cancelBag)
-
-		return Publishers.Merge
+	func transform(input: Input, cancelBag: CancelBag) -> Output {
+		let output = Output()
+		
+		input.signIn
+			.combineLatest(input.email, input.password)
+			.map(\.1, \.2)
+			.map(signInService.signIn)
+			.map { $0.map(\.user) }
+			.replaceEmpty(with: nil)
+			.map { $0 != nil }
+			.assign(to: \.isSignIn, on: output)
+			.store(in: cancelBag)
+		
+		return output
 	}
 }
 
+// MARK: ObservableObject
 extension SignIn.ViewModel: ObservableObject {}

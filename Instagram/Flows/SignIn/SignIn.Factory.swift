@@ -6,12 +6,17 @@
 //
 
 import Foundation
+import Combine
 import UIKit
 
 /// Protocol for sign in factory
 protocol SignInFactoryProtocol {
 	/// make sign in view controller
-	func makeSignInViewController() -> UIViewController
+	/// - Parameter cancelBag: inject, if u need to hold sub's out of view controller life cycle;
+	/// 				  	   cancel bag for sub's on view model & view controller
+	/// - Returns: sign in view controller
+	func makeSignInViewController(
+	) -> UIViewController
 }
 
 extension SignIn {
@@ -23,7 +28,22 @@ extension SignIn {
 extension SignIn.Factory: SignInFactoryProtocol {
 	func makeSignInViewController(
 	) -> UIViewController {
-		// TODO: разобраться а нужно ли мне все такие дженерики юзать тут
-		SignIn.ViewController<SignIn.ViewModel>(viewModel: SignIn.ViewModel())
+		let cancelBag = CancelBag()
+		let input = SignIn.ViewModel.Input(
+			email: Just("").eraseToAnyPublisher(),
+			password: Just("").eraseToAnyPublisher(),
+			signIn: Just(()).eraseToAnyPublisher()
+		)
+		let viewModel = SignIn.ViewModel()
+		let output = viewModel.transform(
+			input: input,
+			cancelBag: cancelBag
+		)
+		let viewController = SignIn.ViewController(
+			output: output,
+			cancelBag: cancelBag
+		)
+
+		return viewController
 	}
 }

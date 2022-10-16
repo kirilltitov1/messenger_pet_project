@@ -6,5 +6,5 @@
 //
 
 protocol SignInOutputProtocol {
-
+	var isSignIn: Bool { get }
 }

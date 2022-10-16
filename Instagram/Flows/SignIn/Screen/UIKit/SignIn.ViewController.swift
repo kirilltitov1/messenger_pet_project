@@ -10,11 +10,16 @@ import UIKit
 import Combine
 
 extension SignIn {
-	final class ViewController<ViewModel: ViewModelProtocol>: UIViewController {
-		private let viewModel: ViewModel
+	final class ViewController: UIViewController {
+		private let output: SignInOutputProtocol
+		private let cancelBag: CancelBag
 
-		init(viewModel: ViewModel) {
-			self.viewModel = viewModel
+		init(
+			output: SignInOutputProtocol,
+			cancelBag: CancelBag
+		) {
+			self.output = output
+			self.cancelBag = cancelBag
 			super.init(nibName: nil, bundle: nil)
 		}
 		required init?(coder: NSCoder) {
@@ -23,7 +28,11 @@ extension SignIn {
 	}
 }
 
-// MARK: SignInOutputProtocol
-extension SignIn.ViewController: SignInOutputProtocol {
-
+// MARK: life cycle
+extension SignIn.ViewController {
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		title = "Sign In"
+		view.backgroundColor = .systemBackground
+	}
 }

@@ -48,7 +48,7 @@ final class AuthService {
 	// MARK: - init
 	private init() {}
 
-	public var isSignedIs: Bool {
+	public var isSigned: Bool {
 		auth.currentUser != nil
 	}
 

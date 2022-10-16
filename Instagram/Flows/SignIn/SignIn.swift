@@ -7,5 +7,5 @@
 
 import Foundation
 
-/// Namespace SignIn
+/// Namespace for SignIn
 enum SignIn {}

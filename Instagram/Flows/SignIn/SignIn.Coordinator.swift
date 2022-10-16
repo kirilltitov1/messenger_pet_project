@@ -5,7 +5,14 @@
 //  Created by Титов Кирилл Иванович on 09.10.2022.
 //
 
-import Foundation
+import UIKit
+
+protocol SignInCoordinatorProtocol {
+	func start(
+		navigationController: UINavigationController,
+		onFinish: @escaping (() -> Void)
+	)
+}
 
 extension SignIn {
 	/// SignIn Coordinator
@@ -22,9 +29,13 @@ extension SignIn {
 }
 
 // MARK: CoordinatorProtocol
-extension SignIn.Coordinator: CoordinatorProtocol {
-	func start(onFinish: @escaping (() -> Void)) {
+extension SignIn.Coordinator {
+	func start(
+		navigationController: UINavigationController,
+		onFinish: @escaping (() -> Void)
+	) {
 		self.onFinish = onFinish
-
+		let screen = factory.makeSignInViewController()
+		
 	}
 }

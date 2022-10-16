@@ -11,6 +11,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 	var window: UIWindow?
 	private let factory: SceneDelegateFactoryProtocol = Factory()
+	private let tabBarFactory: TabBar.Factory = TabBar.Factory()
 
 	func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 		// Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -19,10 +20,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		guard let scene = (scene as? UIWindowScene) else { return }
 		window = UIWindow(windowScene: scene)
 
-		if AuthService.shared.isSignedIs {
-			window?.rootViewController = factory.makeSignInFactory().makeSignInViewController()
+		if AuthService.shared.isSigned {
+			window?.rootViewController = TabBar.Controller(factory: tabBarFactory)
 		} else {
-			// TODO: сделать регистрацию
+			let signInViewController = factory.makeSignInFactory().makeSignInViewController()
+			window?.rootViewController = UINavigationController(rootViewController: signInViewController)
 		}
 		window?.makeKeyAndVisible()
 	}
