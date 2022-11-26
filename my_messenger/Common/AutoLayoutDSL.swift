@@ -36,6 +36,9 @@ extension LayoutAnchor {
 	static let top = relative(attribute: .top, relation: .equal, relatedTo: .top)
 	static let bottom = relative(attribute: .bottom, relation: .equal, relatedTo: .bottom)
 	
+	static let leadingToTrailing = relative(attribute: .leading, relation: .equal, relatedTo: .trailing)
+	static let trailingToLeading = relative(attribute: .trailing, relation: .equal, relatedTo: .leading)
+	
 	static let topToBottom = relative(attribute: .top, relation: .equal, relatedTo: .bottom)
 	static let bottomToTop = relative(attribute: .bottom, relation: .equal, relatedTo: .top)
 	

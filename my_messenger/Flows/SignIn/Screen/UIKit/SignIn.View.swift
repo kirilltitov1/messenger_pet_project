@@ -68,13 +68,16 @@ extension SignIn {
 			return button
 		}()
 		
-		private let textDivider: TextDivider = TextDivider(text: "or")
+		private lazy var textDivider: TextDivider = {
+			let view = TextDivider(text: "or")
+			view.translatesAutoresizingMaskIntoConstraints = false
+			return view
+		}()
 		
 		var input: ViewModel.Input
 		weak var output: ViewModel.Output?
 		private let cancelBag: CancelBag
 
-		
 		private let localization: SignInLocalizationProtocol
 		
 		/// Initialization.
@@ -163,7 +166,8 @@ private extension SignIn.View {
 			gradientView,
 			emailTextField,
 			passwordTextField,
-			signInButton
+			signInButton,
+			textDivider
 		)
 		gradientView.addSubview(headerImageView)
 	}
@@ -192,6 +196,9 @@ private extension SignIn.View {
 						constant: 0)
 					 ],
 			relativeTo: passwordTextField)
+		
+		textDivider.activate(anchors: [.topToBottom(16)], relativeTo: signInButton)
+		textDivider.activate(anchors: [.leading(32), .trailing(-32)], relativeTo: self)
 	}
 	
 	func signinButtonConfigUpdate(state: SignIn.ViewModel.State) {

@@ -9,14 +9,23 @@ import UIKit
 
 class TextDivider: UIView {
 	private let textLabel: UILabel = {
-		let label: UILabel = UILabel(frame: .zero)
+		let label: UILabel = UILabel()
 		label.font = UIFont.preferredFont(forTextStyle: .footnote)
+		label.translatesAutoresizingMaskIntoConstraints = false
 		return label
 	}()
 	
-	private let leftDivider: UIView = Divider(frame: .zero)
+	private let leftDivider: UIView = {
+		let view = Divider(frame: .zero)
+		view.translatesAutoresizingMaskIntoConstraints = false
+		return view
+	}()
 	
-	private let rightDivider: UIView = Divider(frame: .zero)
+	private let rightDivider: UIView = {
+		let view = Divider(frame: .zero)
+		view.translatesAutoresizingMaskIntoConstraints = false
+		return view
+	}()
 	
 	init(text: String) {
 		super.init(frame: .zero)
@@ -40,21 +49,12 @@ class TextDivider: UIView {
 	}
 	
 	private func makeConstraints() {
-		self.activate(anchors: [
-			.relative(
-				attribute: .height,
-				relation: .equal,
-				relatedTo: .height,
-				multiplier: 1,
-				constant: 0
-			)
-		], relativeTo: textLabel)
+		textLabel.activate(anchors: [.top(0), .bottom(0), .centerX(0)], relativeTo: self)
+		textLabel.activate(anchors: [.leadingToTrailing(16)], relativeTo: leftDivider)
+		textLabel.activate(anchors: [.trailingToLeading(-16)], relativeTo: rightDivider)
 		
-		leftDivider.activate(anchors: [.leading(0), .centerY(0)], relativeTo: self)
-		leftDivider.activate(anchors: [.height(1)])
-		textLabel.activate(anchors: [.leading(0)], relativeTo: leftDivider)
-		rightDivider.activate(anchors: [.leading(0)], relativeTo: textLabel)
-		rightDivider.activate(anchors: [.height(1)])
-		rightDivider.activate(anchors: [.trailing(0), .centerY(0)], relativeTo: self)
+		leftDivider.activate(anchors: [.leading(0), .centerY(0), .height(1)], relativeTo: self)
+		
+		rightDivider.activate(anchors: [.trailing(0), .centerY(0), .height(1)], relativeTo: self)
 	}
 }

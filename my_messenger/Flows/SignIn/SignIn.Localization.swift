@@ -11,12 +11,14 @@ protocol SignInLocalizationProtocol {
 	var emailFieldPlaceholder: String { get }
 	var passwordFieldPlaceholder: String { get }
 	var signInButtonTitle: String { get }
+	var dividerText: String { get }
 }
 
 extension Localization {
 	struct SignIn: SignInLocalizationProtocol {
-		let emailFieldPlaceholder = "Email"~
-		let passwordFieldPlaceholder = "Password"~
-		let signInButtonTitle = "Sign In"~
+		let emailFieldPlaceholder: String = "Email"~
+		let passwordFieldPlaceholder: String = "Password"~
+		let signInButtonTitle: String = "Sign In"~
+		let dividerText: String = "or"~
 	}
 }
