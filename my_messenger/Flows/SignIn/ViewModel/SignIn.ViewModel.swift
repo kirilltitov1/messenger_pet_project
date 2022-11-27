@@ -25,7 +25,7 @@ extension SignIn.ViewModel: ViewModelProtocol {
 		/// user press "signIn" button
 		case signingIn
 		/// user signed in successfully
-		case success
+		case signedIn
 		/// sign in fail
 		case failure
 	}
@@ -34,16 +34,20 @@ extension SignIn.ViewModel: ViewModelProtocol {
 		@Published var email: String = ""
 		@Published var password: String = ""
 		let signIn: PassthroughSubject<UIControl, Never> = .init()
+		let signUp: PassthroughSubject<UIControl, Never> = .init()
 	}
 	
 	final class Output: ObservableObject {
-		@Published var isEmailValid: Bool? = nil
-		@Published var isPasswordValid: Bool? = nil
+		@Published var isEmailValid: Bool = false
+		@Published var isPasswordValid: Bool = false
 		
 		@Published var state: State = .idle
 	}
 
-	func transform(input: Input, cancelBag: CancelBag) -> Output {
+	func transform(
+		input: Input,
+		cancelBag: CancelBag
+	) -> Output {
 		let output = Output()
 		
 		input.signIn
@@ -58,7 +62,7 @@ extension SignIn.ViewModel: ViewModelProtocol {
 			.map(signInService.signIn)
 			.map { $0.map(\.user) }
 			.replaceEmpty(with: nil)
-			.map { $0 == nil ? .failure : .success }
+			.map { $0 == nil ? .failure : .signedIn }
 			.assign(to: \.state, on: output)
 			.store(in: cancelBag)
 		

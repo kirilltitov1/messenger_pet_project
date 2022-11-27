@@ -6,11 +6,11 @@
 //
 
 import UIKit
+import Combine
 
 protocol SignInCoordinatorProtocol {
 	func start(
-		navigationController: UINavigationController,
-		onFinish: @escaping (() -> Void)
+		navigationController: UINavigationController
 	)
 }
 
@@ -19,10 +19,13 @@ extension SignIn {
 	final class Coordinator {
 		private var onFinish: (() -> Void)?
 		private let factory: SignInFactoryProtocol
+		private let cancelBag: CancelBag
 
 		init(
-			factory: SignInFactoryProtocol
+			factory: SignInFactoryProtocol,
+			cancelBag: CancelBag
 		) {
+			self.cancelBag = cancelBag
 			self.factory = factory
 		}
 	}
@@ -31,11 +34,16 @@ extension SignIn {
 // MARK: CoordinatorProtocol
 extension SignIn.Coordinator {
 	func start(
-		navigationController: UINavigationController,
-		onFinish: @escaping (() -> Void)
+		navigationController: UINavigationController
 	) {
-		self.onFinish = onFinish
-		let screen = factory.makeSignInViewController()
 		
+		let (screen, viewModel) = factory.makeSignInViewController()
+		
+		navigationController.pushViewController(screen, animated: true)
+		
+		viewModel.input.signUp
+			.sink { _ in
+				
+			}.store(in: cancelBag)
 	}
 }

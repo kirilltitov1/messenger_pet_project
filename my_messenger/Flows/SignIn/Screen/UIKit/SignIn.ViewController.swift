@@ -16,14 +16,19 @@ extension SignIn {
 		private let input: ViewModel.Input
 		private let output: ViewModel.Output
 		
+		private let localization: Localization.SignIn
+		
 		init(
 			input: ViewModel.Input,
 			output: ViewModel.Output,
-			cancelBag: CancelBag
+			cancelBag: CancelBag,
+			localization: Localization.SignIn
 		) {
 			self.input = input
 			self.output = output
 			self.cancelBag = cancelBag
+			
+			self.localization = localization
 			
 			super.init(nibName: nil, bundle: nil)
 		}
@@ -38,13 +43,13 @@ extension SignIn {
 				input: input,
 				output: output,
 				cancelBag: cancelBag,
-				localization: Localization.SignIn()
+				localization: localization
 			)
 		}
 		
 		override func viewDidLoad() {
 			super.viewDidLoad()
-			title = "Sign in"
+			title = localization.signIn
 		}
 	}
 }

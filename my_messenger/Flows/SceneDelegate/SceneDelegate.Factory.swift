@@ -8,13 +8,16 @@
 import Foundation
 
 protocol SceneDelegateFactoryProtocol {
-	func makeSignInFactory() -> SignIn.Factory
+	func makeSignInCoordinator() -> SignIn.Coordinator
 }
 
 extension SceneDelegate {
 	final class Factory: SceneDelegateFactoryProtocol {
-		func makeSignInFactory() -> SignIn.Factory {
-			SignIn.Factory()
+		func makeSignInCoordinator() -> SignIn.Coordinator {
+			let cancelBag = CancelBag()
+			let factory = SignIn.Factory(cancelBag: cancelBag)
+			let coordinator = SignIn.Coordinator(factory: factory, cancelBag: cancelBag)
+			return coordinator
 		}
 	}
 }

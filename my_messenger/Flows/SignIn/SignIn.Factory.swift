@@ -16,21 +16,29 @@ protocol SignInFactoryProtocol {
 	/// 				  	   cancel bag for sub's on view model & view controller
 	/// - Returns: sign in view controller
 	func makeSignInViewController(
-	) -> UIViewController
+	) -> (viewController: UIViewController, viewModel: (input: SignIn.ViewModel.Input, output: SignIn.ViewModel.Output))
 }
 
 extension SignIn {
 	/// Namespace sign in Factory
-	final class Factory {}
+	final class Factory {
+		private let cancelBag: CancelBag
+		init(cancelBag: CancelBag) {
+			self.cancelBag = cancelBag
+		}
+	}
 }
 
 // MARK: SignInFactoryProtocol
 extension SignIn.Factory: SignInFactoryProtocol {
 	func makeSignInViewController(
-	) -> UIViewController {
-		let cancelBag = CancelBag()
+	) -> (viewController: UIViewController, viewModel: (input: SignIn.ViewModel.Input, output: SignIn.ViewModel.Output)) {
+		
 		let input = SignIn.ViewModel.Input()
 		let viewModel = SignIn.ViewModel()
+		
+		let localization: Localization.SignIn = Localization.SignIn()
+		
 		let output = viewModel.transform(
 			input: input,
 			cancelBag: cancelBag
@@ -38,9 +46,10 @@ extension SignIn.Factory: SignInFactoryProtocol {
 		let viewController = SignIn.ViewController(
 			input: input,
 			output: output,
-			cancelBag: cancelBag
+			cancelBag: cancelBag,
+			localization: localization
 		)
 
-		return viewController
+		return (viewController, (input, output))
 	}
 }

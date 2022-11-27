@@ -61,8 +61,20 @@ extension SignIn {
 				.setupTextAttributesTransformer(textStyle: .headline)
 				.build()
 			
-			button.setTitle(localization.signInButtonTitle, for: .normal)
+			button.setTitle(localization.signIn, for: .normal)
 			button.backgroundColor = .systemBackground
+			button.translatesAutoresizingMaskIntoConstraints = false
+			
+			return button
+		}()
+		
+		private lazy var signUpButton: UIButton = {
+			let button: UIButton = UIButton.Builder(configuration: .plain())
+				.setupTextAttributesTransformer(textStyle: .footnote)
+				.build()
+			
+			button.setTitle(localization.signUp, for: .normal)
+			button.backgroundColor = .clear
 			button.translatesAutoresizingMaskIntoConstraints = false
 			
 			return button
@@ -146,8 +158,8 @@ private extension SignIn.View {
 		
 		// MARK: output
 		let isFieldsValid = Publishers.CombineLatest(
-			output.$isEmailValid.removeDuplicates().replaceNil(with: false),
-			output.$isPasswordValid.removeDuplicates().replaceNil(with: false))
+			output.$isEmailValid.removeDuplicates(),
+			output.$isPasswordValid.removeDuplicates())
 			.map { $0.0 && $0.1 }
 		
 		isFieldsValid.sink { [unowned self] isEnabled in
@@ -167,6 +179,7 @@ private extension SignIn.View {
 			emailTextField,
 			passwordTextField,
 			signInButton,
+			signUpButton,
 			textDivider
 		)
 		gradientView.addSubview(headerImageView)
@@ -199,19 +212,27 @@ private extension SignIn.View {
 		
 		textDivider.activate(anchors: [.topToBottom(16)], relativeTo: signInButton)
 		textDivider.activate(anchors: [.leading(32), .trailing(-32)], relativeTo: self)
+		
+		signUpButton.activate(anchors: [.topToBottom(8)], relativeTo: textDivider)
+		signUpButton.activate(anchors: [.right(-32)], relativeTo: self)
 	}
 	
 	func signinButtonConfigUpdate(state: SignIn.ViewModel.State) {
+		
+		func updateActivityIndicator() {
+			let signingIn = (state == .signingIn ? true : false)
+			
+			config?.showsActivityIndicator = signingIn
+			config?.imagePlacement = signingIn ? .leading : .trailing
+			config?.title = signingIn ? (localization.signIn + "...") : localization.signIn
+			signInButton.isEnabled = !signingIn
+			
+			signInButton.configuration = config
+			signInButton.setNeedsUpdateConfiguration()
+		}
+		
 		var config = signInButton.configuration
 		
-		let signingIn = (state == .signingIn ? true : false)
-		
-		config?.showsActivityIndicator = signingIn
-		config?.imagePlacement = signingIn ? .leading : .trailing
-		config?.title = signingIn ? "Signing In..." : "Sign In"
-		signInButton.isEnabled = !signingIn
-		
-		signInButton.configuration = config
-		signInButton.setNeedsUpdateConfiguration()
+		updateActivityIndicator()
 	}
 }
