@@ -50,6 +50,7 @@ extension SignIn {
 		override func viewDidLoad() {
 			super.viewDidLoad()
 			title = localization.signIn
+			navigationController?.navigationBar.setNeedsLayout()
 		}
 	}
 }

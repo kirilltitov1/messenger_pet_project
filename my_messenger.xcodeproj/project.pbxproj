@@ -63,6 +63,9 @@
 		EF903B58292408D000B4BFBB /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF903B56292408CE00B4BFBB /* CoordinatorProtocol.swift */; };
 		EFA2CEEE2932B675007BB0C6 /* TextDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA2CEED2932B675007BB0C6 /* TextDivider.swift */; };
 		EFA2CEF02932BB67007BB0C6 /* Divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA2CEEF2932BB67007BB0C6 /* Divider.swift */; };
+		EFA2CEF329342F3E007BB0C6 /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA2CEF229342F3E007BB0C6 /* ApplicationCoordinator.swift */; };
+		EFA2CEF629378C6C007BB0C6 /* UIButton+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA2CEF529378C6C007BB0C6 /* UIButton+Extentions.swift */; };
+		EFA2CF032937C497007BB0C6 /* Publisher+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA2CF022937C497007BB0C6 /* Publisher+Extentions.swift */; };
 		EFE752EF291B14A900FC0742 /* String+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE752EE291B14A900FC0742 /* String+Validation.swift */; };
 		EFE752F5291B2D5500FC0742 /* RegExpBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE752F4291B2D5500FC0742 /* RegExpBuilder.swift */; };
 		EFE77FA629207F8B00EC45E8 /* CustomSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE77FA529207F8B00EC45E8 /* CustomSubscription.swift */; };
@@ -160,6 +163,9 @@
 		EF903B56292408CE00B4BFBB /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		EFA2CEED2932B675007BB0C6 /* TextDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextDivider.swift; sourceTree = "<group>"; };
 		EFA2CEEF2932BB67007BB0C6 /* Divider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divider.swift; sourceTree = "<group>"; };
+		EFA2CEF229342F3E007BB0C6 /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
+		EFA2CEF529378C6C007BB0C6 /* UIButton+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extentions.swift"; sourceTree = "<group>"; };
+		EFA2CF022937C497007BB0C6 /* Publisher+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Extentions.swift"; sourceTree = "<group>"; };
 		EFE752EE291B14A900FC0742 /* String+Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Validation.swift"; sourceTree = "<group>"; };
 		EFE752F4291B2D5500FC0742 /* RegExpBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegExpBuilder.swift; sourceTree = "<group>"; };
 		EFE77FA529207F8B00EC45E8 /* CustomSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSubscription.swift; sourceTree = "<group>"; };
@@ -405,8 +411,10 @@
 		EF0D72D428E64553004D04F5 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
+				EFA2CEF229342F3E007BB0C6 /* ApplicationCoordinator.swift */,
 				EFF80D8728F73B9C00F830FB /* Core */,
 				5EF899BE28F35C4400D43E65 /* SignIn */,
+				EFA2CF042937D5C3007BB0C6 /* SignUp */,
 				EFF80D8328F739F600F830FB /* Home */,
 				EFF80D8428F739FF00F830FB /* Explore */,
 				EFF80D8528F73A8100F830FB /* Camera */,
@@ -453,7 +461,9 @@
 			isa = PBXGroup;
 			children = (
 				EF67DC17290EFA9E007E30C2 /* UIView+Extentions.swift */,
+				EFA2CEF529378C6C007BB0C6 /* UIButton+Extentions.swift */,
 				EFE77FA72920909E00EC45E8 /* UITextField+Combine.swift */,
+				EFA2CF022937C497007BB0C6 /* Publisher+Extentions.swift */,
 				EF67DC19290F02A5007E30C2 /* UIColor+RGB.swift */,
 				EF67DC13290A10B6007E30C2 /* String+Localization.swift */,
 				EFE752EE291B14A900FC0742 /* String+Validation.swift */,
@@ -486,6 +496,13 @@
 				EF903B53292401C400B4BFBB /* ButtonBuilder.swift */,
 			);
 			path = Builder;
+			sourceTree = "<group>";
+		};
+		EFA2CF042937D5C3007BB0C6 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SignUp;
 			sourceTree = "<group>";
 		};
 		EFE77FAC2922F53100EC45E8 /* DesignSystem */ = {
@@ -877,6 +894,7 @@
 				EFF80D9B28F74A5600F830FB /* Notifications.Factory.swift in Sources */,
 				5EF899DF28F399CE00D43E65 /* SignIn.ViewController.swift in Sources */,
 				EF67DC14290A10B6007E30C2 /* String+Localization.swift in Sources */,
+				EFA2CF032937C497007BB0C6 /* Publisher+Extentions.swift in Sources */,
 				5EF899D028F37BEF00D43E65 /* SignIn.ViewModel.swift in Sources */,
 				EFF80DB828F76E8E00F830FB /* Notifications.Coordinator.swift in Sources */,
 				EFF80D9128F7466900F830FB /* Notifications.swift in Sources */,
@@ -901,6 +919,8 @@
 				5EF899CC28F36ADE00D43E65 /* SignInOutputProtocol.swift in Sources */,
 				EFF80DBA28F76E9D00F830FB /* Camera.Coordinator.swift in Sources */,
 				5E4ECD4728E385D80080DE1D /* AppDelegate.swift in Sources */,
+				EFA2CEF329342F3E007BB0C6 /* ApplicationCoordinator.swift in Sources */,
+				EFA2CEF629378C6C007BB0C6 /* UIButton+Extentions.swift in Sources */,
 				EF67DC002901E05C007E30C2 /* GradientImageView.swift in Sources */,
 				EFE752F5291B2D5500FC0742 /* RegExpBuilder.swift in Sources */,
 				EF67DC12290A0D99007E30C2 /* Localization.swift in Sources */,

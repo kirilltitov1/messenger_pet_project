@@ -67,10 +67,12 @@ extension SignIn.ViewModel: ViewModelProtocol {
 			.store(in: cancelBag)
 		
 		input.$email.map { $0.isEmailValid }
+			.removeDuplicates()
 			.assign(to: \.isEmailValid, on: output)
 			.store(in: cancelBag)
 		
 		input.$password.map { $0.isPasswordValid }
+			.removeDuplicates()
 			.assign(to: \.isPasswordValid, on: output)
 			.store(in: cancelBag)
 		

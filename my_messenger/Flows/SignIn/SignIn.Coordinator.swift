@@ -35,15 +35,14 @@ extension SignIn {
 extension SignIn.Coordinator {
 	func start(
 		navigationController: UINavigationController
-	) {
-		
+	) -> (signedIn: AnyPublisher<Void, Never>, signedUp: AnyPublisher<Void, Never>) {
 		let (screen, viewModel) = factory.makeSignInViewController()
 		
-		navigationController.pushViewController(screen, animated: true)
+		navigationController.setViewControllers([screen], animated: true)
 		
-		viewModel.input.signUp
-			.sink { _ in
-				
-			}.store(in: cancelBag)
+		let signedInPublisher: AnyPublisher<Void, Never> = viewModel.output.$state.first { $0 == .signedIn }.erasedToVoid().eraseToAnyPublisher()
+		let signedUpPublisher: AnyPublisher<Void, Never> = viewModel.input.signUp.erasedToVoid().eraseToAnyPublisher()
+		
+		return (signedInPublisher, signedUpPublisher)
 	}
 }

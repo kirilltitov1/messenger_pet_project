@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+//import RxCocoa
 
 extension SignIn {
 	final class View: UIView {
@@ -148,6 +149,11 @@ private extension SignIn.View {
 			.subscribe(input.signIn)
 			.store(in: cancelBag)
 		
+		signUpButton.publisher(for: .touchUpInside)
+			.throttle(for: .milliseconds(300), scheduler: DispatchQueue.main, latest: true)
+			.subscribe(input.signUp)
+			.store(in: cancelBag)
+		
 		emailTextField.textPublisher
 			.assign(to: \.email, on: input)
 			.store(in: cancelBag)
@@ -158,18 +164,23 @@ private extension SignIn.View {
 		
 		// MARK: output
 		let isFieldsValid = Publishers.CombineLatest(
-			output.$isEmailValid.removeDuplicates(),
-			output.$isPasswordValid.removeDuplicates())
+			output.$isEmailValid,
+			output.$isPasswordValid)
 			.map { $0.0 && $0.1 }
 		
-		isFieldsValid.sink { [unowned self] isEnabled in
-			self.signInButton.isEnabled = isEnabled
-			self.signInButton.backgroundColor = isEnabled ? .systemBackground : .systemBackground.withAlphaComponent(0.3)
-
-		}.store(in: cancelBag)
+		let stateConfiguration = Publishers.CombineLatest(
+			isFieldsValid,
+			output.$state
+		)
 		
-		output.$state.sink { [unowned self] state in
-			self.signinButtonConfigUpdate(state: state)
+		stateConfiguration.sink { [unowned self] isEnabled, state in
+			if isEnabled {
+				let isActive = state == .signingIn
+				self.signInButton.setActivityIndicator(isActive: isActive, title: localization.signIn)
+				self.fieldsConfigurate(state: state)
+			} else {
+				self.signInButton.setEnable(value: isEnabled)
+			}
 		}.store(in: cancelBag)
 	}
 	
@@ -217,22 +228,20 @@ private extension SignIn.View {
 		signUpButton.activate(anchors: [.right(-32)], relativeTo: self)
 	}
 	
-	func signinButtonConfigUpdate(state: SignIn.ViewModel.State) {
-		
-		func updateActivityIndicator() {
-			let signingIn = (state == .signingIn ? true : false)
-			
-			config?.showsActivityIndicator = signingIn
-			config?.imagePlacement = signingIn ? .leading : .trailing
-			config?.title = signingIn ? (localization.signIn + "...") : localization.signIn
-			signInButton.isEnabled = !signingIn
-			
-			signInButton.configuration = config
-			signInButton.setNeedsUpdateConfiguration()
+	func fieldsConfigurate(state: SignIn.ViewModel.State) {
+		func updateActivity() {
+			switch state {
+			case .signingIn:
+				emailTextField.resignFirstResponder()
+				emailTextField.isEnabled = false
+				passwordTextField.resignFirstResponder()
+				passwordTextField.isEnabled = false
+			default:
+				emailTextField.isEnabled = true
+				passwordTextField.isEnabled = true
+			}
 		}
 		
-		var config = signInButton.configuration
-		
-		updateActivityIndicator()
+		updateActivity()
 	}
 }

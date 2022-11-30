@@ -11,10 +11,6 @@ extension String {
 	var isPasswordValid: Bool {
 		let regExp = RegExpBuilder()
 			.startAnchor()
-			.lowercaseLetters(count: 1)
-			.specialCaseLetter(count: 1)
-			.uppercaseLetters(count: 2)
-			.digits(count: 1)
 			.length(min: 6)
 			.endAnchor()
 			.build()
