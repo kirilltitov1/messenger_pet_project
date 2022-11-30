@@ -12,9 +12,9 @@
 		5E4ECD5128E385D80080DE1D /* Instagram.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5E4ECD4F28E385D80080DE1D /* Instagram.xcdatamodeld */; };
 		5E4ECD5328E385D90080DE1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E4ECD5228E385D90080DE1D /* Assets.xcassets */; };
 		5E4ECD5628E385D90080DE1D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E4ECD5428E385D90080DE1D /* LaunchScreen.storyboard */; };
-		5E4ECD6128E385DA0080DE1D /* InstagramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4ECD6028E385DA0080DE1D /* InstagramTests.swift */; };
-		5E4ECD6B28E385DA0080DE1D /* InstagramUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4ECD6A28E385DA0080DE1D /* InstagramUITests.swift */; };
-		5E4ECD6D28E385DA0080DE1D /* InstagramUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4ECD6C28E385DA0080DE1D /* InstagramUITestsLaunchTests.swift */; };
+		5E4ECD6128E385DA0080DE1D /* my_messengerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4ECD6028E385DA0080DE1D /* my_messengerTests.swift */; };
+		5E4ECD6B28E385DA0080DE1D /* my_messengerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4ECD6A28E385DA0080DE1D /* my_messengerUITests.swift */; };
+		5E4ECD6D28E385DA0080DE1D /* my_messengerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4ECD6C28E385DA0080DE1D /* my_messengerUITestsLaunchTests.swift */; };
 		5EF899C428F35C8900D43E65 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF899C328F35C8900D43E65 /* SignIn.swift */; };
 		5EF899C828F35D3B00D43E65 /* SignIn.Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF899C728F35D3B00D43E65 /* SignIn.Coordinator.swift */; };
 		5EF899CA28F3666800D43E65 /* SignIn.Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF899C928F3666800D43E65 /* SignIn.Factory.swift */; };
@@ -122,10 +122,10 @@
 		5E4ECD5528E385D90080DE1D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5E4ECD5728E385D90080DE1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E4ECD5C28E385DA0080DE1D /* my_messengerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = my_messengerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5E4ECD6028E385DA0080DE1D /* InstagramTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramTests.swift; sourceTree = "<group>"; };
+		5E4ECD6028E385DA0080DE1D /* my_messengerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = my_messengerTests.swift; sourceTree = "<group>"; };
 		5E4ECD6628E385DA0080DE1D /* my_messengerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = my_messengerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5E4ECD6A28E385DA0080DE1D /* InstagramUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramUITests.swift; sourceTree = "<group>"; };
-		5E4ECD6C28E385DA0080DE1D /* InstagramUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5E4ECD6A28E385DA0080DE1D /* my_messengerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = my_messengerUITests.swift; sourceTree = "<group>"; };
+		5E4ECD6C28E385DA0080DE1D /* my_messengerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = my_messengerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		5EF899C328F35C8900D43E65 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
 		5EF899C728F35D3B00D43E65 /* SignIn.Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.Coordinator.swift; sourceTree = "<group>"; };
 		5EF899C928F3666800D43E65 /* SignIn.Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.Factory.swift; sourceTree = "<group>"; };
@@ -238,8 +238,8 @@
 			isa = PBXGroup;
 			children = (
 				5E4ECD4528E385D80080DE1D /* my_messenger */,
-				5E4ECD5F28E385DA0080DE1D /* InstagramTests */,
-				5E4ECD6928E385DA0080DE1D /* InstagramUITests */,
+				5E4ECD5F28E385DA0080DE1D /* my_messengerTests */,
+				5E4ECD6928E385DA0080DE1D /* my_messengerUITests */,
 				5E4ECD4428E385D80080DE1D /* Products */,
 				EF3F358728E65F2500F668B4 /* Frameworks */,
 			);
@@ -269,21 +269,21 @@
 			path = my_messenger;
 			sourceTree = "<group>";
 		};
-		5E4ECD5F28E385DA0080DE1D /* InstagramTests */ = {
+		5E4ECD5F28E385DA0080DE1D /* my_messengerTests */ = {
 			isa = PBXGroup;
 			children = (
-				5E4ECD6028E385DA0080DE1D /* InstagramTests.swift */,
+				5E4ECD6028E385DA0080DE1D /* my_messengerTests.swift */,
 			);
-			path = InstagramTests;
+			path = my_messengerTests;
 			sourceTree = "<group>";
 		};
-		5E4ECD6928E385DA0080DE1D /* InstagramUITests */ = {
+		5E4ECD6928E385DA0080DE1D /* my_messengerUITests */ = {
 			isa = PBXGroup;
 			children = (
-				5E4ECD6A28E385DA0080DE1D /* InstagramUITests.swift */,
-				5E4ECD6C28E385DA0080DE1D /* InstagramUITestsLaunchTests.swift */,
+				5E4ECD6A28E385DA0080DE1D /* my_messengerUITests.swift */,
+				5E4ECD6C28E385DA0080DE1D /* my_messengerUITestsLaunchTests.swift */,
 			);
-			path = InstagramUITests;
+			path = my_messengerUITests;
 			sourceTree = "<group>";
 		};
 		5EF899BE28F35C4400D43E65 /* SignIn */ = {
@@ -944,7 +944,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E4ECD6128E385DA0080DE1D /* InstagramTests.swift in Sources */,
+				5E4ECD6128E385DA0080DE1D /* my_messengerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -952,8 +952,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E4ECD6B28E385DA0080DE1D /* InstagramUITests.swift in Sources */,
-				5E4ECD6D28E385DA0080DE1D /* InstagramUITestsLaunchTests.swift in Sources */,
+				5E4ECD6B28E385DA0080DE1D /* my_messengerUITests.swift in Sources */,
+				5E4ECD6D28E385DA0080DE1D /* my_messengerUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
