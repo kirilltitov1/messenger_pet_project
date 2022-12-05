@@ -1,14 +1,15 @@
 //
-//  SignIn.View.swift
-//  Instagram
+//  SignUp.View.swift
+//  my_messenger
 //
-//  Created by Титов Кирилл Иванович on 10.10.2022.
+//  Created by Kirill Titov on 04.12.2022.
 //
 
+import Foundation
 import UIKit
 import Combine
 
-extension SignIn {
+extension SignUp {
 	final class View: UIView {
 		
 		private let gradientView: UIView = GradientView(
@@ -55,24 +56,24 @@ extension SignIn {
 			return field
 		}()
 		
-		private lazy var signInButton: UIButton = {
+		private lazy var signUpButton: UIButton = {
 			let button: UIButton = UIButton.Builder(configuration: .filled())
 				.setupTextAttributesTransformer(textStyle: .headline)
 				.build()
 			
-			button.setTitle(localization.signIn, for: .normal)
+			button.setTitle(localization.signUp, for: .normal)
 			button.backgroundColor = .systemBackground
 			button.translatesAutoresizingMaskIntoConstraints = false
 			
 			return button
 		}()
 		
-		private lazy var signUpButton: UIButton = {
+		private lazy var signInButton: UIButton = {
 			let button: UIButton = UIButton.Builder(configuration: .plain())
 				.setupTextAttributesTransformer(textStyle: .footnote)
 				.build()
 			
-			button.setTitle(localization.signUp, for: .normal)
+			button.setTitle(localization.signIn, for: .normal)
 			button.backgroundColor = .clear
 			button.translatesAutoresizingMaskIntoConstraints = false
 			
@@ -89,7 +90,7 @@ extension SignIn {
 		weak var output: ViewModel.Output?
 		private weak var cancelBag: CancelBag?
 
-		private let localization: SignInLocalizationProtocol
+		private let localization: SignUpLocalizationProtocol
 		
 		/// Initialization.
 		///
@@ -102,7 +103,7 @@ extension SignIn {
 			input: ViewModel.Input,
 			output: ViewModel.Output,
 			cancelBag: CancelBag,
-			localization: SignInLocalizationProtocol
+			localization: SignUpLocalizationProtocol
 		) {
 			self.input = input
 			self.output = output
@@ -126,17 +127,17 @@ extension SignIn {
 }
 
 // MARK: life cycle
-extension SignIn.View {
+extension SignUp.View {
 	override func layoutSubviews() {
 		super.layoutSubviews()
 		
 		emailTextField.layer.cornerRadius = emailTextField.bounds.height/4
 		passwordTextField.layer.cornerRadius = passwordTextField.bounds.height/4
-		signInButton.layer.cornerRadius = signInButton.bounds.height/4
+		signUpButton.layer.cornerRadius = signInButton.bounds.height/4
 	}
 }
 
-private extension SignIn.View {
+private extension SignUp.View {
 	
 	func makeBindings() {
 		guard let input = input else { return }
@@ -144,14 +145,14 @@ private extension SignIn.View {
 		guard let cancelBag = cancelBag else { return }
 		
 		// MARK: input
-		signInButton.publisher(for: .touchUpInside)
-			.throttle(for: .milliseconds(300), scheduler: DispatchQueue.main, latest: true)
-			.subscribe(input.signIn)
-			.store(in: cancelBag)
-		
 		signUpButton.publisher(for: .touchUpInside)
 			.throttle(for: .milliseconds(300), scheduler: DispatchQueue.main, latest: true)
 			.subscribe(input.signUp)
+			.store(in: cancelBag)
+		
+		signInButton.publisher(for: .touchUpInside)
+			.throttle(for: .milliseconds(300), scheduler: DispatchQueue.main, latest: true)
+			.subscribe(input.signIn)
 			.store(in: cancelBag)
 		
 		emailTextField.textPublisher
@@ -175,11 +176,11 @@ private extension SignIn.View {
 		
 		stateConfiguration.sink { [unowned self] isEnabled, state in
 			if isEnabled {
-				let isActive = state == .signingIn
-				self.signInButton.setActivityIndicator(isActive: isActive, title: localization.signIn)
+				let isActive = state == .signingUp
+				self.signUpButton.setActivityIndicator(isActive: isActive, title: localization.signIn)
 				self.fieldsConfigurate(state: state)
 			} else {
-				self.signInButton.setEnable(value: isEnabled)
+				self.signUpButton.setEnable(value: isEnabled)
 			}
 		}.store(in: cancelBag)
 	}
@@ -189,8 +190,8 @@ private extension SignIn.View {
 			gradientView,
 			emailTextField,
 			passwordTextField,
-			signInButton,
 			signUpButton,
+			signInButton,
 			textDivider
 		)
 		gradientView.addSubview(headerImageView)
@@ -209,8 +210,8 @@ private extension SignIn.View {
 		passwordTextField.activate(anchors: [.left(32), .right(-32)], relativeTo: self)
 		passwordTextField.activate(anchors: [.topToBottom(16)], relativeTo: emailTextField)
 		
-		signInButton.activate(anchors: [.left(32), .right(-32)], relativeTo: self)
-		signInButton.activate(
+		signUpButton.activate(anchors: [.left(32), .right(-32)], relativeTo: self)
+		signUpButton.activate(
 			anchors: [.topToBottom(16),
 					  LayoutAnchor.relative(
 						attribute: .height,
@@ -221,17 +222,17 @@ private extension SignIn.View {
 					 ],
 			relativeTo: passwordTextField)
 		
-		textDivider.activate(anchors: [.topToBottom(16)], relativeTo: signInButton)
+		textDivider.activate(anchors: [.topToBottom(16)], relativeTo: signUpButton)
 		textDivider.activate(anchors: [.leading(32), .trailing(-32)], relativeTo: self)
 		
-		signUpButton.activate(anchors: [.topToBottom(8)], relativeTo: textDivider)
-		signUpButton.activate(anchors: [.right(-32)], relativeTo: self)
+		signInButton.activate(anchors: [.topToBottom(8)], relativeTo: textDivider)
+		signInButton.activate(anchors: [.right(-32)], relativeTo: self)
 	}
 	
-	func fieldsConfigurate(state: SignIn.ViewModel.State) {
+	func fieldsConfigurate(state: SignUp.ViewModel.State) {
 		func updateActivity() {
 			switch state {
-			case .signingIn:
+			case .signingUp:
 				emailTextField.resignFirstResponder()
 				emailTextField.isEnabled = false
 				passwordTextField.resignFirstResponder()

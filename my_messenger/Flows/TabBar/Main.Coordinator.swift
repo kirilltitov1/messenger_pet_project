@@ -1,20 +1,20 @@
 //
-//  SignIn.Coordinator.swift
-//  Instagram
+//  Main.Coordinator.swift
+//  my_messenger
 //
-//  Created by Титов Кирилл Иванович on 09.10.2022.
+//  Created by Kirill Titov on 09.12.2022.
 //
 
 import UIKit
 import Combine
 
-protocol SignInCoordinatorProtocol {
+protocol MainCoordinatorProtocol {
 	func start(
 		navigationController: UINavigationController
 	) -> (signedIn: AnyPublisher<Void, Never>, signUp: AnyPublisher<Void, Never>)?
 }
 
-extension SignIn {
+extension Main {
 	/// SignIn Coordinator
 	final class Coordinator {
 		private var onFinish: (() -> Void)?
@@ -32,7 +32,7 @@ extension SignIn {
 }
 
 // MARK: CoordinatorProtocol
-extension SignIn.Coordinator: SignInCoordinatorProtocol {
+extension Main.Coordinator: MainCoordinatorProtocol {
 	func start(
 		navigationController: UINavigationController
 	) -> (signedIn: AnyPublisher<Void, Never>, signUp: AnyPublisher<Void, Never>)? {
@@ -53,3 +53,4 @@ extension SignIn.Coordinator: SignInCoordinatorProtocol {
 		return (signedInPublisher, signUpPublisher)
 	}
 }
+

@@ -1,28 +1,27 @@
 //
-//  SignIn.ViewController.swift
-//  Instagram
+//  SignUp.ViewController.swift
+//  my_messenger
 //
-//  Created by Титов Кирилл Иванович on 10.10.2022.
+//  Created by Kirill Titov on 04.12.2022.
 //
 
 import Foundation
 import UIKit
-import Combine
 
-extension SignIn {
+extension SignUp {
 	final class ViewController: UIViewController {
 		private let cancelBag: CancelBag
 		
 		private let input: ViewModel.Input
 		private let output: ViewModel.Output
 		
-		private let localization: SignInLocalizationProtocol
+		private let localization: SignUpLocalizationProtocol
 		
 		init(
 			input: ViewModel.Input,
 			output: ViewModel.Output,
 			cancelBag: CancelBag,
-			localization: SignInLocalizationProtocol
+			localization: SignUpLocalizationProtocol
 		) {
 			self.input = input
 			self.output = output
@@ -37,7 +36,6 @@ extension SignIn {
 		}
 		
 		// MARK: life cycle
-		
 		override func loadView() {
 			view = View(
 				input: input,
@@ -49,10 +47,9 @@ extension SignIn {
 		
 		override func viewDidLoad() {
 			super.viewDidLoad()
-			title = localization.signIn
+			title = localization.signUp
 			navigationController?.navigationBar.setNeedsLayout()
 		}
-		
 		deinit {
 			print("\(#file) deinit")
 		}

@@ -1,31 +1,31 @@
 //
-//  SignIn.ViewModel.swift
-//  Instagram
+//  SignUp.ViewModel.swift
+//  my_messenger
 //
-//  Created by Титов Кирилл Иванович on 10.10.2022.
+//  Created by Kirill Titov on 03.12.2022.
 //
 
 import Foundation
 import Combine
 import UIKit
 
-extension SignIn {
+extension SignUp {
 	final class ViewModel {
 		private let authService = AuthService.shared
 	}
 }
 
 // MARK: ViewModelProtocol
-extension SignIn.ViewModel: ViewModelProtocol {
+extension SignUp.ViewModel: ViewModelProtocol {
 	
 	/// State of sign in view
 	enum State: Equatable {
 		/// user edit his data
 		case idle
 		/// user press "signIn" button
-		case signingIn
+		case signingUp
 		/// user signed in successfully
-		case signedIn
+		case signedUp
 		/// sign in fail
 		case failure
 	}
@@ -33,8 +33,8 @@ extension SignIn.ViewModel: ViewModelProtocol {
 	final class Input {
 		@Published var email: String = ""
 		@Published var password: String = ""
-		let signIn: PassthroughSubject<UIControl, Never> = .init()
 		let signUp: PassthroughSubject<UIControl, Never> = .init()
+		let signIn: PassthroughSubject<UIControl, Never> = .init()
 	}
 	
 	final class Output: ObservableObject {
@@ -50,19 +50,19 @@ extension SignIn.ViewModel: ViewModelProtocol {
 	) -> Output {
 		let output = Output()
 		
-		input.signIn
-			.map { _ in .signingIn }
+		input.signUp
+			.map { _ in .signingUp }
 			.assign(to: \.state, on: output)
 			.store(in: cancelBag)
 		
-		input.signIn
+		input.signUp
 			.delay(for: .milliseconds(1300), scheduler: DispatchQueue.main)
 			.combineLatest(input.$email, input.$password)
 			.map(\.1, \.2)
-			.map(authService.signIn)
+			.map(authService.signUp)
 			.map { $0.map(\.user) }
 			.replaceEmpty(with: nil)
-			.map { $0 == nil ? .failure : .signedIn }
+			.map { $0 == nil ? .failure : .signedUp }
 			.assign(to: \.state, on: output)
 			.store(in: cancelBag)
 		
@@ -81,4 +81,5 @@ extension SignIn.ViewModel: ViewModelProtocol {
 }
 
 // MARK: ObservableObject
-extension SignIn.ViewModel: ObservableObject {}
+extension SignUp.ViewModel: ObservableObject {}
+

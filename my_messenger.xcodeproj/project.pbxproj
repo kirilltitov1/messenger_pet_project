@@ -36,6 +36,13 @@
 		EF0D72C828E3A076004D04F5 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = EF0D72C728E3A076004D04F5 /* FirebaseStorage */; };
 		EF0D72CA28E3A076004D04F5 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = EF0D72C928E3A076004D04F5 /* FirebaseStorageCombine-Community */; };
 		EF0D72CD28E642D2004D04F5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF0D72CC28E642D2004D04F5 /* GoogleService-Info.plist */; };
+		EF25D64B293930C000AA7225 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF25D64A293930C000AA7225 /* SignUp.swift */; };
+		EF25D64D293930CF00AA7225 /* SignUp.Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF25D64C293930CF00AA7225 /* SignUp.Factory.swift */; };
+		EF25D64F293930E000AA7225 /* SignUp.Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF25D64E293930E000AA7225 /* SignUp.Coordinator.swift */; };
+		EF25D651293930EB00AA7225 /* SignUp.Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF25D650293930EB00AA7225 /* SignUp.Localization.swift */; };
+		EF25D660293BDB6400AA7225 /* SignUp.ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF25D65F293BDB6400AA7225 /* SignUp.ViewModel.swift */; };
+		EF25D662293CCFD900AA7225 /* SignUp.ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF25D661293CCFD900AA7225 /* SignUp.ViewController.swift */; };
+		EF25D664293CDB6B00AA7225 /* SignUp.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF25D663293CDB6B00AA7225 /* SignUp.View.swift */; };
 		EF3F357E28E65D3300F668B4 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3F357D28E65D3300F668B4 /* AuthService.swift */; };
 		EF3F358028E65D4500F668B4 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3F357F28E65D4500F668B4 /* DatabaseService.swift */; };
 		EF3F358228E65D8A00F668B4 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3F358128E65D8A00F668B4 /* StorageService.swift */; };
@@ -56,6 +63,7 @@
 		EF772D3E2924111E009C6DF1 /* textAttributesTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF772D3D2924111E009C6DF1 /* textAttributesTransformer.swift */; };
 		EF772D422924199F009C6DF1 /* Home.Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF772D402924199F009C6DF1 /* Home.Factory.swift */; };
 		EF772D432924199F009C6DF1 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF772D412924199F009C6DF1 /* Home.swift */; };
+		EF7EA88C2943C335003DF8A1 /* Main.Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7EA88B2943C335003DF8A1 /* Main.Coordinator.swift */; };
 		EF903B4C2923FB2400B4BFBB /* buttonAppereance.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF903B4B2923FB2400B4BFBB /* buttonAppereance.swift */; };
 		EF903B4F2923FED800B4BFBB /* image.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF903B4E2923FED800B4BFBB /* image.swift */; };
 		EF903B54292401C400B4BFBB /* ButtonBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF903B53292401C400B4BFBB /* ButtonBuilder.swift */; };
@@ -73,9 +81,9 @@
 		EFE77FAB2921B82300EC45E8 /* CombineCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = EFE77FAA2921B82300EC45E8 /* CombineCocoa */; };
 		EFF80D7528F708F500F830FB /* BindableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF80D7428F708F500F830FB /* BindableProtocol.swift */; };
 		EFF80D7728F7193500F830FB /* CancelBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF80D7628F7193500F830FB /* CancelBag.swift */; };
-		EFF80D7C28F72FF200F830FB /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF80D7B28F72FF200F830FB /* TabBarController.swift */; };
-		EFF80D7E28F733F400F830FB /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF80D7D28F733F400F830FB /* TabBar.swift */; };
-		EFF80D8228F7370300F830FB /* TabBar.Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF80D8128F7370300F830FB /* TabBar.Factory.swift */; };
+		EFF80D7C28F72FF200F830FB /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF80D7B28F72FF200F830FB /* MainController.swift */; };
+		EFF80D7E28F733F400F830FB /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF80D7D28F733F400F830FB /* Main.swift */; };
+		EFF80D8228F7370300F830FB /* Main.Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF80D8128F7370300F830FB /* Main.Factory.swift */; };
 		EFF80D8D28F7431200F830FB /* Explore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF80D8C28F7431200F830FB /* Explore.swift */; };
 		EFF80D8F28F7432100F830FB /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF80D8E28F7432100F830FB /* Camera.swift */; };
 		EFF80D9128F7466900F830FB /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF80D9028F7466900F830FB /* Notifications.swift */; };
@@ -136,6 +144,13 @@
 		5EF899DE28F399CE00D43E65 /* SignIn.ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.ViewController.swift; sourceTree = "<group>"; };
 		5EF899E028F39A1500D43E65 /* SignIn.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.View.swift; sourceTree = "<group>"; };
 		EF0D72CC28E642D2004D04F5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EF25D64A293930C000AA7225 /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
+		EF25D64C293930CF00AA7225 /* SignUp.Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.Factory.swift; sourceTree = "<group>"; };
+		EF25D64E293930E000AA7225 /* SignUp.Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.Coordinator.swift; sourceTree = "<group>"; };
+		EF25D650293930EB00AA7225 /* SignUp.Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.Localization.swift; sourceTree = "<group>"; };
+		EF25D65F293BDB6400AA7225 /* SignUp.ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.ViewModel.swift; sourceTree = "<group>"; };
+		EF25D661293CCFD900AA7225 /* SignUp.ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.ViewController.swift; sourceTree = "<group>"; };
+		EF25D663293CDB6B00AA7225 /* SignUp.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.View.swift; sourceTree = "<group>"; };
 		EF3F357D28E65D3300F668B4 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		EF3F357F28E65D4500F668B4 /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		EF3F358128E65D8A00F668B4 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
@@ -156,6 +171,7 @@
 		EF772D3D2924111E009C6DF1 /* textAttributesTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = textAttributesTransformer.swift; sourceTree = "<group>"; };
 		EF772D402924199F009C6DF1 /* Home.Factory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Home.Factory.swift; sourceTree = "<group>"; };
 		EF772D412924199F009C6DF1 /* Home.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		EF7EA88B2943C335003DF8A1 /* Main.Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.Coordinator.swift; sourceTree = "<group>"; };
 		EF903B4B2923FB2400B4BFBB /* buttonAppereance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = buttonAppereance.swift; sourceTree = "<group>"; };
 		EF903B4E2923FED800B4BFBB /* image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = image.swift; sourceTree = "<group>"; };
 		EF903B53292401C400B4BFBB /* ButtonBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonBuilder.swift; sourceTree = "<group>"; };
@@ -172,9 +188,9 @@
 		EFE77FA72920909E00EC45E8 /* UITextField+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Combine.swift"; sourceTree = "<group>"; };
 		EFF80D7428F708F500F830FB /* BindableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindableProtocol.swift; sourceTree = "<group>"; };
 		EFF80D7628F7193500F830FB /* CancelBag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelBag.swift; sourceTree = "<group>"; };
-		EFF80D7B28F72FF200F830FB /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		EFF80D7D28F733F400F830FB /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
-		EFF80D8128F7370300F830FB /* TabBar.Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.Factory.swift; sourceTree = "<group>"; };
+		EFF80D7B28F72FF200F830FB /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		EFF80D7D28F733F400F830FB /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
+		EFF80D8128F7370300F830FB /* Main.Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.Factory.swift; sourceTree = "<group>"; };
 		EFF80D8C28F7431200F830FB /* Explore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Explore.swift; sourceTree = "<group>"; };
 		EFF80D8E28F7432100F830FB /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		EFF80D9028F7466900F830FB /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
@@ -424,6 +440,23 @@
 			path = Flows;
 			sourceTree = "<group>";
 		};
+		EF25D652293930F100AA7225 /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				EF25D661293CCFD900AA7225 /* SignUp.ViewController.swift */,
+				EF25D663293CDB6B00AA7225 /* SignUp.View.swift */,
+			);
+			path = Screen;
+			sourceTree = "<group>";
+		};
+		EF25D653293930F800AA7225 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				EF25D65F293BDB6400AA7225 /* SignUp.ViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		EF3F358728E65F2500F668B4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -501,6 +534,12 @@
 		EFA2CF042937D5C3007BB0C6 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
+				EF25D64A293930C000AA7225 /* SignUp.swift */,
+				EF25D64C293930CF00AA7225 /* SignUp.Factory.swift */,
+				EF25D64E293930E000AA7225 /* SignUp.Coordinator.swift */,
+				EF25D650293930EB00AA7225 /* SignUp.Localization.swift */,
+				EF25D652293930F100AA7225 /* Screen */,
+				EF25D653293930F800AA7225 /* ViewModel */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -518,8 +557,9 @@
 		EFF80D7828F72F8300F830FB /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
-				EFF80D7D28F733F400F830FB /* TabBar.swift */,
-				EFF80D8128F7370300F830FB /* TabBar.Factory.swift */,
+				EFF80D7D28F733F400F830FB /* Main.swift */,
+				EFF80D8128F7370300F830FB /* Main.Factory.swift */,
+				EF7EA88B2943C335003DF8A1 /* Main.Coordinator.swift */,
 				EFF80D8028F7342F00F830FB /* UIKit */,
 			);
 			path = TabBar;
@@ -528,7 +568,7 @@
 		EFF80D8028F7342F00F830FB /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
-				EFF80D7B28F72FF200F830FB /* TabBarController.swift */,
+				EFF80D7B28F72FF200F830FB /* MainController.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -875,16 +915,19 @@
 				EF903B4C2923FB2400B4BFBB /* buttonAppereance.swift in Sources */,
 				5EF899E128F39A1500D43E65 /* SignIn.View.swift in Sources */,
 				EFA2CEF02932BB67007BB0C6 /* Divider.swift in Sources */,
+				EF25D64B293930C000AA7225 /* SignUp.swift in Sources */,
 				EFF80DC228F7960000F830FB /* Profile.ViewController.swift in Sources */,
 				EFF80D9D28F74A6100F830FB /* Profile.Factory.swift in Sources */,
 				EFF80DBC28F7705C00F830FB /* Explore.Coordinator.swift in Sources */,
-				EFF80D8228F7370300F830FB /* TabBar.Factory.swift in Sources */,
+				EFF80D8228F7370300F830FB /* Main.Factory.swift in Sources */,
+				EF25D664293CDB6B00AA7225 /* SignUp.View.swift in Sources */,
 				EF903B58292408D000B4BFBB /* CoordinatorProtocol.swift in Sources */,
 				EF772D422924199F009C6DF1 /* Home.Factory.swift in Sources */,
+				EF25D64F293930E000AA7225 /* SignUp.Coordinator.swift in Sources */,
 				EFF80D9328F7467600F830FB /* Profile.swift in Sources */,
 				EFF80DAF28F76C4300F830FB /* Explore.ViewController.swift in Sources */,
 				5E4ECD5128E385D80080DE1D /* Instagram.xcdatamodeld in Sources */,
-				EFF80D7C28F72FF200F830FB /* TabBarController.swift in Sources */,
+				EFF80D7C28F72FF200F830FB /* MainController.swift in Sources */,
 				EF67DC1A290F02A5007E30C2 /* UIColor+RGB.swift in Sources */,
 				EF3F358028E65D4500F668B4 /* DatabaseService.swift in Sources */,
 				EF903B54292401C400B4BFBB /* ButtonBuilder.swift in Sources */,
@@ -916,27 +959,32 @@
 				EF67DC1C2913236E007E30C2 /* Appearance.swift in Sources */,
 				5EF899DD28F3968200D43E65 /* SceneDelegate.Factory.swift in Sources */,
 				EF3F357E28E65D3300F668B4 /* AuthService.swift in Sources */,
+				EF25D651293930EB00AA7225 /* SignUp.Localization.swift in Sources */,
 				5EF899CC28F36ADE00D43E65 /* SignInOutputProtocol.swift in Sources */,
 				EFF80DBA28F76E9D00F830FB /* Camera.Coordinator.swift in Sources */,
 				5E4ECD4728E385D80080DE1D /* AppDelegate.swift in Sources */,
 				EFA2CEF329342F3E007BB0C6 /* ApplicationCoordinator.swift in Sources */,
+				EF7EA88C2943C335003DF8A1 /* Main.Coordinator.swift in Sources */,
 				EFA2CEF629378C6C007BB0C6 /* UIButton+Extentions.swift in Sources */,
 				EF67DC002901E05C007E30C2 /* GradientImageView.swift in Sources */,
 				EFE752F5291B2D5500FC0742 /* RegExpBuilder.swift in Sources */,
 				EF67DC12290A0D99007E30C2 /* Localization.swift in Sources */,
 				EFE752EF291B14A900FC0742 /* String+Validation.swift in Sources */,
 				EFF80DAD28F76C3300F830FB /* Camera.ViewController.swift in Sources */,
+				EF25D662293CCFD900AA7225 /* SignUp.ViewController.swift in Sources */,
 				EF67DC1E29133507007E30C2 /* AutoLayoutDSL.swift in Sources */,
 				EFA2CEEE2932B675007BB0C6 /* TextDivider.swift in Sources */,
 				5E4ECD4928E385D80080DE1D /* SceneDelegate.swift in Sources */,
+				EF25D660293BDB6400AA7225 /* SignUp.ViewModel.swift in Sources */,
 				EFF80D9728F74A4000F830FB /* Explore.Factory.swift in Sources */,
 				EF772D432924199F009C6DF1 /* Home.swift in Sources */,
 				EF67DC18290EFA9E007E30C2 /* UIView+Extentions.swift in Sources */,
 				EFF80DC428F796F700F830FB /* Notifications.ViewController.swift in Sources */,
 				EFF80D9928F74A4900F830FB /* Camera.Factory.swift in Sources */,
 				EFF80DC028F7958200F830FB /* Home.ViewController.swift in Sources */,
-				EFF80D7E28F733F400F830FB /* TabBar.swift in Sources */,
+				EFF80D7E28F733F400F830FB /* Main.swift in Sources */,
 				EF67DC0C290A0D2A007E30C2 /* Localized.swift in Sources */,
+				EF25D64D293930CF00AA7225 /* SignUp.Factory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

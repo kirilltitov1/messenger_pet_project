@@ -17,6 +17,8 @@ final class ApplicationCoordinator {
 	private let cancelBag: CancelBag = CancelBag()
 	
 	var signInCoordinator: SignIn.Coordinator?
+	var signUpCoordinator: SignUp.Coordinator?
+//	var tabBarCoordinator: TabBar.
 	
 	public func start(navigationController: UINavigationController) {
 		if AuthService.shared.isSigned {
@@ -35,12 +37,44 @@ final class ApplicationCoordinator {
 		
 		let callBack = signInCoordinator?.start(navigationController: navigationController)
 		
-		callBack?.signedIn.sink { _ in
-			//TODO: signed in
+		callBack?.signedIn
+			.print("signInCoordinator: signIn")
+			.sink { [unowned self] in
+				signInCoordinator = nil
+				startMain()
+			}.store(in: cancelBag)
+		
+		callBack?.signUp
+			.print("signInCoordinator: signedUp")
+			.sink { [unowned self] in
+				signInCoordinator = nil
+				startSignUp(navigationController: navigationController)
+			}.store(in: cancelBag)
+	}
+	
+	private func startSignUp(navigationController: UINavigationController) {
+		let cancelBag = CancelBag()
+		let factory = SignUp.Factory(cancelBag: cancelBag)
+		signUpCoordinator = SignUp.Coordinator(factory: factory, cancelBag: cancelBag)
+		
+		let callBack = signUpCoordinator?.start(navigationController: navigationController)
+		
+		callBack?.signedUp
+			.print("signUpCoordinator: signUp")
+			.sink { [unowned self] in
+				signUpCoordinator = nil
+				startMain()
 		}.store(in: cancelBag)
 		
-		callBack?.signedUp.sink { _ in
-			//TODO: sign up
+		callBack?.signIn
+			.print("signUpCoordinator: signedIn")
+			.sink { [unowned self] in
+			signUpCoordinator = nil
+			startSignIn(navigationController: navigationController)
 		}.store(in: cancelBag)
+	}
+	
+	private func startMain() {
+		print("")
 	}
 }

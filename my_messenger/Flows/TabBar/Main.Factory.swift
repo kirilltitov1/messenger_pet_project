@@ -14,7 +14,7 @@ protocol TabBarItemFactoryProtocol {
 	func makeTabBarNavItem(tag: Int) -> UINavigationController
 }
 
-extension TabBar {
+extension Main {
 	final class Factory {
 		
 		private let homeFactory: Home.Factory = Home.Factory()
@@ -44,5 +44,5 @@ extension TabBar {
 	}
 }
 
-extension TabBar.Factory {
+extension Main.Factory {
 }
