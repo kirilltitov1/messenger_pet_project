@@ -403,6 +403,7 @@
 		EF0D72D228E644D0004D04F5 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				EF25D654293BD3DA00AA7225 /* Coordinator */,
 				EFE77FAC2922F53100EC45E8 /* DesignSystem */,
 				EF67DBFE2901E04D007E30C2 /* Gradient */,
 				EF772D442926A058009C6DF1 /* Combine */,
@@ -940,10 +941,12 @@
 				EFA2CF032937C497007BB0C6 /* Publisher+Extentions.swift in Sources */,
 				5EF899D028F37BEF00D43E65 /* SignIn.ViewModel.swift in Sources */,
 				EFF80DB828F76E8E00F830FB /* Notifications.Coordinator.swift in Sources */,
+				EF25D65C293BD8AA00AA7225 /* BaseCoordinator.swift in Sources */,
 				EFF80D9128F7466900F830FB /* Notifications.swift in Sources */,
 				EFF80DBE28F7706900F830FB /* Home.Coordinator.swift in Sources */,
 				EF903B4F2923FED800B4BFBB /* image.swift in Sources */,
 				EFF80D7728F7193500F830FB /* CancelBag.swift in Sources */,
+				EF25D65A293BD82D00AA7225 /* SystemNavigation.swift in Sources */,
 				5EF899C428F35C8900D43E65 /* SignIn.swift in Sources */,
 				5EF899CA28F3666800D43E65 /* SignIn.Factory.swift in Sources */,
 				5EF899C828F35D3B00D43E65 /* SignIn.Coordinator.swift in Sources */,
@@ -958,6 +961,7 @@
 				EFF80D8F28F7432100F830FB /* Camera.swift in Sources */,
 				EF67DC1C2913236E007E30C2 /* Appearance.swift in Sources */,
 				5EF899DD28F3968200D43E65 /* SceneDelegate.Factory.swift in Sources */,
+				EF25D65E293BD8CD00AA7225 /* Routable.swift in Sources */,
 				EF3F357E28E65D3300F668B4 /* AuthService.swift in Sources */,
 				EF25D651293930EB00AA7225 /* SignUp.Localization.swift in Sources */,
 				5EF899CC28F36ADE00D43E65 /* SignInOutputProtocol.swift in Sources */,
@@ -978,6 +982,7 @@
 				EF25D660293BDB6400AA7225 /* SignUp.ViewModel.swift in Sources */,
 				EFF80D9728F74A4000F830FB /* Explore.Factory.swift in Sources */,
 				EF772D432924199F009C6DF1 /* Home.swift in Sources */,
+				EF25D658293BD80B00AA7225 /* LifeCycleListener.swift in Sources */,
 				EF67DC18290EFA9E007E30C2 /* UIView+Extentions.swift in Sources */,
 				EFF80DC428F796F700F830FB /* Notifications.ViewController.swift in Sources */,
 				EFF80D9928F74A4900F830FB /* Camera.Factory.swift in Sources */,
