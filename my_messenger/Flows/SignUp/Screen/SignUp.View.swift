@@ -123,6 +123,10 @@ extension SignUp {
 		required init?(coder: NSCoder) {
 			fatalError("\(#file): init(coder:) has not been implemented")
 		}
+		
+		deinit {
+			print(#file + ": deinit")
+		}
 	}
 }
 

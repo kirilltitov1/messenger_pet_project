@@ -9,20 +9,24 @@ import UIKit
 import Combine
 
 protocol MainCoordinatorProtocol {
+	/// start main tab bar
+	/// - Parameter navigationController: root navigation controller
+	/// - Returns: call back's
+	@discardableResult
 	func start(
 		navigationController: UINavigationController
-	) -> (signedIn: AnyPublisher<Void, Never>, signUp: AnyPublisher<Void, Never>)?
+	) -> (AnyPublisher<Void, Never>)?
 }
 
 extension Main {
 	/// SignIn Coordinator
 	final class Coordinator {
 		private var onFinish: (() -> Void)?
-		private let factory: SignInFactoryProtocol
+		private let factory: MainFactoryProtocol
 		private let cancelBag: CancelBag
 
 		init(
-			factory: SignInFactoryProtocol,
+			factory: MainFactoryProtocol,
 			cancelBag: CancelBag
 		) {
 			self.cancelBag = cancelBag
@@ -35,22 +39,13 @@ extension Main {
 extension Main.Coordinator: MainCoordinatorProtocol {
 	func start(
 		navigationController: UINavigationController
-	) -> (signedIn: AnyPublisher<Void, Never>, signUp: AnyPublisher<Void, Never>)? {
-		guard let (screen, viewModel) = factory.makeSignInViewController() else { return nil }
+	) -> (AnyPublisher<Void, Never>)? {
+		let tabs = factory.makeMain()
 		
-		navigationController.setViewControllers([screen], animated: true)
+		navigationController.setViewControllers(tabs, animated: true)
 		
-		let signedInPublisher: AnyPublisher<Void, Never> = viewModel.output
-			.$state
-			.filter { $0 == .signedIn }
-			.erasedToVoid()
-			.eraseToAnyPublisher()
-		let signUpPublisher: AnyPublisher<Void, Never> = viewModel.input
-			.signUp
-			.erasedToVoid()
-			.eraseToAnyPublisher()
-		
-		return (signedInPublisher, signUpPublisher)
+		//FIXME: - add callback if need it
+		return nil
 	}
 }
 

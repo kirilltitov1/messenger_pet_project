@@ -11,16 +11,15 @@ import UIKit
 
 /// Protocol for sign up factory
 protocol SignUpFactoryProtocol {
-	/// make sign in view controller
-	/// - Parameter cancelBag: inject, if u need to hold sub's out of view controller life cycle;
-	/// 				  	   cancel bag for sub's on view model & view controller
-	/// - Returns: sign up view controller
+	///   Create sign up controller
+	/// - Parameter navigationController: root navigation controller
+	/// - Returns: sign up view controller and view model for call back's
 	func makeSignUpViewController(
 	) -> (viewController: UIViewController, viewModel: (input: SignUp.ViewModel.Input, output: SignUp.ViewModel.Output))?
 }
 
 extension SignUp {
-	/// Namespace sign in Factory
+	/// Sign up Factory
 	final class Factory {
 		private weak var cancelBag: CancelBag?
 		init(cancelBag: CancelBag) {
@@ -34,7 +33,7 @@ extension SignUp.Factory: SignUpFactoryProtocol {
 	func makeSignUpViewController(
 	) -> (viewController: UIViewController, viewModel: (input: SignUp.ViewModel.Input, output: SignUp.ViewModel.Output))? {
 		
-		let cancelBag: CancelBag = CancelBag()
+		guard let cancelBag = cancelBag else { return nil }
 		
 		let input = SignUp.ViewModel.Input()
 		let viewModel = SignUp.ViewModel()

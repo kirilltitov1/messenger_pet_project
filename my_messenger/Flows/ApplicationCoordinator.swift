@@ -10,27 +10,27 @@ import Combine
 
 final class ApplicationCoordinator {
 	
-	private init() {}
-	
 	static let shared: ApplicationCoordinator = ApplicationCoordinator()
 	
 	private let cancelBag: CancelBag = CancelBag()
 	
-	var signInCoordinator: SignIn.Coordinator?
-	var signUpCoordinator: SignUp.Coordinator?
-//	var tabBarCoordinator: TabBar.
+	var signInCoordinator: SignInCoordinatorProtocol?
+	var signUpCoordinator: SignUpCoordinatorProtocol?
+	var mainCoordinator: MainCoordinatorProtocol?
+	
+	private let authService: AuthService = AuthService.shared
 	
 	public func start(navigationController: UINavigationController) {
 		if AuthService.shared.isSigned {
 			//TODO: tab bar
-//			let tabBarFactory: TabBar.Factory = TabBar.Factory()
+//			let mainFactory: MainCoordinatorProtocol = Main.Factory()
 //			TabBar.Controller(factory: tabBarFactory)
 		} else {
 			startSignIn(navigationController: navigationController)
 		}
 	}
 	
-	private func startSignIn(navigationController: UINavigationController) {
+	public func startSignIn(navigationController: UINavigationController) {
 		let cancelBag = CancelBag()
 		let factory = SignIn.Factory(cancelBag: cancelBag)
 		signInCoordinator = SignIn.Coordinator(factory: factory, cancelBag: cancelBag)
@@ -38,21 +38,20 @@ final class ApplicationCoordinator {
 		let callBack = signInCoordinator?.start(navigationController: navigationController)
 		
 		callBack?.signedIn
-			.print("signInCoordinator: signIn")
+			.print("signInCoordinator: signedIn")
 			.sink { [unowned self] in
 				signInCoordinator = nil
-				startMain()
+				startMain(navigationController: navigationController)
 			}.store(in: cancelBag)
 		
 		callBack?.signUp
-			.print("signInCoordinator: signedUp")
+			.print("signInCoordinator: signUp")
 			.sink { [unowned self] in
-				signInCoordinator = nil
 				startSignUp(navigationController: navigationController)
 			}.store(in: cancelBag)
 	}
 	
-	private func startSignUp(navigationController: UINavigationController) {
+	public func startSignUp(navigationController: UINavigationController) {
 		let cancelBag = CancelBag()
 		let factory = SignUp.Factory(cancelBag: cancelBag)
 		signUpCoordinator = SignUp.Coordinator(factory: factory, cancelBag: cancelBag)
@@ -63,18 +62,22 @@ final class ApplicationCoordinator {
 			.print("signUpCoordinator: signUp")
 			.sink { [unowned self] in
 				signUpCoordinator = nil
-				startMain()
-		}.store(in: cancelBag)
+				startSignIn(navigationController: navigationController)
+			}.store(in: cancelBag)
 		
 		callBack?.signIn
 			.print("signUpCoordinator: signedIn")
 			.sink { [unowned self] in
-			signUpCoordinator = nil
-			startSignIn(navigationController: navigationController)
-		}.store(in: cancelBag)
+				signUpCoordinator = nil
+				navigationController.dismiss(animated: true)
+			}.store(in: cancelBag)
 	}
 	
-	private func startMain() {
-		print("")
+	public func startMain(navigationController: UINavigationController) {
+		let cancelBag = CancelBag()
+		let factory = Main.Factory(cancelBag: cancelBag)
+		mainCoordinator = Main.Coordinator(factory: factory, cancelBag: cancelBag)
+		
+		mainCoordinator?.start(navigationController: navigationController)
 	}
 }

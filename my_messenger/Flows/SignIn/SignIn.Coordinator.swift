@@ -19,7 +19,7 @@ extension SignIn {
 	final class Coordinator {
 		private var onFinish: (() -> Void)?
 		private let factory: SignInFactoryProtocol
-		private let cancelBag: CancelBag
+		private weak var cancelBag: CancelBag?
 
 		init(
 			factory: SignInFactoryProtocol,

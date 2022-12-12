@@ -8,6 +8,7 @@
 import UIKit
 
 extension Main {
+	/// Tab bar controller for main screen
 	final class Controller: UITabBarController {
 		
 		let factory: Main.Factory
@@ -17,7 +18,7 @@ extension Main {
 			factory: Main.Factory
 		) {
 			self.factory = factory
-			tabBarItems = factory.makeTabControllers()
+			tabBarItems = factory.makeMain()
 			
 			super.init(nibName: nil, bundle: nil)
 		}

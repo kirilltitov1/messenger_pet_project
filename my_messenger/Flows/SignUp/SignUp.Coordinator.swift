@@ -9,6 +9,9 @@ import UIKit
 import Combine
 
 protocol SignUpCoordinatorProtocol {
+	/// Present modal screen
+	/// - Parameter navigationController: current navigation controller
+	/// - Returns: call back's
 	func start(
 		navigationController: UINavigationController
 	) -> (signedUp: AnyPublisher<Void, Never>, signIn: AnyPublisher<Void, Never>)?
@@ -19,7 +22,7 @@ extension SignUp {
 	final class Coordinator {
 		private var onFinish: (() -> Void)?
 		private let factory: SignUpFactoryProtocol
-		private let cancelBag: CancelBag
+		private weak var cancelBag: CancelBag?
 
 		init(
 			factory: SignUpFactoryProtocol,
@@ -38,7 +41,7 @@ extension SignUp.Coordinator: SignUpCoordinatorProtocol {
 	) -> (signedUp: AnyPublisher<Void, Never>, signIn: AnyPublisher<Void, Never>)? {
 		guard let (screen, viewModel) = factory.makeSignUpViewController() else { return nil }
 		
-		navigationController.setViewControllers([screen], animated: true)
+		navigationController.present(screen, animated: true)
 		
 		let signedUpPublisher: AnyPublisher<Void, Never> = viewModel.output
 			.$state
@@ -53,4 +56,3 @@ extension SignUp.Coordinator: SignUpCoordinatorProtocol {
 		return (signedUpPublisher, signInPublisher)
 	}
 }
-

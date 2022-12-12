@@ -20,7 +20,7 @@ protocol SignInFactoryProtocol {
 }
 
 extension SignIn {
-	/// Namespace sign in Factory
+	/// Sign in Factory
 	final class Factory {
 		private weak var cancelBag: CancelBag?
 		init(cancelBag: CancelBag) {
