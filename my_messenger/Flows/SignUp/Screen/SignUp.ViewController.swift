@@ -49,7 +49,11 @@ extension SignUp {
 			super.viewDidLoad()
 			title = localization.signUp
 			navigationController?.navigationBar.setNeedsLayout()
+			if let presentationController = presentationController as? UISheetPresentationController {
+				presentationController.prefersGrabberVisible = true
+			}
 		}
+
 		deinit {
 			print("\(#file) deinit")
 		}

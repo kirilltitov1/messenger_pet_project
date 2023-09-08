@@ -74,6 +74,13 @@
 		EFA2CEF329342F3E007BB0C6 /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA2CEF229342F3E007BB0C6 /* ApplicationCoordinator.swift */; };
 		EFA2CEF629378C6C007BB0C6 /* UIButton+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA2CEF529378C6C007BB0C6 /* UIButton+Extentions.swift */; };
 		EFA2CF032937C497007BB0C6 /* Publisher+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA2CF022937C497007BB0C6 /* Publisher+Extentions.swift */; };
+		EFDE0CCF2AA8E56000899788 /* AvailabilityProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDE0CCE2AA8E56000899788 /* AvailabilityProtocol.swift */; };
+		EFDE0CD12AA91E6D00899788 /* AvailabilityFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDE0CD02AA91E6D00899788 /* AvailabilityFacade.swift */; };
+		EFDE0CD52AA91F3600899788 /* AvailabilityFeatureKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDE0CD42AA91F3600899788 /* AvailabilityFeatureKey.swift */; };
+		EFDE0CD82AA9204A00899788 /* AvailabilityFeatureKey+local.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDE0CD72AA9204A00899788 /* AvailabilityFeatureKey+local.swift */; };
+		EFDE0CDA2AA9206B00899788 /* AvailabilityFeatureKey+remote.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDE0CD92AA9206B00899788 /* AvailabilityFeatureKey+remote.swift */; };
+		EFDE0CDC2AA9209300899788 /* AvailabilityFeatureKey+providers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDE0CDB2AA9209300899788 /* AvailabilityFeatureKey+providers.swift */; };
+		EFE4D5882A258B950029E2F7 /* Main.Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE4D5872A258B950029E2F7 /* Main.Router.swift */; };
 		EFE752EF291B14A900FC0742 /* String+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE752EE291B14A900FC0742 /* String+Validation.swift */; };
 		EFE752F5291B2D5500FC0742 /* RegExpBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE752F4291B2D5500FC0742 /* RegExpBuilder.swift */; };
 		EFE77FA629207F8B00EC45E8 /* CustomSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE77FA529207F8B00EC45E8 /* CustomSubscription.swift */; };
@@ -182,6 +189,13 @@
 		EFA2CEF229342F3E007BB0C6 /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
 		EFA2CEF529378C6C007BB0C6 /* UIButton+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extentions.swift"; sourceTree = "<group>"; };
 		EFA2CF022937C497007BB0C6 /* Publisher+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Extentions.swift"; sourceTree = "<group>"; };
+		EFDE0CCE2AA8E56000899788 /* AvailabilityProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailabilityProtocol.swift; sourceTree = "<group>"; };
+		EFDE0CD02AA91E6D00899788 /* AvailabilityFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailabilityFacade.swift; sourceTree = "<group>"; };
+		EFDE0CD42AA91F3600899788 /* AvailabilityFeatureKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailabilityFeatureKey.swift; sourceTree = "<group>"; };
+		EFDE0CD72AA9204A00899788 /* AvailabilityFeatureKey+local.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AvailabilityFeatureKey+local.swift"; sourceTree = "<group>"; };
+		EFDE0CD92AA9206B00899788 /* AvailabilityFeatureKey+remote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AvailabilityFeatureKey+remote.swift"; sourceTree = "<group>"; };
+		EFDE0CDB2AA9209300899788 /* AvailabilityFeatureKey+providers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AvailabilityFeatureKey+providers.swift"; sourceTree = "<group>"; };
+		EFE4D5872A258B950029E2F7 /* Main.Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.Router.swift; sourceTree = "<group>"; };
 		EFE752EE291B14A900FC0742 /* String+Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Validation.swift"; sourceTree = "<group>"; };
 		EFE752F4291B2D5500FC0742 /* RegExpBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegExpBuilder.swift; sourceTree = "<group>"; };
 		EFE77FA529207F8B00EC45E8 /* CustomSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSubscription.swift; sourceTree = "<group>"; };
@@ -403,6 +417,7 @@
 		EF0D72D228E644D0004D04F5 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				EF7EA8B32947D53B003DF8A1 /* PhotoPicker */,
 				EFE77FAC2922F53100EC45E8 /* DesignSystem */,
 				EF67DBFE2901E04D007E30C2 /* Gradient */,
 				EF772D442926A058009C6DF1 /* Combine */,
@@ -420,6 +435,10 @@
 		EF0D72D328E644E0004D04F5 /* Availability */ = {
 			isa = PBXGroup;
 			children = (
+				EFDE0CD42AA91F3600899788 /* AvailabilityFeatureKey.swift */,
+				EFDE0CD62AA9202E00899788 /* Providers */,
+				EFDE0CCE2AA8E56000899788 /* AvailabilityProtocol.swift */,
+				EFDE0CD02AA91E6D00899788 /* AvailabilityFacade.swift */,
 			);
 			path = Availability;
 			sourceTree = "<group>";
@@ -504,6 +523,13 @@
 			path = Extentions;
 			sourceTree = "<group>";
 		};
+		EF7EA8B32947D53B003DF8A1 /* PhotoPicker */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PhotoPicker;
+			sourceTree = "<group>";
+		};
 		EF903B502924015A00B4BFBB /* UIButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -544,6 +570,24 @@
 			path = SignUp;
 			sourceTree = "<group>";
 		};
+		EFDE0CD62AA9202E00899788 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				EFDE0CDB2AA9209300899788 /* AvailabilityFeatureKey+providers.swift */,
+				EFDE0CD72AA9204A00899788 /* AvailabilityFeatureKey+local.swift */,
+				EFDE0CD92AA9206B00899788 /* AvailabilityFeatureKey+remote.swift */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
+		EFE4D5862A258B3F0029E2F7 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				EFE4D5872A258B950029E2F7 /* Main.Router.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		EFE77FAC2922F53100EC45E8 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
@@ -560,6 +604,7 @@
 				EFF80D7D28F733F400F830FB /* Main.swift */,
 				EFF80D8128F7370300F830FB /* Main.Factory.swift */,
 				EF7EA88B2943C335003DF8A1 /* Main.Coordinator.swift */,
+				EFE4D5862A258B3F0029E2F7 /* Router */,
 				EFF80D8028F7342F00F830FB /* UIKit */,
 			);
 			path = TabBar;
@@ -919,6 +964,7 @@
 				EFF80DC228F7960000F830FB /* Profile.ViewController.swift in Sources */,
 				EFF80D9D28F74A6100F830FB /* Profile.Factory.swift in Sources */,
 				EFF80DBC28F7705C00F830FB /* Explore.Coordinator.swift in Sources */,
+				EFDE0CD52AA91F3600899788 /* AvailabilityFeatureKey.swift in Sources */,
 				EFF80D8228F7370300F830FB /* Main.Factory.swift in Sources */,
 				EF25D664293CDB6B00AA7225 /* SignUp.View.swift in Sources */,
 				EF903B58292408D000B4BFBB /* CoordinatorProtocol.swift in Sources */,
@@ -936,14 +982,17 @@
 				EF903B57292408D000B4BFBB /* ViewModelProtocol.swift in Sources */,
 				EFF80D9B28F74A5600F830FB /* Notifications.Factory.swift in Sources */,
 				5EF899DF28F399CE00D43E65 /* SignIn.ViewController.swift in Sources */,
+				EFE4D5882A258B950029E2F7 /* Main.Router.swift in Sources */,
 				EF67DC14290A10B6007E30C2 /* String+Localization.swift in Sources */,
 				EFA2CF032937C497007BB0C6 /* Publisher+Extentions.swift in Sources */,
 				5EF899D028F37BEF00D43E65 /* SignIn.ViewModel.swift in Sources */,
+				EFDE0CD82AA9204A00899788 /* AvailabilityFeatureKey+local.swift in Sources */,
 				EFF80DB828F76E8E00F830FB /* Notifications.Coordinator.swift in Sources */,
 				EFF80D9128F7466900F830FB /* Notifications.swift in Sources */,
 				EFF80DBE28F7706900F830FB /* Home.Coordinator.swift in Sources */,
 				EF903B4F2923FED800B4BFBB /* image.swift in Sources */,
 				EFF80D7728F7193500F830FB /* CancelBag.swift in Sources */,
+				EFDE0CCF2AA8E56000899788 /* AvailabilityProtocol.swift in Sources */,
 				5EF899C428F35C8900D43E65 /* SignIn.swift in Sources */,
 				5EF899CA28F3666800D43E65 /* SignIn.Factory.swift in Sources */,
 				5EF899C828F35D3B00D43E65 /* SignIn.Coordinator.swift in Sources */,
@@ -953,6 +1002,7 @@
 				5EF899CE28F3718A00D43E65 /* SignInInputProtocol.swift in Sources */,
 				EFE77FA629207F8B00EC45E8 /* CustomSubscription.swift in Sources */,
 				EF772D3E2924111E009C6DF1 /* textAttributesTransformer.swift in Sources */,
+				EFDE0CDA2AA9206B00899788 /* AvailabilityFeatureKey+remote.swift in Sources */,
 				EFF80DB628F76E8100F830FB /* Profile.Coordinator.swift in Sources */,
 				EF3F358428E65DAA00F668B4 /* AnalyticsService.swift in Sources */,
 				EFF80D8F28F7432100F830FB /* Camera.swift in Sources */,
@@ -968,6 +1018,7 @@
 				EFA2CEF629378C6C007BB0C6 /* UIButton+Extentions.swift in Sources */,
 				EF67DC002901E05C007E30C2 /* GradientImageView.swift in Sources */,
 				EFE752F5291B2D5500FC0742 /* RegExpBuilder.swift in Sources */,
+				EFDE0CD12AA91E6D00899788 /* AvailabilityFacade.swift in Sources */,
 				EF67DC12290A0D99007E30C2 /* Localization.swift in Sources */,
 				EFE752EF291B14A900FC0742 /* String+Validation.swift in Sources */,
 				EFF80DAD28F76C3300F830FB /* Camera.ViewController.swift in Sources */,
@@ -983,6 +1034,7 @@
 				EFF80D9928F74A4900F830FB /* Camera.Factory.swift in Sources */,
 				EFF80DC028F7958200F830FB /* Home.ViewController.swift in Sources */,
 				EFF80D7E28F733F400F830FB /* Main.swift in Sources */,
+				EFDE0CDC2AA9209300899788 /* AvailabilityFeatureKey+providers.swift in Sources */,
 				EF67DC0C290A0D2A007E30C2 /* Localized.swift in Sources */,
 				EF25D64D293930CF00AA7225 /* SignUp.Factory.swift in Sources */,
 			);
