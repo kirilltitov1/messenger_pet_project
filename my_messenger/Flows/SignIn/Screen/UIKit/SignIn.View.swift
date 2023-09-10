@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 extension SignIn {
-	final class View: UIView {
+	final class View_: UIView {
 		
 		private let gradientView: UIView = GradientView(
 			colors: [.aqua, .softCarnation],
@@ -126,7 +126,7 @@ extension SignIn {
 }
 
 // MARK: life cycle
-extension SignIn.View {
+extension SignIn.View_ {
 	override func layoutSubviews() {
 		super.layoutSubviews()
 		
@@ -136,7 +136,7 @@ extension SignIn.View {
 	}
 }
 
-private extension SignIn.View {
+private extension SignIn.View_ {
 	
 	func makeBindings() {
 		guard let input = input else { return }

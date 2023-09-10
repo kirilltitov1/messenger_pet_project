@@ -42,7 +42,7 @@ extension Main.Coordinator: MainCoordinatorProtocol {
 	) -> (AnyPublisher<Void, Never>)? {
 		let tabs = factory.makeMain()
 		let tabbarnavigationcontroller = UITabBarController()
-		tabbarnavigationcontroller.setViewControllers(<#T##viewControllers: [UIViewController]?##[UIViewController]?#>, animated: <#T##Bool#>)
+//		tabbarnavigationcontroller.setViewControllers(<#T##viewControllers: [UIViewController]?##[UIViewController]?#>, animated: <#T##Bool#>)
 //		navigationController.setViewControllers(tabs, animated: true)
 //		navigationController.pushViewController(<#T##viewController: UIViewController##UIViewController#>, animated: <#T##Bool#>)
 		//FIXME: - add callback if need it

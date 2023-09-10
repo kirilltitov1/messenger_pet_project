@@ -39,7 +39,7 @@ extension SignIn {
 		// MARK: life cycle
 		
 		override func loadView() {
-			view = View(
+			view = View_(
 				input: input,
 				output: output,
 				cancelBag: cancelBag,

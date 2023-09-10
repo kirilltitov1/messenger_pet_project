@@ -8,8 +8,10 @@
 extension AvailabilityFeatureKey {
 	var local: String {
 		switch self {
-		default:
-			return "default local case"
+		case .swiftUIEnabled:
+			return "swiftUIEnabled"
+		case .RXSwiftEnabled:
+			return "RXSwiftEnabled"
 		}
 	}
 }

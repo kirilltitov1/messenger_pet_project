@@ -6,5 +6,6 @@
 //
 
 enum AvailabilityFeatureKey {
-	
+	case swiftUIEnabled
+	case RXSwiftEnabled
 }

@@ -11,10 +11,11 @@ enum AvailabilityProviderProtocol {
 }
 
 extension AvailabilityFeatureKey {
-	var providers: [AvailabilityProtocol] {
+	var providers: [AvailabilityProviderProtocol] {
 		switch self {
-		default:
-			return []
+		case .swiftUIEnabled,
+				.RXSwiftEnabled:
+			return [.local]
 		}
 	}
 }

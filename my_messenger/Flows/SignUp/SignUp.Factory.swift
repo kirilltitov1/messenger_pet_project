@@ -54,3 +54,8 @@ extension SignUp.Factory: SignUpFactoryProtocol {
 		return (viewController, (input, output))
 	}
 }
+
+// MARK: SwiftUI
+extension SignIn.Factory {
+
+}

@@ -6,10 +6,11 @@
 //
 
 extension AvailabilityFeatureKey {
-	var remote: String {
+	var remote: String? {
 		switch self {
-		default:
-			return "default remote case"
+		case .swiftUIEnabled,
+				.RXSwiftEnabled:
+			return nil
 		}
 	}
 }

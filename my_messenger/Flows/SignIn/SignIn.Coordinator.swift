@@ -12,6 +12,8 @@ protocol SignInCoordinatorProtocol {
 	func start(
 		navigationController: UINavigationController
 	) -> (signedIn: AnyPublisher<Void, Never>, signUp: AnyPublisher<Void, Never>)?
+
+	func startSwiftUI()
 }
 
 extension SignIn {
@@ -33,6 +35,10 @@ extension SignIn {
 
 // MARK: CoordinatorProtocol
 extension SignIn.Coordinator: SignInCoordinatorProtocol {
+	func startSwiftUI() {
+		
+	}
+
 	func start(
 		navigationController: UINavigationController
 	) -> (signedIn: AnyPublisher<Void, Never>, signUp: AnyPublisher<Void, Never>)? {

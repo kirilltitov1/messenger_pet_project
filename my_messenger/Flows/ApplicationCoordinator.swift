@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import SwiftUI
 
 final class ApplicationCoordinator {
 	
@@ -19,36 +20,25 @@ final class ApplicationCoordinator {
 	var mainCoordinator: MainCoordinatorProtocol?
 	
 	private let authService: AuthService = AuthService.shared
+
+	private let availability: AvailabilityProtocol = AvailabilityFacade()
 	
 	public func start(navigationController: UINavigationController) {
-		if AuthService.shared.isSigned {
+		if
+			true {
+//			AuthService.shared.isSigned {
 			//TODO: tab bar
 //			let mainFactory: MainCoordinatorProtocol = Main.Factory()
 //			TabBar.Controller(factory: tabBarFactory)
+			let mainScreen = UIHostingController(rootView: Main.Screen())
+			navigationController.pushViewController(mainScreen, animated: true)
 		} else {
 			startSignIn(navigationController: navigationController)
 		}
 	}
 	
 	public func startSignIn(navigationController: UINavigationController) {
-		let cancelBag = CancelBag()
-		let factory = SignIn.Factory(cancelBag: cancelBag)
-		signInCoordinator = SignIn.Coordinator(factory: factory, cancelBag: cancelBag)
-		
-		let callBack = signInCoordinator?.start(navigationController: navigationController)
-		
-		callBack?.signedIn
-			.print("signInCoordinator: signedIn")
-			.sink { [unowned self] in
-				signInCoordinator = nil
-				startMain(navigationController: navigationController)
-			}.store(in: cancelBag)
-		
-		callBack?.signUp
-			.print("signInCoordinator: signUp")
-			.sink { [unowned self] in
-				startSignUp(navigationController: navigationController)
-			}.store(in: cancelBag)
+		signIn(navigationController: navigationController)
 	}
 	
 	public func startSignUp(navigationController: UINavigationController) {
@@ -79,5 +69,43 @@ final class ApplicationCoordinator {
 		mainCoordinator = Main.Coordinator(factory: factory, cancelBag: cancelBag)
 		
 		mainCoordinator?.start(navigationController: navigationController)
+	}
+}
+
+private extension ApplicationCoordinator {
+	func signIn(navigationController: UINavigationController) {
+		let cancelBag: CancelBag = CancelBag()
+		let factory: SignInFactoryProtocol = SignIn.Factory(cancelBag: cancelBag)
+		signInCoordinator = SignIn.Coordinator(factory: factory, cancelBag: cancelBag)
+
+		if
+			true {
+//			availability.isAvailable(featureKey: .swiftUIEnabled) {
+			signInSwiftUI(navigationController: navigationController)
+		} else {
+			signInUIKit(navigationController: navigationController)
+		}
+	}
+
+	func signInUIKit(navigationController: UINavigationController) {
+
+		let callBack = signInCoordinator?.start(navigationController: navigationController)
+
+		callBack?.signedIn
+			.print("signInCoordinator: signedIn")
+			.sink { [unowned self] in
+				signInCoordinator = nil
+				startMain(navigationController: navigationController)
+			}.store(in: cancelBag)
+
+		callBack?.signUp
+			.print("signInCoordinator: signUp")
+			.sink { [unowned self] in
+				startSignUp(navigationController: navigationController)
+			}.store(in: cancelBag)
+	}
+
+	func signInSwiftUI(navigationController: UINavigationController) {
+		signInCoordinator?.startSwiftUI()
 	}
 }

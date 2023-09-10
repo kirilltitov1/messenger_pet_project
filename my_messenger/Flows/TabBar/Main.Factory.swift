@@ -7,12 +7,14 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 /// tab bar item
 protocol TabBarItemFactoryProtocol {
-	var name: String? { get }
-	var tabBarImage: UIImage? { get }
+	var name: String { get }
+	var tabBarImageName: String { get }
 	func makeTabBarNavItem(tag: Int) -> UINavigationController
+	func makeSwiftUITabView(tag: Int) -> AnyView
 }
 
 /// main factory protocol
@@ -31,12 +33,14 @@ extension Main {
 		private let profileFactory: Profile.Factory = Profile.Factory()
 		
 		private weak var cancelBag: CancelBag?
+
+		private let availability: AvailabilityFacade = AvailabilityFacade()
 		
 		init(cancelBag: CancelBag) {
 			self.cancelBag = cancelBag
 		}
 		
-		private lazy var tabFactorys: [TabBarItemFactoryProtocol] = [
+		public lazy var tabFactorys: [TabBarItemFactoryProtocol] = [
 			homeFactory,
 			exploreFactory,
 			cameraFactory,
@@ -47,14 +51,22 @@ extension Main {
 		public func makeMain() -> [UINavigationController] {
 			makeTabControllers()
 		}
+
+		public func makeSwiftUIMain() -> [AnyView] {
+			makeSwiftUITabCotrollers()
+		}
 	}
 }
 
 private extension Main.Factory {
 	private func makeTabControllers() -> [UINavigationController] {
-		let tabs = tabFactorys
+		tabFactorys
 			.enumerated()
 			.map { $1.makeTabBarNavItem(tag: $0) }
-		return tabs
+	}
+	private func makeSwiftUITabCotrollers() -> [AnyView] {
+		tabFactorys
+			.enumerated()
+			.map { $1.makeSwiftUITabView(tag: $0) }
 	}
 }
