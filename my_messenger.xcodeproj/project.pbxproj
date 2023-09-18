@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E1C08702ABA33C5005F02D0 /* API in Frameworks */ = {isa = PBXBuildFile; productRef = 5E1C086F2ABA33C5005F02D0 /* API */; };
 		5E2E0D192AAD2CB6003FC029 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2E0D182AAD2CB6003FC029 /* Persistence.swift */; };
 		5E2E0D1C2AAD301A003FC029 /* SignIn.ViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2E0D1B2AAD301A003FC029 /* SignIn.ViewScreen.swift */; };
-		5E36C7142AB8F757003512DB /* InstagramAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 5E36C7132AB8F757003512DB /* InstagramAPI */; };
+		5E337A012AC7A8820040BE0F /* Color+RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E337A002AC7A8820040BE0F /* Color+RGB.swift */; };
+		5E337A032AC7A8900040BE0F /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E337A022AC7A8900040BE0F /* Colors.swift */; };
 		5E40F8D42AAD55B1007A41F6 /* SignIn.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF899E028F39A1500D43E65 /* SignIn.View.swift */; };
 		5E4ECD4728E385D80080DE1D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4ECD4628E385D80080DE1D /* AppDelegate.swift */; };
 		5E4ECD4928E385D80080DE1D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4ECD4828E385D80080DE1D /* SceneDelegate.swift */; };
@@ -150,9 +152,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5E1C086E2ABA330D005F02D0 /* API */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = API; sourceTree = "<group>"; };
 		5E2E0D182AAD2CB6003FC029 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		5E2E0D1B2AAD301A003FC029 /* SignIn.ViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.ViewScreen.swift; sourceTree = "<group>"; };
-		5E36C7122AB8F70E003512DB /* InstagramAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = InstagramAPI; sourceTree = "<group>"; };
+		5E337A002AC7A8820040BE0F /* Color+RGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+RGB.swift"; sourceTree = "<group>"; };
+		5E337A022AC7A8900040BE0F /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		5E4ECD4328E385D80080DE1D /* my_messenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = my_messenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E4ECD4628E385D80080DE1D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E4ECD4828E385D80080DE1D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -277,6 +281,7 @@
 				EF0D72CA28E3A076004D04F5 /* FirebaseStorageCombine-Community in Frameworks */,
 				EF0D72C228E3A076004D04F5 /* FirebaseDatabaseSwift in Frameworks */,
 				EF0D72C028E3A076004D04F5 /* FirebaseDatabase in Frameworks */,
+				5E1C08702ABA33C5005F02D0 /* API in Frameworks */,
 				EF0D72B828E3A076004D04F5 /* FirebaseAnalyticsSwift in Frameworks */,
 				EF0D72C828E3A076004D04F5 /* FirebaseStorage in Frameworks */,
 				EF3F358928E65F2500F668B4 /* FirebaseFirestore in Frameworks */,
@@ -284,7 +289,6 @@
 				EF0D72BA28E3A076004D04F5 /* FirebaseAuth in Frameworks */,
 				EF0D72BE28E3A076004D04F5 /* FirebaseCrashlytics in Frameworks */,
 				EF0D72B628E3A076004D04F5 /* FirebaseAnalytics in Frameworks */,
-				5E36C7142AB8F757003512DB /* InstagramAPI in Frameworks */,
 				EF0D72BC28E3A076004D04F5 /* FirebaseAuthCombine-Community in Frameworks */,
 				EFE77FAB2921B82300EC45E8 /* CombineCocoa in Frameworks */,
 				EF0D72C428E3A076004D04F5 /* FirebaseRemoteConfig in Frameworks */,
@@ -314,6 +318,16 @@
 				5E2E0D1B2AAD301A003FC029 /* SignIn.ViewScreen.swift */,
 			);
 			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		5E337A042AC7A8940040BE0F /* Colors */ = {
+			isa = PBXGroup;
+			children = (
+				5E337A022AC7A8900040BE0F /* Colors.swift */,
+				EF67DC19290F02A5007E30C2 /* UIColor+RGB.swift */,
+				5E337A002AC7A8820040BE0F /* Color+RGB.swift */,
+			);
+			path = Colors;
 			sourceTree = "<group>";
 		};
 		5E4ECD3A28E385D80080DE1D = {
@@ -543,7 +557,7 @@
 		EF0D72CE28E64371004D04F5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				5E36C7122AB8F70E003512DB /* InstagramAPI */,
+				5E1C086E2ABA330D005F02D0 /* API */,
 				EF4803F62AB273170076CFBF /* DesignSystem */,
 				EF67DC10290A0D83007E30C2 /* Localization */,
 				5E4ECD5228E385D90080DE1D /* Assets.xcassets */,
@@ -700,7 +714,7 @@
 				EFA2CEF529378C6C007BB0C6 /* UIButton+Extentions.swift */,
 				EFE77FA72920909E00EC45E8 /* UITextField+Combine.swift */,
 				EFA2CF022937C497007BB0C6 /* Publisher+Extentions.swift */,
-				EF67DC19290F02A5007E30C2 /* UIColor+RGB.swift */,
+				5E337A042AC7A8940040BE0F /* Colors */,
 				EF67DC13290A10B6007E30C2 /* String+Localization.swift */,
 				EFE752EE291B14A900FC0742 /* String+Validation.swift */,
 			);
@@ -1011,7 +1025,7 @@
 				EF3F358A28E65F2500F668B4 /* FirebaseFirestoreCombine-Community */,
 				EFE77FAA2921B82300EC45E8 /* CombineCocoa */,
 				EF4803F72AB37AC30076CFBF /* DesignSystem */,
-				5E36C7132AB8F757003512DB /* InstagramAPI */,
+				5E1C086F2ABA33C5005F02D0 /* API */,
 			);
 			productName = Instagram;
 			productReference = 5E4ECD4328E385D80080DE1D /* my_messenger.app */;
@@ -1164,6 +1178,7 @@
 				EFF80D9B28F74A5600F830FB /* Notifications.Factory.swift in Sources */,
 				5EF899DF28F399CE00D43E65 /* SignIn.ViewController.swift in Sources */,
 				EFE4D5882A258B950029E2F7 /* Main.Router.swift in Sources */,
+				5E337A012AC7A8820040BE0F /* Color+RGB.swift in Sources */,
 				EF67DC14290A10B6007E30C2 /* String+Localization.swift in Sources */,
 				EFA2CF032937C497007BB0C6 /* Publisher+Extentions.swift in Sources */,
 				5EF899D028F37BEF00D43E65 /* SignIn.ViewModel.swift in Sources */,
@@ -1171,6 +1186,7 @@
 				EFF80DB828F76E8E00F830FB /* Notifications.Coordinator.swift in Sources */,
 				EFF80D9128F7466900F830FB /* Notifications.swift in Sources */,
 				EFF80DBE28F7706900F830FB /* Home.Coordinator.swift in Sources */,
+				5E337A032AC7A8900040BE0F /* Colors.swift in Sources */,
 				EF903B4F2923FED800B4BFBB /* image.swift in Sources */,
 				EFF80D7728F7193500F830FB /* CancelBag.swift in Sources */,
 				EF4803EB2AB222C60076CFBF /* MainScreen.swift in Sources */,
@@ -1603,9 +1619,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5E36C7132AB8F757003512DB /* InstagramAPI */ = {
+		5E1C086F2ABA33C5005F02D0 /* API */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = InstagramAPI;
+			productName = API;
 		};
 		EF0D72B528E3A076004D04F5 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;

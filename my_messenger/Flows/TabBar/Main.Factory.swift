@@ -5,16 +5,17 @@
 //  Created by Kirill Titov on 12.10.2022.
 //
 
-import Foundation
 import UIKit
 import SwiftUI
+import Foundation
+import DesignSystem
 
 /// tab bar item
 protocol TabBarItemFactoryProtocol {
 	var name: String { get }
 	var tabBarImageName: String { get }
 	func makeTabBarNavItem(tag: Int) -> UINavigationController
-	func makeSwiftUITabView(tag: Int) -> AnyView
+	func makeSwiftUITabView(tag: Int) -> TabScreenWrapper<AnyView>
 }
 
 /// main factory protocol
@@ -52,7 +53,8 @@ extension Main {
 			makeTabControllers()
 		}
 
-		public func makeSwiftUIMain() -> [AnyView] {
+		@ViewBuilder
+		public func makeSwiftUIMain() -> some View {
 			makeSwiftUITabCotrollers()
 		}
 	}
@@ -64,9 +66,10 @@ private extension Main.Factory {
 			.enumerated()
 			.map { $1.makeTabBarNavItem(tag: $0) }
 	}
-	private func makeSwiftUITabCotrollers() -> [AnyView] {
-		tabFactorys
-			.enumerated()
-			.map { $1.makeSwiftUITabView(tag: $0) }
+
+	@ViewBuilder
+	private func makeSwiftUITabCotrollers() -> some View {
+		let tabs = tabFactorys.enumerated().map { $1.makeSwiftUITabView(tag: $0) }
+		ForEach(tabs, id: \.id) { $0 }
 	}
 }

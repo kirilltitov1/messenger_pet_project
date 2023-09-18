@@ -6,12 +6,7 @@
 //
 
 import SwiftUI
-
-extension AnyView: Identifiable {
-	public var id: UUID {
-		UUID()
-	}
-}
+import DesignSystem
 
 extension Main {
 
@@ -21,12 +16,20 @@ extension Main {
 		@State private var selectedTab: Int = 1
 		private let cancelBag = CancelBag()
 
+		init(
+			selectedTab: Int = 1
+		) {
+			self.selectedTab = selectedTab
+		}
+
 		var body: some View {
 			TabView(selection: $selectedTab) {
-				ForEach(Main.Factory(cancelBag: cancelBag).makeSwiftUIMain()) { view in
-					view
-				}
+				tabItems
 			}.navigationBarHidden(true)
+		}
+
+		private var tabItems: some View {
+			Main.Factory(cancelBag: cancelBag).makeSwiftUIMain()
 		}
 	}
 }

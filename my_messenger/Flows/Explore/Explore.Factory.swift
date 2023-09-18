@@ -38,12 +38,12 @@ extension Explore.Factory {
 
 // MARK: - SwiftUI
 extension Explore.Factory {
-	func makeSwiftUITabView(tag: Int) -> AnyView {
-		AnyView(erasing: Explore.ViewScreen()
+	func makeSwiftUITabView(tag: Int) -> TabScreenWrapper<AnyView> {
+		TabScreenWrapper(Explore.ViewScreen()
 			.tag(tag)
 			.tabItem {
 				TabItem(title: name, imageName: tabBarImageName)
-			}
+			}.eraseToAnyView()
 		)
 	}
 }
