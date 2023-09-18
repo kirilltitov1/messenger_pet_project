@@ -17,15 +17,22 @@ extension SignIn {
 
 // MARK: ViewModelProtocol
 extension SignIn.ViewModel: ViewModelProtocol {
-	
+
+	enum Action: Equatable {
+		/// user press "signIn" button
+		case signIn
+		/// user press "signup" button
+		case signUp
+	}
+
 	/// State of sign in view
 	enum State: Equatable {
 		/// user edit his data
 		case idle
-		/// user press "signIn" button
-		case signingIn
 		/// user signed in successfully
 		case signedIn
+		/// user actions
+		case action(Action)
 		/// sign in fail
 		case failure
 	}
@@ -51,7 +58,12 @@ extension SignIn.ViewModel: ViewModelProtocol {
 		let output = Output()
 		
 		input.signIn
-			.map { _ in .signingIn }
+			.map { _ in .action(.signIn) }
+			.assign(to: \.state, on: output)
+			.store(in: cancelBag)
+
+		input.signUp
+			.map { _ in .action(.signUp) }
 			.assign(to: \.state, on: output)
 			.store(in: cancelBag)
 		

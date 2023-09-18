@@ -11,9 +11,7 @@ import DesignSystem
 import Combine
 
 protocol NotificationsFactoryProtocol {
-	func makeTabBarNavItem(tag: Int) -> UINavigationController
-	func makeSwiftUITabView(tag: Int) -> AnyView
-	func makeSwiftUIView() -> AnyView
+
 }
 
 extension Notifications {
@@ -58,11 +56,12 @@ extension Notifications.Factory {
 
 // MARK: - SwiftUI
 extension Notifications.Factory {
-	func makeSwiftUITabView(tag: Int) -> AnyView {
-		makeSwiftUIView()
+	func makeSwiftUITabView(tag: Int) -> TabScreenWrapper<AnyView> {
+		TabScreenWrapper(makeSwiftUIView()
 			.tag(tag)
 			.tabItem {
 				TabItem(title: name, imageName: tabBarImageName)
 			}.eraseToAnyView()
+		)
 	}
 }

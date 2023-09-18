@@ -1,6 +1,6 @@
-MODULE="Modules/InstagramAPI/Sources/InstagramAPI"
+MODULE="my_messenger/Resources/Resources/API/Sources/API"
 
-openapi-generator generate -i "api.yaml" -g swift5 -o "api"
+openapi-generator generate -i "api.yml" -g swift5 -o "api"
 rm -r $MODULE""*
-cp -R "instagramAPI/OpenAPIClient/Classes/OpenAPIs/". $MODULE
-rm -r "instagramAPI"
+cp -R "api/OpenAPIClient/Classes/OpenAPIs/". $MODULE
+rm -r "api"

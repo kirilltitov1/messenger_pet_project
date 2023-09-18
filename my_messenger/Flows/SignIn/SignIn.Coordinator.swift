@@ -51,11 +51,12 @@ extension SignIn.Coordinator: SignInCoordinatorProtocol {
 			.filter { $0 == .signedIn }
 			.erasedToVoid()
 			.eraseToAnyPublisher()
-		let signUpPublisher: AnyPublisher<Void, Never> = viewModel.input
-			.signUp
+		let signUpPublisher: AnyPublisher<Void, Never> = viewModel.output
+			.$state
+			.filter { $0 == .action(.signUp) }
 			.erasedToVoid()
 			.eraseToAnyPublisher()
-		
+
 		return (signedInPublisher, signUpPublisher)
 	}
 }

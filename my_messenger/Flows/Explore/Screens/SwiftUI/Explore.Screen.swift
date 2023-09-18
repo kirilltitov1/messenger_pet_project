@@ -6,13 +6,50 @@
 //
 
 import SwiftUI
+import DesignSystem
+import Combine
 
 extension Explore {
-	struct ViewScreen: View {
+	struct ViewScreen: View, InfiniteListDelegate {
+
+		@State var selection: Int = 0
+
+		func requestItems(page: Int) -> AnyPublisher<[AnyView], Never> {
+			return Just([
+				AnyView(Text("111111")),
+				AnyView(Text("222222")),
+				AnyView(Text("333333")),
+				AnyView(Text("444444")),
+				AnyView(Text("555555")),
+				AnyView(Text("111111")),
+				AnyView(Text("222222")),
+				AnyView(Text("333333")),
+				AnyView(Text("444444")),
+				AnyView(Text("555555")),
+				AnyView(Text("111111")),
+				AnyView(Text("222222")),
+				AnyView(Text("333333")),
+				AnyView(Text("444444")),
+				AnyView(Text("555555")),
+				AnyView(Text("111111")),
+				AnyView(Text("222222")),
+				AnyView(Text("333333")),
+				AnyView(Text("444444")),
+				AnyView(Text("555555")),
+				AnyView(Text("111111")),
+				AnyView(Text("222222")),
+				AnyView(Text("333333")),
+				AnyView(Text("444444")),
+				AnyView(Text("555555"))
+			]).eraseToAnyPublisher()
+		}
+
+		init() {
+			print(#file)
+		}
+
 		var body: some View {
-			VStack {
-				Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-			}
+			InfiniteList.Item(delegate: self)
 		}
 	}
 }

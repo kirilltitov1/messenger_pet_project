@@ -34,7 +34,9 @@ extension SignIn {
 			VStack {
 				Text("localization.signIn")
 					.bold()
-			}
+			}.background(
+				LinearGradient(colors: [.aqua, .softCarnation], startPoint: .top, endPoint: .bottom)
+			)
 		}
 	}
 }

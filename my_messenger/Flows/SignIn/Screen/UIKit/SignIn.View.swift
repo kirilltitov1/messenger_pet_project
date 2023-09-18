@@ -175,7 +175,7 @@ private extension SignIn.View_ {
 		
 		stateConfiguration.sink { [unowned self] isEnabled, state in
 			if isEnabled {
-				let isActive = state == .signingIn
+				let isActive = state == .action(.signIn)
 				self.signInButton.setActivityIndicator(isActive: isActive, title: localization.signIn)
 				self.fieldsConfigurate(state: state)
 			} else {
@@ -231,7 +231,7 @@ private extension SignIn.View_ {
 	func fieldsConfigurate(state: SignIn.ViewModel.State) {
 		func updateActivity() {
 			switch state {
-			case .signingIn:
+			case .action(.signIn):
 				emailTextField.resignFirstResponder()
 				emailTextField.isEnabled = false
 				passwordTextField.resignFirstResponder()
