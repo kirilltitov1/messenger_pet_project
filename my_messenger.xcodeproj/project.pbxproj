@@ -169,6 +169,7 @@
 		5E4ECD6628E385DA0080DE1D /* my_messengerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = my_messengerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E4ECD6A28E385DA0080DE1D /* my_messengerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = my_messengerUITests.swift; sourceTree = "<group>"; };
 		5E4ECD6C28E385DA0080DE1D /* my_messengerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = my_messengerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5E819D632AE83A1200F659F0 /* Log */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Log; sourceTree = "<group>"; };
 		5EE6AEF72AB28766004DD0DD /* Home.Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.Screen.swift; sourceTree = "<group>"; };
 		5EE6AEFA2AB288E8004DD0DD /* Explore.Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Explore.Screen.swift; sourceTree = "<group>"; };
 		5EE6AEFE2AB28A56004DD0DD /* Notifications.Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.Screen.swift; sourceTree = "<group>"; };
@@ -557,6 +558,7 @@
 		EF0D72CE28E64371004D04F5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5E819D632AE83A1200F659F0 /* Log */,
 				5E1C086E2ABA330D005F02D0 /* API */,
 				EF4803F62AB273170076CFBF /* DesignSystem */,
 				EF67DC10290A0D83007E30C2 /* Localization */,

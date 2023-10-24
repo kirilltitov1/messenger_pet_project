@@ -57,11 +57,6 @@ extension Notifications.Factory {
 // MARK: - SwiftUI
 extension Notifications.Factory {
 	func makeSwiftUITabView(tag: Int) -> TabScreenWrapper<AnyView> {
-		TabScreenWrapper(makeSwiftUIView()
-			.tag(tag)
-			.tabItem {
-				TabItem(title: name, imageName: tabBarImageName)
-			}.eraseToAnyView()
-		)
+		TabScreenWrapper(Text(name).eraseToAnyView())
 	}
 }

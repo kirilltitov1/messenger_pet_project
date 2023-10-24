@@ -23,13 +23,13 @@ extension Main {
 		}
 
 		var body: some View {
-			TabView(selection: $selectedTab) {
-				tabItems
-			}.navigationBarHidden(true)
+			tabView
 		}
 
-		private var tabItems: some View {
-			Main.Factory(cancelBag: cancelBag).makeSwiftUIMain()
+		private var tabView: some View {
+			TabView(selection: $selectedTab) {
+				Main.Factory(cancelBag: cancelBag).makeSwiftUIMain()
+			}.navigationBarHidden(true)
 		}
 	}
 }

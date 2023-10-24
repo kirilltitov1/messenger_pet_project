@@ -42,11 +42,6 @@ extension Profile.Factory {
 // MARK: - SwiftUI
 extension Profile.Factory {
 	func makeSwiftUITabView(tag: Int) -> TabScreenWrapper<AnyView> {
-		TabScreenWrapper(Profile.ViewScreen()
-			.tag(tag)
-			.tabItem {
-				TabItem(title: name, imageName: tabBarImageName)
-			}.eraseToAnyView()
-		)
+		TabScreenWrapper(Text(name).eraseToAnyView())
 	}
 }

@@ -45,7 +45,7 @@ extension Explore {
 		}
 
 		init() {
-			print(#file)
+//			print("init: ", #file)
 		}
 
 		var body: some View {
