@@ -28,7 +28,11 @@ extension Main {
 
 		private var tabView: some View {
 			TabView(selection: $selectedTab) {
-				Main.Factory(cancelBag: cancelBag).makeSwiftUIMain()
+				Home.ViewScreen()
+				Explore.ViewScreen()
+				Camera.ViewScreen()
+				Notifications.ViewScreen()
+				Profile.ViewScreen()
 			}.navigationBarHidden(true)
 		}
 	}

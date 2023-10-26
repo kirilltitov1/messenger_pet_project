@@ -70,7 +70,7 @@ private extension Main.Factory {
 	@ViewBuilder
 	private func makeSwiftUITabCotrollers() -> some View {
 		let tabs = tabFactorys.enumerated().map { $1.makeSwiftUITabView(tag: $0) }
-		ForEach(tabs)
+		ForEach(tabs, id: \.id)
 		{ $0 }
 	}
 }

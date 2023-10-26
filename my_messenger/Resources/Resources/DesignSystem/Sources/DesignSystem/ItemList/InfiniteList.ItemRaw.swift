@@ -8,9 +8,21 @@
 import SwiftUI
 
 extension InfiniteList {
-	struct ItemRaw {
-		let id = UUID()
-		let raw: AnyView
+	public struct ItemRaw: Identifiable, Hashable {
+		public let id = UUID()
+
+		public func hash(into hasher: inout Hasher) {
+			hasher.combine(id)
+		}
+
+		public static func == (
+			lhs: Self,
+			rhs: Self
+		) -> Bool {
+			lhs.id == rhs.id
+		}
+
+		public let raw: AnyView
 
 		init(raw: AnyView) {
 			self.raw = raw

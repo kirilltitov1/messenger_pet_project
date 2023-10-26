@@ -10,46 +10,44 @@ import DesignSystem
 import Combine
 
 extension Explore {
-	struct ViewScreen: View, InfiniteListDelegate {
+	struct ViewScreen: View, Identifiable {
+		var id: UUID = UUID()
+		func hash(into hasher: inout Hasher) {
+			hasher.combine(id)
+		}
+		static func == (lhs: Self, rhs: Self) -> Bool {
+			lhs.id == rhs.id
+		}
 
 		@State var selection: Int = 0
 
-		func requestItems(page: Int) -> AnyPublisher<[AnyView], Never> {
-			return Just([
-				AnyView(Text("111111")),
-				AnyView(Text("222222")),
-				AnyView(Text("333333")),
-				AnyView(Text("444444")),
-				AnyView(Text("555555")),
-				AnyView(Text("111111")),
-				AnyView(Text("222222")),
-				AnyView(Text("333333")),
-				AnyView(Text("444444")),
-				AnyView(Text("555555")),
-				AnyView(Text("111111")),
-				AnyView(Text("222222")),
-				AnyView(Text("333333")),
-				AnyView(Text("444444")),
-				AnyView(Text("555555")),
-				AnyView(Text("111111")),
-				AnyView(Text("222222")),
-				AnyView(Text("333333")),
-				AnyView(Text("444444")),
-				AnyView(Text("555555")),
-				AnyView(Text("111111")),
-				AnyView(Text("222222")),
-				AnyView(Text("333333")),
-				AnyView(Text("444444")),
-				AnyView(Text("555555"))
-			]).eraseToAnyPublisher()
-		}
+		private let input: ViewModel.Input
+		private let output: ViewModel.Output
 
 		init() {
-//			print("init: ", #file)
+			let cancelBag = CancelBag()
+
+			let input = ViewModel.Input()
+			let viewModel = ViewModel()
+
+			let output = viewModel.transform(input: input, cancelBag: cancelBag)
+			self.init(input: input, output: output)
+		}
+
+		init(
+			input: ViewModel.Input,
+			output: ViewModel.Output
+		) {
+			self.input = input
+			self.output = output
 		}
 
 		var body: some View {
-			InfiniteList.Item(delegate: self)
+			InfiniteList.Item(loadMore: input.loadMore)
+				.tag(output.tag)
+				.tabItem {
+					TabItem(title: output.name, imageName: output.tabBarImageName)
+				}
 		}
 	}
 }

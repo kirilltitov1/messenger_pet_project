@@ -20,12 +20,12 @@ public extension InfiniteList {
 //		private let loadingView: LoadingView
 
 		public init(
-			delegate: InfiniteListDelegate
+			loadMore: @escaping ((Int) -> (AnyPublisher<[AnyView], Never>))
 //			loadingView: LoadingView
 		) {
 			let cancelBag = CancelBag()
-			let viewModel = ViewModel(delegate: delegate, cancelBag: cancelBag)
-			let input = ViewModel.Input()
+			let viewModel = ViewModel(cancelBag: cancelBag)
+			let input = ViewModel.Input(loadMore: loadMore)
 			let output = viewModel.transform(input: input)
 
 			self.input = input
@@ -36,33 +36,48 @@ public extension InfiniteList {
 
 			setupBindings()
 
-			input.action.send(.requestItems)
+			input.action
+				.send(.requestItems)
 		}
 		@State var selection: Int = 0
 
 		public var body: some View {
 			VStack {
-				Picker("API`s", selection: $selection) {
-					Text("Picker Name")
-					Text("picker name 2")
-				}.pickerStyle(.segmented)
-
-				let raws = output.raws.enumerated().map({ $0 })
-				List(raws, id: \.element.id) { index, item in
-					item.onAppear { print(index) /*input.action.send(.requestMoreRawsIfNeedIt(index: index))*/ }
-				}.overlay {
-					Text("Is loading ...")
-						.opacity(isLoading ? 1 : 0)
-				}.frame(
-					idealWidth: .infinity,
-					idealHeight: .infinity
-				)
-
-				Picker("API`s", selection: $selection) {
-					Text("Picker Name")
-					Text("picker name 2")
-				}.pickerStyle(.segmented)
+				header
+				infiniteList
+				footer
 			}
+		}
+
+		private var infiniteList: some View {
+			let raws = output.raws.enumerated().map({ $0 })
+			return List {
+				ForEach(raws, id: \.element.id) { index, element in
+					element.raw.onAppear {
+						input.action.send(.requestMoreRawsIfNeedIt(index: index))
+					}
+				}
+			}.overlay {
+				Text("Is loading ...")
+					.opacity(isLoading ? 1 : 0)
+			}.frame(
+				idealWidth: .infinity,
+				idealHeight: .infinity
+			)
+		}
+
+		private var header: some View {
+			Picker("API`s", selection: $selection) {
+				Text("Picker Name")
+				Text("picker name 2")
+			}.pickerStyle(.segmented)
+		}
+
+		private var footer: some View {
+			Picker("API`s", selection: $selection) {
+				Text("Picker Name")
+				Text("picker name 2")
+			}.pickerStyle(.segmented)
 		}
 
 		private func setupBindings() {

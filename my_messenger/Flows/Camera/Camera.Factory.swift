@@ -39,6 +39,11 @@ extension Camera.Factory {
 // MARK: - SwiftUI
 extension Camera.Factory {
 	func makeSwiftUITabView(tag: Int) -> TabScreenWrapper<AnyView> {
-		TabScreenWrapper(Text(name).eraseToAnyView())
+		TabScreenWrapper(
+			Camera.ViewScreen().eraseToAnyView(),
+			tag: tag,
+			title: name,
+			imageName: tabBarImageName
+		)
 	}
 }

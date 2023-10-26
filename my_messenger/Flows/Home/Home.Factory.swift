@@ -42,11 +42,11 @@ extension Home.Factory {
 // MARK: - SwiftUI
 extension Home.Factory {
 	func makeSwiftUITabView(tag: Int) -> TabScreenWrapper<AnyView> {
-		TabScreenWrapper(Home.ViewScreen()
-			.tag(tag)
-			.tabItem {
-				TabItem(title: name, imageName: tabBarImageName)
-			}.eraseToAnyView()
+		TabScreenWrapper(
+			Home.ViewScreen().eraseToAnyView(),
+			tag: tag,
+			title: name,
+			imageName: tabBarImageName
 		)
 	}
 }

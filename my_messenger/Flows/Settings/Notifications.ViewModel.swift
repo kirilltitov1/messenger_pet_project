@@ -27,6 +27,9 @@ extension Notifications {
 		}
 
 		final class Output: ObservableObject {
+			var tag: Int = 3
+			var name: String = "Notifications"
+			var tabBarImageName: String = "bell"
 			@Published var items: [String] = [
 				"11111111111",
 				"22222222222",

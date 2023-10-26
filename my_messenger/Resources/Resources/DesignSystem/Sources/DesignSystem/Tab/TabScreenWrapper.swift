@@ -20,32 +20,25 @@ public struct TabScreenWrapper<Content: View>: Hashable, Identifiable, View {
 		lhs.id == rhs.id
 	}
 
-	public init(
-		tag: Int,
-		name: String,
-		subtitle: String? = nil,
-		imageName: String? = nil,
-		image: Image? = nil
-	) {
-		self.tag = tag
-		self.name = name
-		self.subtitle = subtitle
-		self.imageName = imageName
-		self.image = image
-	}
-
-	private let tag: Int
-	private let name: String
+	private var tag: Int
+	private var title: String
 	private var subtitle: String?
 	private var imageName: String?
 	private var image: Image?
 
 	private let content: Content
 
-	public init(_ content: Content) {
+	public init(
+		_ content: Content,
+		tag: Int,
+		title: String,
+		subtitle: String? = nil,
+		imageName: String? = nil,
+		image: Image? = nil
+	) {
 		self.content = content
 		self.tag = tag
-		self.name = name
+		self.title = title
 		self.subtitle = subtitle
 		self.imageName = imageName
 		self.image = image
@@ -53,5 +46,9 @@ public struct TabScreenWrapper<Content: View>: Hashable, Identifiable, View {
 
 	public var body: some View {
 		self.content
+			.tag(tag)
+			.tabItem {
+				TabItem(title: title, subtitle: subtitle, imageName: imageName, image: image)
+			}
 	}
 }

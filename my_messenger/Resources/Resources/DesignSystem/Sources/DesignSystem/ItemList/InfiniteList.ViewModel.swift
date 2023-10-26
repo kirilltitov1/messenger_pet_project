@@ -12,7 +12,7 @@ import SwiftUI
 extension InfiniteList {
 	final class ViewModel {
 
-		enum Actions: Equatable {
+		enum Action: Equatable {
 			case tapOnRaw
 			case requestMoreRawsIfNeedIt(index: Int)
 			case requestItems
@@ -31,16 +31,23 @@ extension InfiniteList {
 			case idle
 			case endOfScroll
 			case loadingMoreRaws
-			case action(Actions)
+			case action(Action)
 			case failure
 		}
 
 		final class Input: ObservableObject  {
-			var action: PassthroughSubject<Actions, Never> = .init()
+			private(set) var action: PassthroughSubject<Action, Never> = .init()
+			private(set) var loadMore: ((Int) -> (AnyPublisher<[AnyView], Never>))
+
+			init(
+				loadMore: (@escaping (Int) -> AnyPublisher<[AnyView], Never>)
+			) {
+				self.loadMore = loadMore
+			}
 		}
 
 		final class Output: ObservableObject {
-			@Published var raws: [AnyView] = []
+			@Published var raws: [ItemRaw] = []
 			@Published var state: State = .idle
 
 			@Published fileprivate var totalItemsAvailable: Int = 0
@@ -48,28 +55,25 @@ extension InfiniteList {
 			@Published fileprivate var page = 0
 		}
 
-		private var delegate: InfiniteListDelegate
 		private let cancelBag: CancelBag
 		private let itemsFromEndThreshold: Int = 15
 
 		init(
-			delegate: InfiniteListDelegate,
 			cancelBag: CancelBag
 		) {
-			self.delegate = delegate
 			self.cancelBag = cancelBag
 		}
 
 		func transform(input: Input) -> Output {
 			let output = Output()
-
-			input.action
-				.filter {
-					if case .requestMoreRawsIfNeedIt = $0 { return true }
-					return false
-				}.map { _ in .loadingMoreRaws }
-				.assign(to: \.state, on: output)
-				.store(in: cancelBag)
+//
+//			input.action
+//				.filter {
+//					if case .requestMoreRawsIfNeedIt = $0 { return true }
+//					return false
+//				}.map { _ in .loadingMoreRaws }
+//				.assign(to: \.state, on: output)
+//				.store(in: cancelBag)
 
 			input.action
 				.compactMap {
@@ -91,10 +95,10 @@ extension InfiniteList {
 					guard let self = self else { return }
 					output.page += 1
 					output.state = .loadingMoreRaws
-					self.delegate.requestItems(page: output.page)
-						.sink {
-							output.totalItemsAvailable = $0.count
-							output.raws.append(contentsOf: $0)
+					input.loadMore(output.page)
+						.sink { loadedRaws in
+							output.totalItemsAvailable = loadedRaws.count
+							output.raws.append(contentsOf: loadedRaws.map(ItemRaw.init(raw:)))
 							output.itemsLoadedCount = output.raws.count
 							output.state = .idle
 						}

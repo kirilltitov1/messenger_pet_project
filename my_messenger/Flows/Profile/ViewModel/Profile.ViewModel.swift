@@ -28,6 +28,9 @@ extension Profile.ViewModel: ViewModelProtocol {
 	}
 
 	final class Output: ObservableObject {
+		var tag: Int = 4
+		var name: String = "Profile"
+		var tabBarImageName: String = "person"
 		@Published var state: State = .idle
 	}
 

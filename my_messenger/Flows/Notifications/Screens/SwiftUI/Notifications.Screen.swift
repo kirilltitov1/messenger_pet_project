@@ -6,12 +6,30 @@
 //
 
 import SwiftUI
+import DesignSystem
 
 extension Notifications {
-	struct ViewScreen: View {
+	struct ViewScreen: View, Identifiable {
+		var id: UUID = UUID()
+		func hash(into hasher: inout Hasher) {
+			hasher.combine(id)
+		}
+		static func == (lhs: Self, rhs: Self) -> Bool {
+			lhs.id == rhs.id
+		}
 
 		private let input: ViewModel.Input
 		private let output: ViewModel.Output
+
+		init() {
+			let cancelBag = CancelBag()
+
+			let input = ViewModel.Input()
+			let viewModel = ViewModel()
+
+			let output = viewModel.transform(input: input, cancelBag: cancelBag)
+			self.init(input: input, output: output)
+		}
 
 		init(
 			input: ViewModel.Input,
@@ -28,7 +46,10 @@ extension Notifications {
 						Text(item)
 					}
 				}
-			}
+			}.tag(output.tag)
+				.tabItem {
+					TabItem(title: output.name, imageName: output.tabBarImageName)
+				}
 		}
 	}
 }
