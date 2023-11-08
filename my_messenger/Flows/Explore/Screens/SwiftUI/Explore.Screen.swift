@@ -43,8 +43,13 @@ extension Explore {
 		}
 
 		var body: some View {
-			InfiniteList.Item(loadMore: input.loadMore)
-				.tag(output.tag)
+			InfiniteList.Item(
+				totalItemsAvailable: 100,
+				loadMore: input.loadMore,
+				loadMoreData: input.loadMoreData,
+				loadingView: Text("Loading...")) { _ in
+					Text("")
+				}.tag(output.tag)
 				.tabItem {
 					TabItem(title: output.name, imageName: output.tabBarImageName)
 				}

@@ -8,38 +8,68 @@
 import SwiftUI
 import Combine
 
+class ItemList {
+	let name: String
+	var id: UUID = UUID()
+
+	init(name: String) {
+		self.name = name
+	}
+}
+extension ItemList: Hashable, Identifiable {
+	func hash(into hasher: inout Hasher) {
+		hasher.combine(id)
+	}
+	static func == (lhs: ItemList, rhs: ItemList) -> Bool {
+		lhs.name == rhs.name
+	}
+}
+
 public extension InfiniteList {
-	struct Item: View {
+	struct Item<Data, Content, LoadingView>: View
+	where Data: RandomAccessCollection, Data.Element: Hashable, Content: View, LoadingView: View {
 
-		@ObservedObject private var input: ViewModel.Input
-		@ObservedObject private var output: ViewModel.Output
+		@ObservedObject private var input: ViewModel.Input<Data>
+		@ObservedObject private var output: ViewModel.Output<Data>
 
+		private let content: (Data.Element) -> Content
+		private let loadingView: LoadingView
+
+		@State var selection: Int = 0
 		@State private var isLoading: Bool
 		private let cancelBag: CancelBag
 
-//		private let loadingView: LoadingView
 
 		public init(
-			loadMore: @escaping ((Int) -> (AnyPublisher<[AnyView], Never>))
-//			loadingView: LoadingView
+			totalItemsAvailable: Int,
+			loadMore: @escaping ((Int) -> (AnyPublisher<[AnyView], Never>)),
+			loadMoreData: @escaping ((Int) -> (AnyPublisher<Data, Never>)),
+			loadingView: LoadingView,
+			@ViewBuilder content: @escaping (Data.Element) -> Content
 		) {
 			let cancelBag = CancelBag()
 			let viewModel = ViewModel(cancelBag: cancelBag)
-			let input = ViewModel.Input(loadMore: loadMore)
-			let output = viewModel.transform(input: input)
+			let input = ViewModel.Input<Data>(
+				loadMore: loadMore,
+				loadMoreData: loadMoreData
+			)
+			let output = viewModel.transform(
+				totalItemsAvailable: totalItemsAvailable,
+				input: input
+			)
 
 			self.input = input
 			self.output = output
 			self.cancelBag = cancelBag
-//			self.loadingView = loadingView
-			self.isLoading = false
+			self._isLoading = State<Bool>(initialValue: false)
+			self.loadingView = loadingView
+			self.content = content
 
 			setupBindings()
 
-			input.action
-				.send(.requestItems)
+//			input.action
+//				.send(.requestItems)
 		}
-		@State var selection: Int = 0
 
 		public var body: some View {
 			VStack {
@@ -56,9 +86,14 @@ public extension InfiniteList {
 					element.raw.onAppear {
 						input.action.send(.requestMoreRawsIfNeedIt(index: index))
 					}
+					.frame(maxWidth: .infinity, alignment: .leading)
+					.contentShape(Rectangle())
+					.onTapGesture {
+//						input.action.send(.tapOnRaw)
+					}
 				}
 			}.overlay {
-				Text("Is loading ...")
+				loadingView
 					.opacity(isLoading ? 1 : 0)
 			}.frame(
 				idealWidth: .infinity,

@@ -22,7 +22,7 @@ extension InfiniteList {
 			lhs.id == rhs.id
 		}
 
-		public let raw: AnyView
+		let raw: AnyView
 
 		init(raw: AnyView) {
 			self.raw = raw

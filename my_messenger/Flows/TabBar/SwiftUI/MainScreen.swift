@@ -19,7 +19,7 @@ extension Main {
 		init(
 			selectedTab: Int = 1
 		) {
-			self.selectedTab = selectedTab
+			self._selectedTab = State(initialValue: selectedTab)
 		}
 
 		var body: some View {

@@ -13,7 +13,7 @@ extension InfiniteList {
 	final class ViewModel {
 
 		enum Action: Equatable {
-			case tapOnRaw
+			case tapOnRaw(index: Int)
 			case requestMoreRawsIfNeedIt(index: Int)
 			case requestItems
 
@@ -35,28 +35,40 @@ extension InfiniteList {
 			case failure
 		}
 
-		final class Input: ObservableObject  {
+		final class Input<Data>: ObservableObject
+		where Data: RandomAccessCollection, Data.Element: Hashable {
 			private(set) var action: PassthroughSubject<Action, Never> = .init()
 			private(set) var loadMore: ((Int) -> (AnyPublisher<[AnyView], Never>))
+			private(set) var loadMoreData: ((Int) -> (AnyPublisher<Data, Never>))
 
 			init(
-				loadMore: (@escaping (Int) -> AnyPublisher<[AnyView], Never>)
+				loadMore: (@escaping (Int) -> AnyPublisher<[AnyView], Never>),
+				loadMoreData: (@escaping (Int) -> (AnyPublisher<Data, Never>))
 			) {
 				self.loadMore = loadMore
+				self.loadMoreData = loadMoreData
 			}
 		}
 
-		final class Output: ObservableObject {
+		final class Output<Data>: ObservableObject
+		where Data: RandomAccessCollection, Data.Element: Hashable {
+			@Published var data: Data?
 			@Published var raws: [ItemRaw] = []
 			@Published var state: State = .idle
 
-			@Published fileprivate var totalItemsAvailable: Int = 0
+			@Published fileprivate private(set) var totalItemsAvailable: Int
 			@Published fileprivate var itemsLoadedCount: Int = 0
 			@Published fileprivate var page = 0
+
+			private var cancellable: AnyCancellable?
+
+			init(totalItemsAvailable: Int) {
+				self.totalItemsAvailable = totalItemsAvailable
+			}
 		}
 
-		private let cancelBag: CancelBag
-		private let itemsFromEndThreshold: Int = 15
+		private weak var cancelBag: CancelBag?
+		private static let itemsFromEndThreshold: Int = 15
 
 		init(
 			cancelBag: CancelBag
@@ -64,45 +76,49 @@ extension InfiniteList {
 			self.cancelBag = cancelBag
 		}
 
-		func transform(input: Input) -> Output {
-			let output = Output()
-//
-//			input.action
-//				.filter {
-//					if case .requestMoreRawsIfNeedIt = $0 { return true }
-//					return false
-//				}.map { _ in .loadingMoreRaws }
-//				.assign(to: \.state, on: output)
-//				.store(in: cancelBag)
+		func transform<Data>(
+			totalItemsAvailable: Int,
+			input: Input<Data>
+		) -> Output<Data>
+		where Data: RandomAccessCollection, Data.Element: Hashable {
+			let output = Output<Data>(totalItemsAvailable: totalItemsAvailable)
+
+			guard let cancelBag = cancelBag else { return output }
 
 			input.action
 				.compactMap {
 					if case let .requestMoreRawsIfNeedIt(index) = $0 { return index }
 					return nil
-				}.filter { [weak self] in
-					guard let self = self else { return false }
-					return self.thresholdMeet(output.itemsLoadedCount, $0) &&
-					self.moreItemsRemaining(output.itemsLoadedCount, output.totalItemsAvailable)
-				}.map { _ in .action(.requestItems) }
-				.assign(to: \.state, on: output)
-				.store(in: cancelBag)
+				}.filter {
+					InfiniteList.ViewModel.thresholdMeet(output.itemsLoadedCount, $0) &&
+					InfiniteList.ViewModel.moreItemsRemaining(output.itemsLoadedCount, output.totalItemsAvailable)
+				}.sink { _ in
+					input.action.send(.requestItems)
+				}.store(in: cancelBag)
 
 			input.action
 				.filter {
 					if case .requestItems = $0 { return true }
 					return false
-				}.sink { [weak self] _ in
-					guard let self = self else { return }
+				}.sink { [cancelBag] _ in
 					output.page += 1
 					output.state = .loadingMoreRaws
 					input.loadMore(output.page)
+						.receive(on: DispatchQueue.main)
 						.sink { loadedRaws in
-							output.totalItemsAvailable = loadedRaws.count
 							output.raws.append(contentsOf: loadedRaws.map(ItemRaw.init(raw:)))
 							output.itemsLoadedCount = output.raws.count
 							output.state = .idle
 						}
-						.store(in: self.cancelBag)
+						.store(in: cancelBag)
+				}.store(in: cancelBag)
+
+			input.action
+				.compactMap {
+					if case let .tapOnRaw(index) = $0 { return index }
+					return nil
+				}.sink { _ in
+					
 				}.store(in: cancelBag)
 
 			return output
@@ -112,12 +128,12 @@ extension InfiniteList {
 
 private extension InfiniteList.ViewModel {
 	/// Determines whether we have meet the threshold for requesting more items.
-	private func thresholdMeet(_ itemsLoadedCount: Int, _ index: Int) -> Bool {
-		return (itemsLoadedCount - index) == itemsFromEndThreshold
+	private static func thresholdMeet(_ itemsLoadedCount: Int, _ index: Int) -> Bool {
+		return (itemsLoadedCount - index) == InfiniteList.ViewModel.itemsFromEndThreshold
 	}
 
 	/// Determines whether there is more data to load.
-	private func moreItemsRemaining(_ itemsLoadedCount: Int, _ totalItemsAvailable: Int) -> Bool {
+	private static func moreItemsRemaining(_ itemsLoadedCount: Int, _ totalItemsAvailable: Int) -> Bool {
 		return itemsLoadedCount < totalItemsAvailable
 	}
 }
