@@ -20,9 +20,10 @@ extension Explore {
 		}
 
 		@State var selection: Int = 0
+		private let cancelBag: CancelBag
 
-		private let input: ViewModel.Input
-		private let output: ViewModel.Output
+		@ObservedObject private var input: ViewModel.Input
+		@ObservedObject private var output: ViewModel.Output
 
 		init() {
 			let cancelBag = CancelBag()
@@ -31,15 +32,17 @@ extension Explore {
 			let viewModel = ViewModel()
 
 			let output = viewModel.transform(input: input, cancelBag: cancelBag)
-			self.init(input: input, output: output)
+			self.init(input: input, output: output, cancelBag: cancelBag)
 		}
 
 		init(
 			input: ViewModel.Input,
-			output: ViewModel.Output
+			output: ViewModel.Output,
+			cancelBag: CancelBag
 		) {
 			self.input = input
 			self.output = output
+			self.cancelBag = cancelBag
 		}
 
 		var body: some View {
@@ -47,9 +50,11 @@ extension Explore {
 				totalItemsAvailable: 100,
 				loadMore: input.loadMore,
 				loadMoreData: input.loadMoreData,
-				loadingView: Text("Loading...")) { _ in
-					Text("")
-				}.tag(output.tag)
+				data: $output.data,
+				loadingView: Text("Loading...")
+			) { element in
+				Text(element.name)
+			}.tag(output.tag)
 				.tabItem {
 					TabItem(title: output.name, imageName: output.tabBarImageName)
 				}

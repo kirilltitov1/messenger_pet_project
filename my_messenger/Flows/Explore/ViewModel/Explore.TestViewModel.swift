@@ -7,12 +7,14 @@
 
 import Foundation
 
-protocol TestViewModelProtocol {
-	var name: String { get set }
-}
+//protocol TestViewModelProtocol {
+//	var name: String { get set }
+//}
 
 extension Explore {
-	struct TestViewModel {
+	struct TestViewModel: Hashable, Identifiable {
+		var id: UUID = UUID()
+		
 		let name: String
 
 		init(name: String) {

@@ -24,15 +24,18 @@ extension Explore.ViewModel: ViewModelProtocol {
 		case failure
 	}
 
-	final class Input {
+	final class Input: ObservableObject {
 		private(set) lazy var loadMore: ((Int) -> (AnyPublisher<[AnyView], Never>)) = { [weak self] in
 			guard let self = self else { return Just([]).eraseToAnyPublisher() }
 			return self.requestItems(page: $0)
 		}
-		private(set) lazy var loadMoreData: ((Int) -> (AnyPublisher<Data, Never>)) = { [weak self] in
-			guard let self = self else { return Just([]).eraseToAnyPublisher() }
-			return self.requestItems(page: $0)
-		}
+
+//		func loadMoreData(page: Int) {
+//			return requestItemsData(page: page)
+//		}
+
+		/// load page: Int
+		let loadMoreData: PassthroughSubject<Int, Never> = .init()
 	}
 
 	final class Output: ObservableObject {
@@ -40,6 +43,7 @@ extension Explore.ViewModel: ViewModelProtocol {
 		var name: String = "Explore"
 		var tabBarImageName: String = "newspaper"
 		@Published var items: [AnyView] = []
+		@Published var data = [Explore.TestViewModel]()
 		@Published var state: State = .idle
 	}
 
@@ -49,6 +53,10 @@ extension Explore.ViewModel: ViewModelProtocol {
 	) -> Output {
 		let output = Output()
 
+		input.loadMoreData
+			.flatMap(input.requestItemsData)
+			.assign(to: \.data, on: output)
+			.store(in: cancelBag)
 //		input.action.compactMap {
 //			if case let .loadMore(page) = $0 { return page }
 //			return nil
@@ -62,6 +70,14 @@ extension Explore.ViewModel: ViewModelProtocol {
 }
 
 extension Explore.ViewModel.Input: InfiniteListDelegate {
+	func requestItemsData(page: Int) -> AnyPublisher<[Explore.TestViewModel], Never> {
+		let publisher1 = Just(
+			(1...15).map { page in Explore.TestViewModel(name: "\(page)") }
+		).delay(for: .milliseconds(1300), scheduler: DispatchQueue.global(qos: .background))
+			.eraseToAnyPublisher()
+		return publisher1
+	}
+
 	func requestItems(page: Int) -> AnyPublisher<[AnyView], Never> {
 		let publisher1 = Just([
 			AnyView(Text("\(page)")),

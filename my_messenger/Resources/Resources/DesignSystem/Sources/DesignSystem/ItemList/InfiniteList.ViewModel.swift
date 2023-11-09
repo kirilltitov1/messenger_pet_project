@@ -39,11 +39,11 @@ extension InfiniteList {
 		where Data: RandomAccessCollection, Data.Element: Hashable {
 			private(set) var action: PassthroughSubject<Action, Never> = .init()
 			private(set) var loadMore: ((Int) -> (AnyPublisher<[AnyView], Never>))
-			private(set) var loadMoreData: ((Int) -> (AnyPublisher<Data, Never>))
+			private(set) var loadMoreData: PassthroughSubject<Int, Never>
 
 			init(
 				loadMore: (@escaping (Int) -> AnyPublisher<[AnyView], Never>),
-				loadMoreData: (@escaping (Int) -> (AnyPublisher<Data, Never>))
+				loadMoreData: PassthroughSubject<Int, Never>
 			) {
 				self.loadMore = loadMore
 				self.loadMoreData = loadMoreData
@@ -52,7 +52,7 @@ extension InfiniteList {
 
 		final class Output<Data>: ObservableObject
 		where Data: RandomAccessCollection, Data.Element: Hashable {
-			@Published var data: Data?
+			@Binding var data: Data
 			@Published var raws: [ItemRaw] = []
 			@Published var state: State = .idle
 
@@ -62,7 +62,11 @@ extension InfiniteList {
 
 			private var cancellable: AnyCancellable?
 
-			init(totalItemsAvailable: Int) {
+			init(
+				data: Binding<Data>,
+				totalItemsAvailable: Int
+			) {
+				self._data = data
 				self.totalItemsAvailable = totalItemsAvailable
 			}
 		}
@@ -78,10 +82,14 @@ extension InfiniteList {
 
 		func transform<Data>(
 			totalItemsAvailable: Int,
+			data: Binding<Data>,
 			input: Input<Data>
 		) -> Output<Data>
 		where Data: RandomAccessCollection, Data.Element: Hashable {
-			let output = Output<Data>(totalItemsAvailable: totalItemsAvailable)
+			let output = Output<Data>(
+				data: data,
+				totalItemsAvailable: totalItemsAvailable
+			)
 
 			guard let cancelBag = cancelBag else { return output }
 
@@ -96,21 +104,40 @@ extension InfiniteList {
 					input.action.send(.requestItems)
 				}.store(in: cancelBag)
 
+//			input.action
+//				.filter {
+//					if case .requestItems = $0 { return true }
+//					return false
+//				}.sink { [cancelBag] _ in
+//					output.page += 1
+//					output.state = .loadingMoreRaws
+//					input.loadMore(output.page)
+//						.receive(on: DispatchQueue.main)
+//						.sink { loadedRaws in
+//							output.raws.append(contentsOf: loadedRaws.map(ItemRaw.init(raw:)))
+//							output.itemsLoadedCount = output.raws.count
+//							output.state = .idle
+//						}
+//						.store(in: cancelBag)
+//				}.store(in: cancelBag)
+
 			input.action
 				.filter {
 					if case .requestItems = $0 { return true }
 					return false
-				}.sink { [cancelBag] _ in
+				}.sink { _ in
 					output.page += 1
-					output.state = .loadingMoreRaws
-					input.loadMore(output.page)
-						.receive(on: DispatchQueue.main)
-						.sink { loadedRaws in
-							output.raws.append(contentsOf: loadedRaws.map(ItemRaw.init(raw:)))
-							output.itemsLoadedCount = output.raws.count
-							output.state = .idle
-						}
-						.store(in: cancelBag)
+//					output.state = .loadingMoreRaws
+					input.loadMoreData.send(output.page)
+						
+//					input.loadMore(output.page)
+//						.receive(on: DispatchQueue.main)
+//						.sink { loadedRaws in
+//							output.raws.append(contentsOf: loadedRaws.map(ItemRaw.init(raw:)))
+//							output.itemsLoadedCount = output.raws.count
+//							output.state = .idle
+//						}
+//						.store(in: cancelBag)
 				}.store(in: cancelBag)
 
 			input.action

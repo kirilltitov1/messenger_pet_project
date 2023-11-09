@@ -27,7 +27,7 @@ extension ItemList: Hashable, Identifiable {
 
 public extension InfiniteList {
 	struct Item<Data, Content, LoadingView>: View
-	where Data: RandomAccessCollection, Data.Element: Hashable, Content: View, LoadingView: View {
+	where Data: RandomAccessCollection, Data.Element: Hashable, Data.Element: Identifiable, Content: View, LoadingView: View {
 
 		@ObservedObject private var input: ViewModel.Input<Data>
 		@ObservedObject private var output: ViewModel.Output<Data>
@@ -42,8 +42,9 @@ public extension InfiniteList {
 
 		public init(
 			totalItemsAvailable: Int,
-			loadMore: @escaping ((Int) -> (AnyPublisher<[AnyView], Never>)),
-			loadMoreData: @escaping ((Int) -> (AnyPublisher<Data, Never>)),
+			loadMore: @escaping ((Int) -> AnyPublisher<[AnyView], Never>),
+			loadMoreData: PassthroughSubject<Int, Never>,
+			data: Binding<Data>,
 			loadingView: LoadingView,
 			@ViewBuilder content: @escaping (Data.Element) -> Content
 		) {
@@ -55,6 +56,7 @@ public extension InfiniteList {
 			)
 			let output = viewModel.transform(
 				totalItemsAvailable: totalItemsAvailable,
+				data: data,
 				input: input
 			)
 
@@ -67,8 +69,8 @@ public extension InfiniteList {
 
 			setupBindings()
 
-//			input.action
-//				.send(.requestItems)
+			input.action
+				.send(.requestItems)
 		}
 
 		public var body: some View {
@@ -80,25 +82,36 @@ public extension InfiniteList {
 		}
 
 		private var infiniteList: some View {
-			let raws = output.raws.enumerated().map({ $0 })
-			return List {
-				ForEach(raws, id: \.element.id) { index, element in
-					element.raw.onAppear {
-						input.action.send(.requestMoreRawsIfNeedIt(index: index))
+			Group {
+//				let raws = output.raws.enumerated().map { $0 }
+				let data = output.data.enumerated().map { $0 }
+//				let list = List {
+//					ForEach(data, id: \.element.id) { index, element in
+//						EmptyView()
+//					}
+//				}
+				return List {
+					ForEach(data, id: \.element.id) { index, item in
+//						element.raw.onAppear {
+//							input.action.send(.requestMoreRawsIfNeedIt(index: index))
+//						}
+						content(item).onAppear {
+							input.action.send(.requestMoreRawsIfNeedIt(index: index))
+						}
+						.frame(maxWidth: .infinity, alignment: .leading)
+						.contentShape(Rectangle())
+						.onTapGesture {
+							//						input.action.send(.tapOnRaw)
+						}
 					}
-					.frame(maxWidth: .infinity, alignment: .leading)
-					.contentShape(Rectangle())
-					.onTapGesture {
-//						input.action.send(.tapOnRaw)
-					}
-				}
-			}.overlay {
-				loadingView
-					.opacity(isLoading ? 1 : 0)
-			}.frame(
-				idealWidth: .infinity,
-				idealHeight: .infinity
-			)
+				}.overlay {
+					loadingView
+						.opacity(isLoading ? 1 : 0)
+				}.frame(
+					idealWidth: .infinity,
+					idealHeight: .infinity
+				)
+			}
 		}
 
 		private var header: some View {
