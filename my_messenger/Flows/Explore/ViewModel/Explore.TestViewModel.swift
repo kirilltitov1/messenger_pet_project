@@ -7,12 +7,13 @@
 
 import Foundation
 
-//protocol TestViewModelProtocol {
-//	var name: String { get set }
-//}
-
 extension Explore {
 	struct TestViewModel: Hashable, Identifiable {
+
+		static func == (lhs: Self, rhs: Self) -> Bool {
+			lhs.id == rhs.id
+		}
+
 		var id: UUID = UUID()
 		
 		let name: String

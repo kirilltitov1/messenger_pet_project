@@ -30,6 +30,9 @@ extension Main {
 			TabView(selection: $selectedTab) {
 				Home.ViewScreen()
 				Explore.ViewScreen()
+//					.environmentObject(
+//
+//					)
 				Camera.ViewScreen()
 				Notifications.ViewScreen()
 				Profile.ViewScreen()

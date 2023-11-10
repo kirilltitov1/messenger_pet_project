@@ -12,6 +12,7 @@ import Combine
 extension Explore {
 	struct ViewScreen: View, Identifiable {
 		var id: UUID = UUID()
+
 		func hash(into hasher: inout Hasher) {
 			hasher.combine(id)
 		}
@@ -20,44 +21,47 @@ extension Explore {
 		}
 
 		@State var selection: Int = 0
-		private let cancelBag: CancelBag
+//		private let cancelBag: CancelBag
 
-		@ObservedObject private var input: ViewModel.Input
-		@ObservedObject private var output: ViewModel.Output
+		@ObservedObject private var viewModel: ViewModel = ViewModel()
+//		@ObservedObject private var output: ViewModel.Output
 
-		init() {
-			let cancelBag = CancelBag()
+//		init() {
+//			let cancelBag = CancelBag()
+//
+//			let viewModel = ViewModel()
+//
+//			let input = ViewModel.Input()
+//			let output = viewModel.transform(input: input, cancelBag: cancelBag)
+//
+//			self.init(input: input, output: output, cancelBag: cancelBag)
+//		}
 
-			let input = ViewModel.Input()
-			let viewModel = ViewModel()
-
-			let output = viewModel.transform(input: input, cancelBag: cancelBag)
-			self.init(input: input, output: output, cancelBag: cancelBag)
-		}
-
-		init(
-			input: ViewModel.Input,
-			output: ViewModel.Output,
-			cancelBag: CancelBag
-		) {
-			self.input = input
-			self.output = output
-			self.cancelBag = cancelBag
-		}
+//		init(
+//			input: ViewModel.Input,
+//			output: ViewModel.Output,
+//			cancelBag: CancelBag
+//		) {
+//			self.input = input
+//			self.output = output
+//			self.cancelBag = cancelBag
+//		}
 
 		var body: some View {
-			InfiniteList.Item(
-				totalItemsAvailable: 100,
-				loadMore: input.loadMore,
-				loadMoreData: input.loadMoreData,
-				data: $output.data,
-				loadingView: Text("Loading...")
-			) { element in
-				Text(element.name)
-			}.tag(output.tag)
-				.tabItem {
-					TabItem(title: output.name, imageName: output.tabBarImageName)
-				}
+			infiniteList
+		}
+
+		var infiniteList: some View {
+			Group {
+				InfiniteList.Item<[Explore.TestViewModel], Text, Text>(
+					loadingView: Text("Loading...")
+				) { element in
+					Text(element.name)
+				}.tag(viewModel.tag)
+					.tabItem {
+						TabItem(title: viewModel.name, imageName: viewModel.tabBarImageName)
+					}
+			}
 		}
 	}
 }

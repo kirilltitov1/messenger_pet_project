@@ -11,10 +11,53 @@ import SwiftUI
 import Combine
 
 extension Explore {
-	final class ViewModel {}
+	final class ViewModel: ObservableObject {
+
+		public var cancelBag: CancelBag = CancelBag()
+
+		let loadMoreData: PassthroughSubject<Int, Never> = .init()
+
+		let infinitiListViewModel: InfiniteList.ViewModel<[Explore.TestViewModel]>
+
+		let totalItemsAvailable: Int = 100
+
+		var tag: Int = 1
+		var name: String = "Explore"
+		var tabBarImageName: String = "newspaper"
+		@Published var data = [Explore.TestViewModel]()
+
+		init() {
+			self.infinitiListViewModel = .init(
+				data: $data,
+				loadMoreData: loadMoreData,
+				totalItemsAvailable: totalItemsAvailable
+			)
+			setup()
+		}
+
+		func setup() {
+			loadMoreData
+				.flatMap(requestItemsData)
+				.receive(on: DispatchQueue.main)
+				.sink { [weak self] in
+					self?.data.append(contentsOf: $0)
+				}
+				.store(in: cancelBag)
+		}
+
+
+		func requestItemsData(page: Int) -> AnyPublisher<[Explore.TestViewModel], Never> {
+			let publisher1 = Just(
+				(1...15).map { index in Explore.TestViewModel(name: "page: \(page) index: \(index)") }
+			).delay(for: .milliseconds(1300), scheduler: DispatchQueue.global(qos: .background))
+				.eraseToAnyPublisher()
+			return publisher1
+		}
+	}
 }
 
-extension Explore.ViewModel: ViewModelProtocol {
+extension Explore.ViewModel {
+//: ViewModelProtocol {
 
 	/// State of sign in view
 	enum State: Equatable {
@@ -24,39 +67,32 @@ extension Explore.ViewModel: ViewModelProtocol {
 		case failure
 	}
 
-	final class Input: ObservableObject {
-		private(set) lazy var loadMore: ((Int) -> (AnyPublisher<[AnyView], Never>)) = { [weak self] in
-			guard let self = self else { return Just([]).eraseToAnyPublisher() }
-			return self.requestItems(page: $0)
-		}
+	final class Input {
 
 //		func loadMoreData(page: Int) {
 //			return requestItemsData(page: page)
 //		}
 
 		/// load page: Int
-		let loadMoreData: PassthroughSubject<Int, Never> = .init()
+//		let loadMoreData: PassthroughSubject<Int, Never> = .init()
 	}
 
-	final class Output: ObservableObject {
-		var tag: Int = 1
-		var name: String = "Explore"
-		var tabBarImageName: String = "newspaper"
-		@Published var items: [AnyView] = []
-		@Published var data = [Explore.TestViewModel]()
-		@Published var state: State = .idle
+	final class Output {
 	}
 
-	func transform(
-		input: Input,
-		cancelBag: CancelBag
-	) -> Output {
-		let output = Output()
-
-		input.loadMoreData
-			.flatMap(input.requestItemsData)
-			.assign(to: \.data, on: output)
-			.store(in: cancelBag)
+//	func transform(
+//		input: Input,
+//		cancelBag: CancelBag
+//	) -> Output {
+//		let output = Output()
+//
+//		input.loadMoreData
+//			.flatMap(input.requestItemsData)
+//			.receive(on: DispatchQueue.main)
+//			.sink {
+//				output.data.append(contentsOf: $0)
+//			}
+//			.store(in: cancelBag)
 //		input.action.compactMap {
 //			if case let .loadMore(page) = $0 { return page }
 //			return nil
@@ -64,70 +100,25 @@ extension Explore.ViewModel: ViewModelProtocol {
 //			.sink { eewfw in
 //
 //		}
-
-		return output
-	}
+//
+//		return output
+//	}
 }
 
-extension Explore.ViewModel.Input: InfiniteListDelegate {
+extension Explore.ViewModel.Input {
 	func requestItemsData(page: Int) -> AnyPublisher<[Explore.TestViewModel], Never> {
 		let publisher1 = Just(
-			(1...15).map { page in Explore.TestViewModel(name: "\(page)") }
+			(1...15).map { index in Explore.TestViewModel(name: "page: \(page) index: \(index)") }
 		).delay(for: .milliseconds(1300), scheduler: DispatchQueue.global(qos: .background))
 			.eraseToAnyPublisher()
 		return publisher1
 	}
 
-	func requestItems(page: Int) -> AnyPublisher<[AnyView], Never> {
-		let publisher1 = Just([
-			AnyView(Text("\(page)")),
-			AnyView(Text("\(page)")),
-			AnyView(Text("\(page)")),
-			AnyView(Text("\(page)")),
-			AnyView(Text("\(page)")),
-			AnyView(Text("\(page)")),
-			AnyView(Text("\(page)")),
-			AnyView(Text("\(page)")),
-			AnyView(Text("\(page)")),
-			AnyView(Text("\(page)")),
-			AnyView(Text("\(page)")),
-			AnyView(Text("\(page)")),
-			AnyView(Text("\(page)")),
-			AnyView(Text("\(page)")),
-			AnyView(Text("\(page)"))
-		]).delay(for: .milliseconds(1300), scheduler: DispatchQueue.global(qos: .background))
+	func requestItems(page: Int) -> AnyPublisher<[Explore.TestViewModel], Never> {
+		let publisher1 = Just(
+			(1...15).map { index in Explore.TestViewModel(name: "page: \(page) index: \(index)") }
+		).delay(for: .milliseconds(1300), scheduler: DispatchQueue.global(qos: .background))
 			.eraseToAnyPublisher()
-//		let publisher2 = Just([
-//			AnyView(Text("111111")),
-//			AnyView(Text("222222")),
-//			AnyView(Text("333333")),
-//			AnyView(Text("444444")),
-//			AnyView(Text("555555")),
-//			AnyView(Text("111111")),
-//			AnyView(Text("222222")),
-//			AnyView(Text("333333")),
-//			AnyView(Text("444444")),
-//			AnyView(Text("555555")),
-//			AnyView(Text("111111")),
-//			AnyView(Text("222222")),
-//			AnyView(Text("333333")),
-//			AnyView(Text("444444")),
-//			AnyView(Text("555555")),
-//			AnyView(Text("111111")),
-//			AnyView(Text("222222")),
-//			AnyView(Text("333333")),
-//			AnyView(Text("444444")),
-//			AnyView(Text("555555")),
-//			AnyView(Text("111111")),
-//			AnyView(Text("222222")),
-//			AnyView(Text("333333")),
-//			AnyView(Text("444444")),
-//			AnyView(Text("555555"))
-//		]).eraseToAnyPublisher()
-//		return Publishers.Merge(
-//			publisher1
-////			publisher2
-//		).eraseToAnyPublisher()
 		return publisher1
 	}
 }
