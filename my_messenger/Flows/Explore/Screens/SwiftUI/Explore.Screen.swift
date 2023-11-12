@@ -20,32 +20,11 @@ extension Explore {
 			lhs.id == rhs.id
 		}
 
-		@State var selection: Int = 0
-//		private let cancelBag: CancelBag
+		@ObservedObject private var viewModel: ViewModel = .init(serviceApi: MockApi())
 
-		@ObservedObject private var viewModel: ViewModel = ViewModel()
-//		@ObservedObject private var output: ViewModel.Output
+		@State private var headerSection: ViewModel.HeaderSection = .cats
 
-//		init() {
-//			let cancelBag = CancelBag()
-//
-//			let viewModel = ViewModel()
-//
-//			let input = ViewModel.Input()
-//			let output = viewModel.transform(input: input, cancelBag: cancelBag)
-//
-//			self.init(input: input, output: output, cancelBag: cancelBag)
-//		}
-
-//		init(
-//			input: ViewModel.Input,
-//			output: ViewModel.Output,
-//			cancelBag: CancelBag
-//		) {
-//			self.input = input
-//			self.output = output
-//			self.cancelBag = cancelBag
-//		}
+		let cancelBag = CancelBag()
 
 		var body: some View {
 			infiniteList
@@ -53,8 +32,13 @@ extension Explore {
 
 		var infiniteList: some View {
 			Group {
-				InfiniteList.Item<[Explore.TestViewModel], Text, Text>(
-					loadingView: Text("Loading...")
+				InfiniteList.Item(
+					data: $viewModel.data,
+					isLoading: $viewModel.isLoading,
+					loadMoreData: viewModel.loadMoreData,
+					rowDidTapped: viewModel.rowAction,
+					loadingView: Text("Loading..."),
+					header: header
 				) { element in
 					Text(element.name)
 				}.tag(viewModel.tag)
@@ -62,6 +46,20 @@ extension Explore {
 						TabItem(title: viewModel.name, imageName: viewModel.tabBarImageName)
 					}
 			}
+		}
+
+		private var header: AnyView {
+			// TODO: create header
+			// FIXME: [4] вот тут хотелось бы иметь связку вот такую ViewModel -> create Binding<HeaderSection> -> ViewModel refresh подписывается на Binding<HeaderSection> -> ViewModel.Binding<HeaderSection> вставляется в 59 строку Picker, так что ниже
+			AnyView(Picker("API`s", selection: $headerSection) {
+				ForEach(ViewModel.HeaderSection.allCases, id: \.self) {
+					Text("\($0.rawValue) api").tag($0)
+				}
+			}.contentShape(Rectangle()).onTapGesture {
+				print(headerSection)
+				// FIXME: [3] тут приходится делать костыльный биндинг на ViewModel, который продублирует вызов api... и выйдет вот так: модель выставила бы при .init вызов первичной прогрузки данных, и тут при установке первого значения.
+				viewModel.headerSection = headerSection
+			}.pickerStyle(.segmented))
 		}
 	}
 }

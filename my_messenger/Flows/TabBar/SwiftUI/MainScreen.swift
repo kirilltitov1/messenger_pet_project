@@ -13,11 +13,11 @@ extension Main {
 	struct Screen: View {
 
 		//TODO: добавить состояние из бд по закрытию приложения
-		@State private var selectedTab: Int = 1
+		@State private var selectedTab: Int = 0
 		private let cancelBag = CancelBag()
 
 		init(
-			selectedTab: Int = 1
+			selectedTab: Int = 0
 		) {
 			self._selectedTab = State(initialValue: selectedTab)
 		}
@@ -30,9 +30,6 @@ extension Main {
 			TabView(selection: $selectedTab) {
 				Home.ViewScreen()
 				Explore.ViewScreen()
-//					.environmentObject(
-//
-//					)
 				Camera.ViewScreen()
 				Notifications.ViewScreen()
 				Profile.ViewScreen()

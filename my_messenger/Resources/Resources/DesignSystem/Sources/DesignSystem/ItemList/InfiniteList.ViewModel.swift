@@ -13,37 +13,29 @@ extension InfiniteList {
 	public final class ViewModel<Data>: ObservableObject
 	where Data: RandomAccessCollection, Data.Element: Hashable {
 		
-		private var loadMoreData: PassthroughSubject<Int, Never>
-		
-		var loadMore: PassthroughSubject<Void, Never> = .init()
-		
-		@Binding var data: Data
-		
-		fileprivate private(set) var totalItemsAvailable: Int
-		fileprivate var itemsLoadedCount: Int = 0
-		fileprivate var page = 0
-		
+		var loadMoreData: PassthroughSubject<Void, Never>
+		var rowDidTapped: PassthroughSubject<Data.Element, Never>?
+
 		private var cancelBag: CancelBag = CancelBag()
-		
+
+		@Binding var data: Data
+		@Binding var isLoading: Bool
+
 		public init(
 			data: Binding<Data>,
-			loadMoreData: PassthroughSubject<Int, Never>,
-			totalItemsAvailable: Int
+			isLoading: Binding<Bool>,
+			loadMoreData: PassthroughSubject<Void, Never>,
+			rowDidTapped: PassthroughSubject<Data.Element, Never>?
 		) {
 			self.loadMoreData = loadMoreData
+			self.rowDidTapped = rowDidTapped
+			self._isLoading = isLoading
 			self._data = data
-			self.totalItemsAvailable = totalItemsAvailable
 
 			setupBindings()
 		}
-		
+
 		private func setupBindings() {
-			loadMore
-				.sink { [weak self] in
-					guard let self = self else { return }
-					page += 1
-					loadMoreData.send(page)
-				}.store(in: cancelBag)
 		}
 	}
 }

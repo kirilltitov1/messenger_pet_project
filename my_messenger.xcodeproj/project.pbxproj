@@ -13,6 +13,8 @@
 		5E337A012AC7A8820040BE0F /* Color+RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E337A002AC7A8820040BE0F /* Color+RGB.swift */; };
 		5E337A032AC7A8900040BE0F /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E337A022AC7A8900040BE0F /* Colors.swift */; };
 		5E40F8D42AAD55B1007A41F6 /* SignIn.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF899E028F39A1500D43E65 /* SignIn.View.swift */; };
+		5E4E7F462AFED80500C1F996 /* CurrentValueSubject+binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E7F452AFED80500C1F996 /* CurrentValueSubject+binding.swift */; };
+		5E4E7F482B0120EC00C1F996 /* Explore.Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E7F472B0120EC00C1F996 /* Explore.Service.swift */; };
 		5E4ECD4728E385D80080DE1D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4ECD4628E385D80080DE1D /* AppDelegate.swift */; };
 		5E4ECD4928E385D80080DE1D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4ECD4828E385D80080DE1D /* SceneDelegate.swift */; };
 		5E4ECD5128E385D80080DE1D /* Instagram.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5E4ECD4F28E385D80080DE1D /* Instagram.xcdatamodeld */; };
@@ -161,6 +163,8 @@
 		5E2E0D1B2AAD301A003FC029 /* SignIn.ViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.ViewScreen.swift; sourceTree = "<group>"; };
 		5E337A002AC7A8820040BE0F /* Color+RGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+RGB.swift"; sourceTree = "<group>"; };
 		5E337A022AC7A8900040BE0F /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		5E4E7F452AFED80500C1F996 /* CurrentValueSubject+binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrentValueSubject+binding.swift"; sourceTree = "<group>"; };
+		5E4E7F472B0120EC00C1F996 /* Explore.Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Explore.Service.swift; sourceTree = "<group>"; };
 		5E4ECD4328E385D80080DE1D /* my_messenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = my_messenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E4ECD4628E385D80080DE1D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E4ECD4828E385D80080DE1D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -724,6 +728,7 @@
 				EFA2CEF529378C6C007BB0C6 /* UIButton+Extentions.swift */,
 				EFE77FA72920909E00EC45E8 /* UITextField+Combine.swift */,
 				EFA2CF022937C497007BB0C6 /* Publisher+Extentions.swift */,
+				5E4E7F452AFED80500C1F996 /* CurrentValueSubject+binding.swift */,
 				5E337A042AC7A8940040BE0F /* Colors */,
 				EF67DC13290A10B6007E30C2 /* String+Localization.swift */,
 				EFE752EE291B14A900FC0742 /* String+Validation.swift */,
@@ -995,6 +1000,7 @@
 			children = (
 				EF8EABE52AE9D2EC007ADB0A /* Explore.ViewModel.swift */,
 				5ED222E32AFB153A00542389 /* Explore.TestViewModel.swift */,
+				5E4E7F472B0120EC00C1F996 /* Explore.Service.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1172,6 +1178,7 @@
 				EFF80D9D28F74A6100F830FB /* Profile.Factory.swift in Sources */,
 				5EE6AEF82AB28766004DD0DD /* Home.Screen.swift in Sources */,
 				EFF80DBC28F7705C00F830FB /* Explore.Coordinator.swift in Sources */,
+				5E4E7F462AFED80500C1F996 /* CurrentValueSubject+binding.swift in Sources */,
 				EFDE0CD52AA91F3600899788 /* AvailabilityFeatureKey.swift in Sources */,
 				EFF80D8228F7370300F830FB /* Main.Factory.swift in Sources */,
 				EF25D664293CDB6B00AA7225 /* SignUp.View.swift in Sources */,
@@ -1204,6 +1211,7 @@
 				5E337A032AC7A8900040BE0F /* Colors.swift in Sources */,
 				EF903B4F2923FED800B4BFBB /* image.swift in Sources */,
 				EFF80D7728F7193500F830FB /* CancelBag.swift in Sources */,
+				5E4E7F482B0120EC00C1F996 /* Explore.Service.swift in Sources */,
 				EF4803EB2AB222C60076CFBF /* MainScreen.swift in Sources */,
 				EFDE0CCF2AA8E56000899788 /* AvailabilityProtocol.swift in Sources */,
 				5EF899C428F35C8900D43E65 /* SignIn.swift in Sources */,
