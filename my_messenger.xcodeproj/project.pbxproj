@@ -161,6 +161,7 @@
 		5E1C086E2ABA330D005F02D0 /* API */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = API; sourceTree = "<group>"; };
 		5E2E0D182AAD2CB6003FC029 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		5E2E0D1B2AAD301A003FC029 /* SignIn.ViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.ViewScreen.swift; sourceTree = "<group>"; };
+		5E30BCBD2B02788000B7C173 /* ServiceLocator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ServiceLocator; sourceTree = "<group>"; };
 		5E337A002AC7A8820040BE0F /* Color+RGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+RGB.swift"; sourceTree = "<group>"; };
 		5E337A022AC7A8900040BE0F /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		5E4E7F452AFED80500C1F996 /* CurrentValueSubject+binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrentValueSubject+binding.swift"; sourceTree = "<group>"; };
@@ -570,6 +571,7 @@
 		EF0D72CE28E64371004D04F5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5E30BCBD2B02788000B7C173 /* ServiceLocator */,
 				5E819D632AE83A1200F659F0 /* Log */,
 				5E1C086E2ABA330D005F02D0 /* API */,
 				EF4803F62AB273170076CFBF /* DesignSystem */,
