@@ -40,16 +40,18 @@ extension Notifications {
 		}
 
 		var body: some View {
-			VStack {
-				List {
-					ForEach(output.items) { item in
-						Text(item)
+			NavigationView {
+				VStack {
+					List {
+						ForEach(output.items) { item in
+							Text(item)
+						}
 					}
 				}
 			}.tag(output.tag)
 				.tabItem {
-					TabItem(title: output.name, imageName: output.tabBarImageName)
-				}
+					   TabItem(title: output.name, imageName: output.tabBarImageName)
+				   }
 		}
 	}
 }

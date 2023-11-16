@@ -40,12 +40,16 @@ extension Home {
 		}
 		
 		var body: some View {
-			VStack {
-				Text("Home")
+			NavigationView {
+				VStack {
+					Rectangle()
+						.foregroundColor(.red)
+					Text("Home")
+				}
 			}.tag(output.tag)
 				.tabItem {
-					TabItem(title: output.name, imageName: output.tabBarImageName)
-				}
+					   TabItem(title: output.name, imageName: output.tabBarImageName)
+				   }
 		}
 	}
 }

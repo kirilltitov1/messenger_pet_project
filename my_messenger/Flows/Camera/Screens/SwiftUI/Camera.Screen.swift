@@ -40,12 +40,14 @@ extension Camera {
 		}
 		
 		var body: some View {
-			VStack {
-				Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+			NavigationView {
+				VStack {
+					Text("Hello, World!")
+				}
 			}.tag(output.tag)
 				.tabItem {
-					TabItem(title: output.name, imageName: output.tabBarImageName)
-				}
+					   TabItem(title: output.name, imageName: output.tabBarImageName)
+				   }
 		}
 	}
 }

@@ -13,12 +13,18 @@ import Combine
 extension Explore {
 	final class ViewModel: ObservableObject {
 
+		enum HeaderSection: String, Equatable, CaseIterable {
+			case cats
+			case dogs
+			case foxes
+		}
+
 		public let cancelBag: CancelBag = CancelBag()
 
 		let loadMoreData: PassthroughSubject<Void, Never> = .init()
 		let refresh: PassthroughSubject<Void, Never> = .init()
-		let rowAction: PassthroughSubject<TestViewModel, Never> = .init()
-		let serviceApi: ExploreServiceProtocol
+		let rowAction: PassthroughSubject<AnimalViewModel, Never> = .init()
+		let serviceApi: AnimalServiceProtocol
 
 		let totalItemsAvailable: Int = 100
 
@@ -26,24 +32,13 @@ extension Explore {
 		let name: String = "Explore"
 		let tabBarImageName: String = "newspaper"
 
-		@Published var data: [Explore.TestViewModel] = []
-		@Published var isLoading: Bool = false
+		@Published var data: [Explore.AnimalViewModel] = []
 		@Published var page: Int = 1
-		@Published var headerSection: HeaderSection = .cats {
-			didSet {
-				refresh.send(())
-			}
-		}
-
-		// FIXME: [1] хотелось бы задать этот енум для работы стратегии с апи, не понимаю как прикрепить его к swifui... выглядит так что swiftui забирает часть логики из модели например как мне забиндить паблишер из Explore.ViewModel в Explore.Screen, раньше я мог написать фабрику, которая бы собрала зависимости, но сам инициализабор View не дает этого сделать из за враппера observableObject
-		enum HeaderSection: String, Equatable, CaseIterable {
-			case cats
-			case dogs
-			case foxes
-		}
+		@Published var headerSection: HeaderSection = .cats
+		@Published var isLoading: Bool = false
 
 		init(
-			serviceApi: ExploreServiceProtocol
+			serviceApi: AnimalServiceProtocol
 		) {
 			self.serviceApi = serviceApi
 
@@ -53,6 +48,12 @@ extension Explore {
 		}
 
 		private func setupBindings() {
+			$headerSection
+				.sink { [weak self] _ in
+					self?.refresh.send(())
+				}
+				.store(in: cancelBag)
+
 			loadMoreData
 				.receive(on: DispatchQueue.main)
 				.sink { [weak self] in
@@ -87,9 +88,8 @@ extension Explore {
 
 // MARK: - MOCK
 extension Explore.ViewModel {
-	func requestItemsData(page: Int, providerType: HeaderSection?) -> AnyPublisher<[Explore.TestViewModel], Never> {
-		// FIXME: [2] вот тут очень легко заметить этот гигантский костыль в виде Optional<HeaderSection>, headerSection хотелось бы инитить тут, оно бы вызывало загрузку данных, а как его отсюда забиндить на Picker который в Explore.Screen ?
-		guard let providerType = providerType else { return Just([]).eraseToAnyPublisher() }
+	func requestItemsData(page: Int, providerType: HeaderSection?) -> AnyPublisher<[Explore.AnimalViewModel], Never> {
+		guard let providerType = providerType else { return Empty().eraseToAnyPublisher() }
 		switch providerType {
 		case .cats:
 			return serviceApi.catsRequest(page: page)

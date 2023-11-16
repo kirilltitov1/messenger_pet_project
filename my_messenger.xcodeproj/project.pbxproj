@@ -23,7 +23,7 @@
 		5E4ECD6128E385DA0080DE1D /* my_messengerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4ECD6028E385DA0080DE1D /* my_messengerTests.swift */; };
 		5E4ECD6B28E385DA0080DE1D /* my_messengerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4ECD6A28E385DA0080DE1D /* my_messengerUITests.swift */; };
 		5E4ECD6D28E385DA0080DE1D /* my_messengerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4ECD6C28E385DA0080DE1D /* my_messengerUITestsLaunchTests.swift */; };
-		5ED222E42AFB153A00542389 /* Explore.TestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED222E32AFB153A00542389 /* Explore.TestViewModel.swift */; };
+		5ED222E42AFB153A00542389 /* Explore.AnimalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED222E32AFB153A00542389 /* Explore.AnimalViewModel.swift */; };
 		5EE6AEF82AB28766004DD0DD /* Home.Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE6AEF72AB28766004DD0DD /* Home.Screen.swift */; };
 		5EE6AEFB2AB288E8004DD0DD /* Explore.Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE6AEFA2AB288E8004DD0DD /* Explore.Screen.swift */; };
 		5EE6AEFF2AB28A56004DD0DD /* Notifications.Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE6AEFE2AB28A56004DD0DD /* Notifications.Screen.swift */; };
@@ -73,7 +73,7 @@
 		EF3F358628E65DBA00F668B4 /* HapticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3F358528E65DBA00F668B4 /* HapticsService.swift */; };
 		EF3F358928E65F2500F668B4 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EF3F358828E65F2500F668B4 /* FirebaseFirestore */; };
 		EF3F358B28E65F2500F668B4 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = EF3F358A28E65F2500F668B4 /* FirebaseFirestoreCombine-Community */; };
-		EF4803EB2AB222C60076CFBF /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4803EA2AB222C60076CFBF /* MainScreen.swift */; };
+		EF4803EB2AB222C60076CFBF /* Main.Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4803EA2AB222C60076CFBF /* Main.Screen.swift */; };
 		EF4803F22AB244610076CFBF /* Camera.Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4803F12AB244610076CFBF /* Camera.Screen.swift */; };
 		EF4803F82AB37AC30076CFBF /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = EF4803F72AB37AC30076CFBF /* DesignSystem */; };
 		EF67DC002901E05C007E30C2 /* GradientImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF67DBFF2901E05C007E30C2 /* GradientImageView.swift */; };
@@ -179,7 +179,7 @@
 		5E4ECD6A28E385DA0080DE1D /* my_messengerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = my_messengerUITests.swift; sourceTree = "<group>"; };
 		5E4ECD6C28E385DA0080DE1D /* my_messengerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = my_messengerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		5E819D632AE83A1200F659F0 /* Log */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Log; sourceTree = "<group>"; };
-		5ED222E32AFB153A00542389 /* Explore.TestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Explore.TestViewModel.swift; sourceTree = "<group>"; };
+		5ED222E32AFB153A00542389 /* Explore.AnimalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Explore.AnimalViewModel.swift; sourceTree = "<group>"; };
 		5EE6AEF72AB28766004DD0DD /* Home.Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.Screen.swift; sourceTree = "<group>"; };
 		5EE6AEFA2AB288E8004DD0DD /* Explore.Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Explore.Screen.swift; sourceTree = "<group>"; };
 		5EE6AEFE2AB28A56004DD0DD /* Notifications.Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.Screen.swift; sourceTree = "<group>"; };
@@ -217,7 +217,7 @@
 		EF3F358128E65D8A00F668B4 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		EF3F358328E65DAA00F668B4 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
 		EF3F358528E65DBA00F668B4 /* HapticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsService.swift; sourceTree = "<group>"; };
-		EF4803EA2AB222C60076CFBF /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
+		EF4803EA2AB222C60076CFBF /* Main.Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.Screen.swift; sourceTree = "<group>"; };
 		EF4803F12AB244610076CFBF /* Camera.Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.Screen.swift; sourceTree = "<group>"; };
 		EF4803F62AB273170076CFBF /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DesignSystem; sourceTree = "<group>"; };
 		EF67DBFF2901E05C007E30C2 /* GradientImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientImageView.swift; sourceTree = "<group>"; };
@@ -683,7 +683,7 @@
 		EF4803E92AB222A90076CFBF /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
-				EF4803EA2AB222C60076CFBF /* MainScreen.swift */,
+				EF4803EA2AB222C60076CFBF /* Main.Screen.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -1001,7 +1001,7 @@
 			isa = PBXGroup;
 			children = (
 				EF8EABE52AE9D2EC007ADB0A /* Explore.ViewModel.swift */,
-				5ED222E32AFB153A00542389 /* Explore.TestViewModel.swift */,
+				5ED222E32AFB153A00542389 /* Explore.AnimalViewModel.swift */,
 				5E4E7F472B0120EC00C1F996 /* Explore.Service.swift */,
 			);
 			path = ViewModel;
@@ -1214,7 +1214,7 @@
 				EF903B4F2923FED800B4BFBB /* image.swift in Sources */,
 				EFF80D7728F7193500F830FB /* CancelBag.swift in Sources */,
 				5E4E7F482B0120EC00C1F996 /* Explore.Service.swift in Sources */,
-				EF4803EB2AB222C60076CFBF /* MainScreen.swift in Sources */,
+				EF4803EB2AB222C60076CFBF /* Main.Screen.swift in Sources */,
 				EFDE0CCF2AA8E56000899788 /* AvailabilityProtocol.swift in Sources */,
 				5EF899C428F35C8900D43E65 /* SignIn.swift in Sources */,
 				5EF899CA28F3666800D43E65 /* SignIn.Factory.swift in Sources */,
@@ -1276,7 +1276,7 @@
 				EFF80D7E28F733F400F830FB /* Main.swift in Sources */,
 				EFDE0CDC2AA9209300899788 /* AvailabilityFeatureKey+providers.swift in Sources */,
 				5EE6AEFF2AB28A56004DD0DD /* Notifications.Screen.swift in Sources */,
-				5ED222E42AFB153A00542389 /* Explore.TestViewModel.swift in Sources */,
+				5ED222E42AFB153A00542389 /* Explore.AnimalViewModel.swift in Sources */,
 				EF67DC0C290A0D2A007E30C2 /* Localized.swift in Sources */,
 				EF25D64D293930CF00AA7225 /* SignUp.Factory.swift in Sources */,
 			);

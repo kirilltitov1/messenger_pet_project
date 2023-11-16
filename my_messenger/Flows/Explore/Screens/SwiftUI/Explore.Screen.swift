@@ -20,14 +20,19 @@ extension Explore {
 			lhs.id == rhs.id
 		}
 
-		@ObservedObject private var viewModel: ViewModel = .init(serviceApi: MockApi())
-
-		@State private var headerSection: ViewModel.HeaderSection = .cats
+		@ObservedObject private var viewModel: ViewModel = .init(serviceApi: MockAnimalApi())
 
 		let cancelBag = CancelBag()
 
 		var body: some View {
-			infiniteList
+			NavigationView {
+				infiniteList
+					.navigationBarTitleDisplayMode(.large)
+				// FIXME: почему он ломает мне tabbar нижний? он отрисовывается 
+//					.navigationTitle(viewModel.name)
+			}.tabItem {
+				TabItem(title: viewModel.name, imageName: viewModel.tabBarImageName)
+			}
 		}
 
 		var infiniteList: some View {
@@ -36,30 +41,37 @@ extension Explore {
 					data: $viewModel.data,
 					isLoading: $viewModel.isLoading,
 					loadMoreData: viewModel.loadMoreData,
-					rowDidTapped: viewModel.rowAction,
 					loadingView: Text("Loading..."),
 					header: header
 				) { element in
-					Text(element.name)
-				}.tag(viewModel.tag)
-					.tabItem {
-						TabItem(title: viewModel.name, imageName: viewModel.tabBarImageName)
+					NavigationLink(destination: ChatView(userName: element.name)) {
+						Text(element.name)
+							.modifier(StretchContentToRectangle())
+							.tag(viewModel.tag)
+
+						Circle()
+							.foregroundColor(.red)
+							.frame(width: 35, height: 35)
+							.onTapGesture { [element] in
+								withAnimation(.linear(duration: 3)) { [element] in
+									viewModel.data.removeAll { $0 == element }
+								}
+							}
 					}
+				}
 			}
 		}
 
 		private var header: AnyView {
-			// TODO: create header
-			// FIXME: [4] вот тут хотелось бы иметь связку вот такую ViewModel -> create Binding<HeaderSection> -> ViewModel refresh подписывается на Binding<HeaderSection> -> ViewModel.Binding<HeaderSection> вставляется в 59 строку Picker, так что ниже
-			AnyView(Picker("API`s", selection: $headerSection) {
-				ForEach(ViewModel.HeaderSection.allCases, id: \.self) {
-					Text("\($0.rawValue) api").tag($0)
+			AnyView(
+				Picker("API`s", selection: $viewModel.headerSection) {
+					ForEach(Explore.ViewModel.HeaderSection.allCases, id: \.self) {
+						Text("\($0.rawValue) api").tag($0)
+					}
 				}
-			}.contentShape(Rectangle()).onTapGesture {
-				print(headerSection)
-				// FIXME: [3] тут приходится делать костыльный биндинг на ViewModel, который продублирует вызов api... и выйдет вот так: модель выставила бы при .init вызов первичной прогрузки данных, и тут при установке первого значения.
-				viewModel.headerSection = headerSection
-			}.pickerStyle(.segmented))
+				.allowsHitTesting(!viewModel.isLoading)
+				.pickerStyle(.segmented)
+			)
 		}
 	}
 }

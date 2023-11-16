@@ -28,7 +28,6 @@ public extension InfiniteList {
 			data: Binding<Data>,
 			isLoading: Binding<Bool>,
 			loadMoreData: PassthroughSubject<Void, Never>,
-			rowDidTapped: PassthroughSubject<Data.Element, Never>?,
 			loadingView: LoadingView,
 			header: AnyView? = nil,
 			footer: AnyView? = nil,
@@ -43,7 +42,7 @@ public extension InfiniteList {
 			self.header = header
 			self.footer = footer
 
-			self.viewModel = .init(data: data, isLoading: isLoading, loadMoreData: loadMoreData, rowDidTapped: rowDidTapped)
+			self.viewModel = .init(data: data, isLoading: isLoading, loadMoreData: loadMoreData)
 		}
 
 		public var body: some View {
@@ -72,12 +71,9 @@ public extension InfiniteList {
 							}
 						}
 						.frame(maxWidth: .infinity, alignment: .leading)
-						.contentShape(Rectangle())
-						.onTapGesture {
-							viewModel.rowDidTapped?.send(item)
-						}
 					}
-				}.frame(
+				}.listStyle(.grouped)
+				.frame(
 					idealWidth: .infinity,
 					idealHeight: .infinity
 				)

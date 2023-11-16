@@ -14,7 +14,6 @@ extension InfiniteList {
 	where Data: RandomAccessCollection, Data.Element: Hashable {
 		
 		var loadMoreData: PassthroughSubject<Void, Never>
-		var rowDidTapped: PassthroughSubject<Data.Element, Never>?
 
 		private var cancelBag: CancelBag = CancelBag()
 
@@ -24,11 +23,9 @@ extension InfiniteList {
 		public init(
 			data: Binding<Data>,
 			isLoading: Binding<Bool>,
-			loadMoreData: PassthroughSubject<Void, Never>,
-			rowDidTapped: PassthroughSubject<Data.Element, Never>?
+			loadMoreData: PassthroughSubject<Void, Never>
 		) {
 			self.loadMoreData = loadMoreData
-			self.rowDidTapped = rowDidTapped
 			self._isLoading = isLoading
 			self._data = data
 

@@ -31,7 +31,8 @@ final class ApplicationCoordinator {
 //			let mainFactory: MainCoordinatorProtocol = Main.Factory()
 //			TabBar.Controller(factory: tabBarFactory)
 			let mainScreen = UIHostingController(rootView: Main.Screen())
-			navigationController.pushViewController(mainScreen, animated: true)
+			navigationController.isToolbarHidden = true
+			navigationController.setViewControllers([mainScreen], animated: true)
 		} else {
 			startSignIn(navigationController: navigationController)
 		}

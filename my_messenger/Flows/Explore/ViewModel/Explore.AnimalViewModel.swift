@@ -8,7 +8,7 @@
 import Foundation
 
 extension Explore {
-	struct TestViewModel: Hashable, Identifiable {
+	struct AnimalViewModel: Hashable, Identifiable {
 
 		static func == (lhs: Self, rhs: Self) -> Bool {
 			lhs.id == rhs.id
