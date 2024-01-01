@@ -7,6 +7,7 @@
 
 import Combine
 import Foundation
+import ServiceLocator
 
 protocol AnimalServiceProtocol {
 	/// Request cats data
@@ -65,5 +66,23 @@ final class MockAnimalApi: AnimalServiceProtocol {
 		).delay(for: .milliseconds(1300), scheduler: DispatchQueue.global(qos: .background))
 			.eraseToAnyPublisher()
 		return publisher1
+	}
+}
+
+extension MockAnimalApi: ServiceProtocol {
+	static var service: MockAnimalApi {
+		if let service: MockAnimalApi = ServiceLocator.service() {
+			return service
+		}
+
+		let service = MockAnimalApi()
+		ServiceLocator.addService(service)
+		return service
+	}
+
+	func clear() {}
+
+	func remove() {
+		ServiceLocator.removeService(self)
 	}
 }

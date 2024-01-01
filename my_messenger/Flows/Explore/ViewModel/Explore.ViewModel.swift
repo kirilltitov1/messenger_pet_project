@@ -37,10 +37,8 @@ extension Explore {
 		@Published var headerSection: HeaderSection = .cats
 		@Published var isLoading: Bool = false
 
-		init(
-			serviceApi: AnimalServiceProtocol
-		) {
-			self.serviceApi = serviceApi
+		init() {
+			self.serviceApi = MockAnimalApi.service
 
 			setupBindings()
 
