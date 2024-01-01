@@ -16,13 +16,13 @@ extension SignIn {
 		private let input: ViewModel.Input
 		private let output: ViewModel.Output
 		
-		private let localization: Localization.SignIn
+		private let localization: SignInLocalizationProtocol
 		
 		init(
 			input: ViewModel.Input,
 			output: ViewModel.Output,
 			cancelBag: CancelBag,
-			localization: Localization.SignIn
+			localization: SignInLocalizationProtocol
 		) {
 			self.input = input
 			self.output = output
@@ -39,7 +39,7 @@ extension SignIn {
 		// MARK: life cycle
 		
 		override func loadView() {
-			view = View(
+			view = View_(
 				input: input,
 				output: output,
 				cancelBag: cancelBag,
@@ -51,6 +51,10 @@ extension SignIn {
 			super.viewDidLoad()
 			title = localization.signIn
 			navigationController?.navigationBar.setNeedsLayout()
+		}
+		
+		deinit {
+			print("\(#file) deinit")
 		}
 	}
 }

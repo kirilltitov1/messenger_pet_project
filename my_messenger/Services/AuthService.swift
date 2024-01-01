@@ -58,12 +58,19 @@ final class AuthService {
 	) -> Future<AuthDataResult, Error> {
 		auth.signIn(withEmail: email, password: password)
 	}
+	
+	public func signUp(
+		email: String,
+		password: String
+	) -> Future<AuthDataResult, Error> {
+		signUp(email: email, password: password, username: nil, avatar: nil)
+	}
 
 	public func signUp(
 		email: String,
-		username: String,
 		password: String,
-		avatar: Data?
+		username: String? = nil,
+		avatar: Data? = nil
 	) -> Future<AuthDataResult, Error> {
 		auth.createUser(withEmail: email, password: password)
 	}

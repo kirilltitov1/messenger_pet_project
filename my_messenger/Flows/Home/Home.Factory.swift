@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SwiftUI
+import DesignSystem
 
 protocol HomeFactoryProtocol {
 	
@@ -13,19 +15,38 @@ protocol HomeFactoryProtocol {
 
 extension Home {
 	final class Factory: HomeFactoryProtocol, TabBarItemFactoryProtocol {
-		var name: String? {
+		var name: String {
 			"Home"
 		}
 		
-		var tabBarImage: UIImage? {
-			UIImage(systemName: "house")
+		var tabBarImageName: String {
+			"house"
 		}
-		
-		func makeTabBarNavItem(tag: Int) -> UINavigationController {
-			let viewController = ViewController()
-			let navController = UINavigationController(rootViewController: viewController)
-			navController.tabBarItem = UITabBarItem(title: name, image: tabBarImage, tag: tag)
-			return navController
-		}
+	}
+}
+
+// MARK: - UIKit
+extension Home.Factory {
+	func makeTabBarNavItem(tag: Int) -> UINavigationController {
+		let viewController = Home.ViewController()
+		let navController = UINavigationController(rootViewController: viewController)
+		navController.tabBarItem = UITabBarItem(
+			title: name,
+			image: UIImage(systemName: tabBarImageName),
+			tag: tag
+		)
+		return navController
+	}
+}
+
+// MARK: - SwiftUI
+extension Home.Factory {
+	func makeSwiftUITabView(tag: Int) -> TabScreenWrapper<AnyView> {
+		TabScreenWrapper(
+			Home.ViewScreen().eraseToAnyView(),
+			tag: tag,
+			title: name,
+			imageName: tabBarImageName
+		)
 	}
 }

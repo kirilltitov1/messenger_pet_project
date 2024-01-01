@@ -11,7 +11,9 @@ import Combine
 protocol SignInCoordinatorProtocol {
 	func start(
 		navigationController: UINavigationController
-	)
+	) -> (signedIn: AnyPublisher<Void, Never>, signUp: AnyPublisher<Void, Never>)?
+
+	func startSwiftUI()
 }
 
 extension SignIn {
@@ -19,7 +21,7 @@ extension SignIn {
 	final class Coordinator {
 		private var onFinish: (() -> Void)?
 		private let factory: SignInFactoryProtocol
-		private let cancelBag: CancelBag
+		private weak var cancelBag: CancelBag?
 
 		init(
 			factory: SignInFactoryProtocol,
@@ -32,17 +34,29 @@ extension SignIn {
 }
 
 // MARK: CoordinatorProtocol
-extension SignIn.Coordinator {
+extension SignIn.Coordinator: SignInCoordinatorProtocol {
+	func startSwiftUI() {
+		
+	}
+
 	func start(
 		navigationController: UINavigationController
-	) -> (signedIn: AnyPublisher<Void, Never>, signedUp: AnyPublisher<Void, Never>) {
-		let (screen, viewModel) = factory.makeSignInViewController()
+	) -> (signedIn: AnyPublisher<Void, Never>, signUp: AnyPublisher<Void, Never>)? {
+		guard let (screen, viewModel) = factory.makeSignInViewController() else { return nil }
 		
 		navigationController.setViewControllers([screen], animated: true)
 		
-		let signedInPublisher: AnyPublisher<Void, Never> = viewModel.output.$state.first { $0 == .signedIn }.erasedToVoid().eraseToAnyPublisher()
-		let signedUpPublisher: AnyPublisher<Void, Never> = viewModel.input.signUp.erasedToVoid().eraseToAnyPublisher()
-		
-		return (signedInPublisher, signedUpPublisher)
+		let signedInPublisher: AnyPublisher<Void, Never> = viewModel.output
+			.$state
+			.filter { $0 == .signedIn }
+			.erasedToVoid()
+			.eraseToAnyPublisher()
+		let signUpPublisher: AnyPublisher<Void, Never> = viewModel.output
+			.$state
+			.filter { $0 == .action(.signUp) }
+			.erasedToVoid()
+			.eraseToAnyPublisher()
+
+		return (signedInPublisher, signUpPublisher)
 	}
 }

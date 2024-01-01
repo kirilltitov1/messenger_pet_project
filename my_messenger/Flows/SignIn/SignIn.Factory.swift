@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import UIKit
+import SwiftUI
 
 /// Protocol for sign in factory
 protocol SignInFactoryProtocol {
@@ -16,13 +17,15 @@ protocol SignInFactoryProtocol {
 	/// 				  	   cancel bag for sub's on view model & view controller
 	/// - Returns: sign in view controller
 	func makeSignInViewController(
-	) -> (viewController: UIViewController, viewModel: (input: SignIn.ViewModel.Input, output: SignIn.ViewModel.Output))
+	) -> (viewController: UIViewController, viewModel: (input: SignIn.ViewModel.Input, output: SignIn.ViewModel.Output))?
+
+	func makeSignInViewScreen() -> SignIn.ViewScreen?
 }
 
 extension SignIn {
-	/// Namespace sign in Factory
+	/// Sign in Factory
 	final class Factory {
-		private let cancelBag: CancelBag
+		private weak var cancelBag: CancelBag?
 		init(cancelBag: CancelBag) {
 			self.cancelBag = cancelBag
 		}
@@ -32,12 +35,14 @@ extension SignIn {
 // MARK: SignInFactoryProtocol
 extension SignIn.Factory: SignInFactoryProtocol {
 	func makeSignInViewController(
-	) -> (viewController: UIViewController, viewModel: (input: SignIn.ViewModel.Input, output: SignIn.ViewModel.Output)) {
+	) -> (viewController: UIViewController, viewModel: (input: SignIn.ViewModel.Input, output: SignIn.ViewModel.Output))? {
+		
+		guard let cancelBag = cancelBag else { return nil }
 		
 		let input = SignIn.ViewModel.Input()
 		let viewModel = SignIn.ViewModel()
 		
-		let localization: Localization.SignIn = Localization.SignIn()
+		let localization: SignInLocalizationProtocol = Localization.SignIn()
 		
 		let output = viewModel.transform(
 			input: input,
@@ -51,5 +56,29 @@ extension SignIn.Factory: SignInFactoryProtocol {
 		)
 
 		return (viewController, (input, output))
+	}
+
+	func makeSignInViewScreen(
+	) -> SignIn.ViewScreen? {
+		guard let cancelBag = cancelBag else { return nil }
+
+		let input = SignIn.ViewModel.Input()
+		let viewModel = SignIn.ViewModel()
+
+		let localization: SignInLocalizationProtocol = Localization.SignIn()
+
+		let output = viewModel.transform(
+			input: input,
+			cancelBag: cancelBag
+		)
+
+		let viewScreen = SignIn.ViewScreen(
+			input: input,
+			output: output,
+			cancelBag: cancelBag,
+			localization: localization
+		)
+
+		return viewScreen
 	}
 }

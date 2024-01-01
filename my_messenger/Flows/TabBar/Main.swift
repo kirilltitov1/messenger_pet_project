@@ -8,4 +8,4 @@
 import Foundation
 
 /// Namespace for tab bar
-enum TabBar {}
+enum Main {}

@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SwiftUI
+import DesignSystem
 
 protocol ProfileFactoryProtocol {
 	
@@ -13,19 +15,38 @@ protocol ProfileFactoryProtocol {
 
 extension Profile {
 	final class Factory: ProfileFactoryProtocol, TabBarItemFactoryProtocol {
-		var name: String? {
+		var name: String {
 			"Profile"
 		}
 		
-		var tabBarImage: UIImage? {
-			UIImage()
+		var tabBarImageName: String {
+			"person"
 		}
-		
-		func makeTabBarNavItem(tag: Int) -> UINavigationController {
-			let viewController = ViewController()
-			let navController = UINavigationController(rootViewController: viewController)
-			navController.tabBarItem = UITabBarItem(title: name, image: tabBarImage, tag: tag)
-			return navController
-		}
+	}
+}
+
+// MARK: - UIKit
+extension Profile.Factory {
+	func makeTabBarNavItem(tag: Int) -> UINavigationController {
+		let viewController = Profile.ViewController()
+		let navController = UINavigationController(rootViewController: viewController)
+		navController.tabBarItem = UITabBarItem(
+			title: name,
+			image: UIImage(systemName: tabBarImageName),
+			tag: tag
+		)
+		return navController
+	}
+}
+
+// MARK: - SwiftUI
+extension Profile.Factory {
+	func makeSwiftUITabView(tag: Int) -> TabScreenWrapper<AnyView> {
+		TabScreenWrapper(
+			Profile.ViewScreen().eraseToAnyView(),
+			tag: tag,
+			title: name,
+			imageName: tabBarImageName
+		)
 	}
 }

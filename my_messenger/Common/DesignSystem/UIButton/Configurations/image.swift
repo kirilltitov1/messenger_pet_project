@@ -8,16 +8,17 @@
 import UIKit
 
 extension UIButton.Configuration {
-	/// <#Description#>
+	/// Configure button image
 	/// - Parameters:
-	///   - imageName: <#imageName description#>
-	///   - placement: <#placement description#>
-	///   - scale: <#scale description#>
+	///   - imageName: image name
+	///   - placement: placement
+	///   - scale: scale
 	mutating func configureImage(
 		imageName: String,
 		placement: NSDirectionalRectEdge,
 		scale: UIImage.SymbolScale
 	) {
+		if imageName == "" { return }
 		self.image = UIImage(named: imageName)
 		self.imagePadding = 5
 		self.imagePlacement = placement

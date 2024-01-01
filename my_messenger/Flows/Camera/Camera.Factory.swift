@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SwiftUI
+import DesignSystem
 
 protocol CameraFactoryProtocol {
 	
@@ -13,19 +15,35 @@ protocol CameraFactoryProtocol {
 
 extension Camera {
 	final class Factory: CameraFactoryProtocol, TabBarItemFactoryProtocol {
-		var name: String? {
+		var name: String {
 			"Camera"
 		}
 		
-		var tabBarImage: UIImage? {
-			UIImage()
+		var tabBarImageName: String {
+			"camera"
 		}
-		
-		func makeTabBarNavItem(tag: Int) -> UINavigationController {
-			let viewController = ViewController()
-			let navController = UINavigationController(rootViewController: viewController)
-			navController.tabBarItem = UITabBarItem(title: name, image: tabBarImage, tag: tag)
-			return navController
-		}
+	}
+}
+
+// MARK: - UIKit
+extension Camera.Factory {
+	func makeTabBarNavItem(tag: Int) -> UINavigationController {
+		let viewController = Camera.ViewController()
+		let navController = UINavigationController(rootViewController: viewController)
+		navController.tabBarItem = UITabBarItem(title: name, image: UIImage(systemName: tabBarImageName), tag: tag)
+		return navController
+	}
+
+}
+
+// MARK: - SwiftUI
+extension Camera.Factory {
+	func makeSwiftUITabView(tag: Int) -> TabScreenWrapper<AnyView> {
+		TabScreenWrapper(
+			Camera.ViewScreen().eraseToAnyView(),
+			tag: tag,
+			title: name,
+			imageName: tabBarImageName
+		)
 	}
 }

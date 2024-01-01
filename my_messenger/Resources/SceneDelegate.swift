@@ -6,24 +6,36 @@
 //
 
 import UIKit
+import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 	var window: UIWindow?
-	let factory: Factory = Factory()
-	
-	var applicationCoordinator: ApplicationCoordinator = ApplicationCoordinator.shared
-	
+
+	private let factory: Factory = Factory()
+	private var applicationCoordinator: ApplicationCoordinator = ApplicationCoordinator.shared
+	private let availabilityFacade: AvailabilityFacade = AvailabilityFacade()
+
 	func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-		
+
 		guard let scene = (scene as? UIWindowScene) else { return }
 		window = UIWindow(windowScene: scene)
-		
-		let navigationController = UINavigationController(rootViewController: UIViewController())
-		window?.rootViewController = navigationController
-		window?.makeKeyAndVisible()
-		
-		applicationCoordinator.start(navigationController: navigationController)
+
+//		if
+//			true {
+////			availabilityFacade.isAvailable(featureKey: .swiftUIEnabled) {
+//			let view = View()
+//			let viewController = UIHostingController(rootView: View)
+//			let navigationController = UINavigationController(rootViewController: viewController)
+//			window?.rootViewController = navigationController
+//			window?.makeKeyAndVisible()
+//		} else {
+			let navigationController = UINavigationController(rootViewController: UIViewController())
+			window?.rootViewController = navigationController
+			window?.makeKeyAndVisible()
+			
+			applicationCoordinator.start(navigationController: navigationController)
+//		}
 	}
 
 	func sceneDidDisconnect(_ scene: UIScene) {
@@ -56,5 +68,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		// Save changes in the application's managed object context when the application transitions to the background.
 		(UIApplication.shared.delegate as? AppDelegate)?.saveContext()
 	}
-
 }

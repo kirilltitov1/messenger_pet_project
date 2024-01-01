@@ -7,17 +7,18 @@
 
 import UIKit
 
-extension TabBar {
+extension Main {
+	/// Tab bar controller for main screen
 	final class Controller: UITabBarController {
 		
-		let factory: TabBar.Factory
+		let factory: Main.Factory
 		let tabBarItems: [UINavigationController]
 		
 		init(
-			factory: TabBar.Factory
+			factory: Main.Factory
 		) {
 			self.factory = factory
-			tabBarItems = factory.makeTabControllers()
+			tabBarItems = factory.makeMain()
 			
 			super.init(nibName: nil, bundle: nil)
 		}
@@ -29,7 +30,7 @@ extension TabBar {
 }
 
 // MARK: UITabBarController
-extension TabBar.Controller {
+extension Main.Controller {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setTabBarItems()
@@ -40,7 +41,7 @@ extension TabBar.Controller {
 	}
 }
 
-private extension TabBar.Controller {
+private extension Main.Controller {
 	func setTabBarItems() {
 		setViewControllers(tabBarItems, animated: false)
 	}

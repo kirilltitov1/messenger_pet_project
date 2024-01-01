@@ -7,10 +7,9 @@
 
 import UIKit
 import Combine
-//import RxCocoa
 
 extension SignIn {
-	final class View: UIView {
+	final class View_: UIView {
 		
 		private let gradientView: UIView = GradientView(
 			colors: [.aqua, .softCarnation],
@@ -58,7 +57,6 @@ extension SignIn {
 		
 		private lazy var signInButton: UIButton = {
 			let button: UIButton = UIButton.Builder(configuration: .filled())
-				.setupImage(imageName: "")
 				.setupTextAttributesTransformer(textStyle: .headline)
 				.build()
 			
@@ -87,9 +85,9 @@ extension SignIn {
 			return view
 		}()
 		
-		var input: ViewModel.Input
+		weak var input: ViewModel.Input?
 		weak var output: ViewModel.Output?
-		private let cancelBag: CancelBag
+		private weak var cancelBag: CancelBag?
 
 		private let localization: SignInLocalizationProtocol
 		
@@ -128,7 +126,7 @@ extension SignIn {
 }
 
 // MARK: life cycle
-extension SignIn.View {
+extension SignIn.View_ {
 	override func layoutSubviews() {
 		super.layoutSubviews()
 		
@@ -138,10 +136,12 @@ extension SignIn.View {
 	}
 }
 
-private extension SignIn.View {
+private extension SignIn.View_ {
 	
 	func makeBindings() {
+		guard let input = input else { return }
 		guard let output = output else { return }
+		guard let cancelBag = cancelBag else { return }
 		
 		// MARK: input
 		signInButton.publisher(for: .touchUpInside)
@@ -175,7 +175,7 @@ private extension SignIn.View {
 		
 		stateConfiguration.sink { [unowned self] isEnabled, state in
 			if isEnabled {
-				let isActive = state == .signingIn
+				let isActive = state == .action(.signIn)
 				self.signInButton.setActivityIndicator(isActive: isActive, title: localization.signIn)
 				self.fieldsConfigurate(state: state)
 			} else {
@@ -231,7 +231,7 @@ private extension SignIn.View {
 	func fieldsConfigurate(state: SignIn.ViewModel.State) {
 		func updateActivity() {
 			switch state {
-			case .signingIn:
+			case .action(.signIn):
 				emailTextField.resignFirstResponder()
 				emailTextField.isEnabled = false
 				passwordTextField.resignFirstResponder()
