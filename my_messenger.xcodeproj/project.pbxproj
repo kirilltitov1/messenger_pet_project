@@ -12,6 +12,7 @@
 		5E2E0D1C2AAD301A003FC029 /* SignIn.ViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2E0D1B2AAD301A003FC029 /* SignIn.ViewScreen.swift */; };
 		5E337A012AC7A8820040BE0F /* Color+RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E337A002AC7A8820040BE0F /* Color+RGB.swift */; };
 		5E337A032AC7A8900040BE0F /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E337A022AC7A8900040BE0F /* Colors.swift */; };
+		5E3610EB2B58395E0021675F /* SuffixSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3610EA2B58395E0021675F /* SuffixSequence.swift */; };
 		5E40F8D42AAD55B1007A41F6 /* SignIn.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF899E028F39A1500D43E65 /* SignIn.View.swift */; };
 		5E4E7F462AFED80500C1F996 /* CurrentValueSubject+binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E7F452AFED80500C1F996 /* CurrentValueSubject+binding.swift */; };
 		5E4E7F482B0120EC00C1F996 /* Explore.Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E7F472B0120EC00C1F996 /* Explore.Service.swift */; };
@@ -164,6 +165,7 @@
 		5E2E0D1B2AAD301A003FC029 /* SignIn.ViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.ViewScreen.swift; sourceTree = "<group>"; };
 		5E337A002AC7A8820040BE0F /* Color+RGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+RGB.swift"; sourceTree = "<group>"; };
 		5E337A022AC7A8900040BE0F /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		5E3610EA2B58395E0021675F /* SuffixSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuffixSequence.swift; sourceTree = "<group>"; };
 		5E4E7F452AFED80500C1F996 /* CurrentValueSubject+binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrentValueSubject+binding.swift"; sourceTree = "<group>"; };
 		5E4E7F472B0120EC00C1F996 /* Explore.Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Explore.Service.swift; sourceTree = "<group>"; };
 		5E4ECD4328E385D80080DE1D /* my_messenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = my_messenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -624,6 +626,7 @@
 				EF903B56292408CE00B4BFBB /* CoordinatorProtocol.swift */,
 				EF903B55292408CE00B4BFBB /* ViewModelProtocol.swift */,
 				EF67DC0B290A0D2A007E30C2 /* Localized.swift */,
+				5E3610EA2B58395E0021675F /* SuffixSequence.swift */,
 				EFE752F4291B2D5500FC0742 /* RegExpBuilder.swift */,
 				EF67DC1D29133507007E30C2 /* AutoLayoutDSL.swift */,
 			);
@@ -633,8 +636,8 @@
 		EF0D72D328E644E0004D04F5 /* Availability */ = {
 			isa = PBXGroup;
 			children = (
-				EFDE0CD42AA91F3600899788 /* AvailabilityFeatureKey.swift */,
 				EFDE0CD62AA9202E00899788 /* Providers */,
+				EFDE0CD42AA91F3600899788 /* AvailabilityFeatureKey.swift */,
 				EFDE0CCE2AA8E56000899788 /* AvailabilityProtocol.swift */,
 				EFDE0CD02AA91E6D00899788 /* AvailabilityFacade.swift */,
 			);
@@ -1181,6 +1184,7 @@
 				EF25D64B293930C000AA7225 /* SignUp.swift in Sources */,
 				EFF80DC228F7960000F830FB /* Profile.ViewController.swift in Sources */,
 				EFF80D9D28F74A6100F830FB /* Profile.Factory.swift in Sources */,
+				5E3610EB2B58395E0021675F /* SuffixSequence.swift in Sources */,
 				5EE6AEF82AB28766004DD0DD /* Home.Screen.swift in Sources */,
 				EFF80DBC28F7705C00F830FB /* Explore.Coordinator.swift in Sources */,
 				5E4E7F462AFED80500C1F996 /* CurrentValueSubject+binding.swift in Sources */,
